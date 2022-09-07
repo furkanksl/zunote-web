@@ -1,8 +1,8 @@
 import React from "react";
-import "../../styles/Home.module.scss";
+import styles from "../../src/styles/home.module.scss";
 
 function HomePage() {
-    return <div className="title">HomePage</div>;
+    return <div>HomePage</div>;
 }
 
 export default HomePage;
