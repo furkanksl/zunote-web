@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import "./styles";
+
+body {
+    @apply p-5 
+    sm:pt-[30px] 
+    sm:pb-[20px] 
+    sm:py-10;
+
+    background-color: $primary-color;
+}
