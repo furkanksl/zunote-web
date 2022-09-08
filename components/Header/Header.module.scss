@@ -1,0 +1,195 @@
+@import "../../src/styles/styles";
+
+.header-wrapper {
+    // font-family: $primary-font;
+    @apply flex 
+    flex-row
+    justify-between 
+    items-end
+    mb-5
+    w-full;
+}
+
+.logo {
+    @apply sm:w-full 
+    w-[130px]
+    mb-0
+    sm:mb-[-10px]
+    sm:max-w-[180px] 
+    relative
+    
+    cursor-pointer;
+}
+
+.menu-items {
+    @apply hidden
+    flex-row
+    items-center
+    justify-center
+    gap-10
+    sm:flex;
+}
+
+.mobile-menu-items {
+    @apply flex
+    flex-row
+    items-center
+    justify-center
+    gap-5
+    mb-[3px]
+    sm:hidden;
+
+    :first-child {
+        @apply h-12;
+    }
+
+    :last-child {
+        @apply mr-[-3px] h-10;
+    }
+
+    svg,
+    div > svg {
+        @apply flex 
+        h-10 
+        cursor-pointer 
+        sm:hidden;
+
+        &:hover {
+            path {
+                fill: white;
+            }
+        }
+    }
+}
+
+.item {
+    @apply hidden 
+    h-12 
+    cursor-pointer 
+    sm:flex;
+
+    &:hover {
+        path {
+            fill: white;
+        }
+    }
+}
+
+.mobile-item {
+    @apply flex 
+    h-10 
+    cursor-pointer 
+    sm:hidden;
+
+    &:hover {
+        path {
+            fill: white;
+        }
+    }
+}
+
+.item-selected {
+    path {
+        fill: $gray-color !important;
+    }
+}
+
+.menu {
+    background-color: $secondary-color;
+    width: calc(100% - 40px);
+
+    @include shadowed-box();
+
+    @apply fixed 
+    top-[70px]
+    flex
+    flex-col
+    justify-start
+    items-center
+    gap-y-[25px]
+    rounded-t-[0px]
+    rounded-b-[10px]
+    px-5 py-3
+    sm:hidden;
+
+    div {
+        p {
+            @apply font-extralight;
+        }
+
+        &:hover {
+            p {
+                @apply text-white;
+            }
+            svg {
+                path {
+                    fill: white;
+                }
+            }
+        }
+
+        svg {
+            @apply flex 
+            h-10 
+            cursor-pointer 
+            sm:hidden;
+        }
+    }
+}
+.profile {
+    &:hover {
+        .profile-dropdown {
+            @apply visible
+            delay-75;
+        }
+    }
+}
+
+.profile-dropdown {
+    background-color: $gray-color;
+    border-radius: $border-10;
+
+    @include shadowed-box();
+
+    @apply fixed
+    top-24
+    right-6
+    hidden
+    sm:flex
+    flex-col
+    justify-start
+    items-start
+    gap-y-1
+    py-2
+    w-[190px]
+    delay-[400ms]
+    invisible;
+
+    p {
+        @apply text-[13px] font-extralight mx-auto mb-2;
+    }
+    div:hover {
+        svg > path,
+        svg > g > path {
+            fill: white;
+        }
+
+        p {
+            @apply text-white;
+        }
+    }
+
+    div > .item-selected {
+        path {
+            fill: $primary-color !important;
+        }
+    }
+
+    div > p {
+        @apply mb-0 text-base font-normal;
+    }
+
+    svg {
+        @apply h-7;
+    }
+}
