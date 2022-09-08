@@ -3,8 +3,10 @@ import React, { useState } from "react";
 import styles from "./Header.module.scss";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import LocalService from "../../src/services/local.service";
 
 function Header() {
+    const localService = new LocalService();
     const router = useRouter();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -240,6 +242,15 @@ function Header() {
 
     function onMenuToggle() {
         setIsMenuOpen(!isMenuOpen);
+
+        document?.addEventListener(
+            "click",
+            (e: any) => {
+                const hasClickedOutsideOfMobileMenu = localService.clickOutsideHandlerOnMobileMenu(e);
+                if (!hasClickedOutsideOfMobileMenu) setIsMenuOpen(false);
+            },
+            false
+        );
     }
 
     return (
@@ -694,7 +705,10 @@ function Header() {
                     {menuItems.map((item: any, index: number) => {
                         return (
                             <Link href={item.route}>
-                                <div className="flex flex-row items-center mr-auto gap-x-3 cursor-pointer">
+                                <div
+                                    onClick={() => setIsMenuOpen(false)}
+                                    className="flex flex-row items-center mr-auto gap-x-3 cursor-pointer"
+                                >
                                     {item.svg}
                                     <p>{item.name}</p>
                                 </div>
