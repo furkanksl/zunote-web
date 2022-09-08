@@ -1,0 +1,105 @@
+@import "./styles";
+
+.aut-page-wrapper {
+    @apply flex
+    flex-col
+    justify-start
+    items-center
+    pt-10
+    w-full;
+}
+
+.logo {
+    @apply w-[180px];
+}
+
+.page-toggle {
+    background-color: $gray-color;
+
+    @include shadowed-box();
+
+    @apply flex
+    flex-row
+    items-center
+    justify-between
+    rounded-[10px]
+    mt-9
+    mb-20
+    p-[5px];
+
+    .selected {
+        background-color: $second-gray-color;
+
+        p {
+            @apply text-white;
+        }
+    }
+
+    .item {
+        @apply flex
+        flex-row
+        rounded-[10px]
+        justify-center
+        items-center
+        cursor-pointer
+        py-1.5 px-8;
+
+        p {
+            @apply mb-0 text-base font-sans font-normal;
+        }
+    }
+}
+
+.input {
+    background-color: $gray-color;
+
+    @include shadowed-box();
+
+    @apply flex
+    flex-row
+    w-full
+    max-w-[320px]
+    items-center
+    justify-start
+    p-2
+    gap-x-1
+    mb-9
+    rounded-[10px];
+
+    .icon {
+        @apply w-7;
+    }
+
+    input {
+        @apply placeholder:text-gray-400
+        bg-transparent
+        font-sans
+        text-base
+        font-light
+        outline-none;
+    }
+}
+
+.button {
+    background-color: $secondary-color;
+
+    @include shadowed-box();
+
+    @apply mt-[14px]
+    px-8
+    py-3
+    cursor-pointer
+    rounded-[10px];
+
+    &:hover {
+        background-color: #fdcc53;
+    }
+
+    p {
+        @apply mb-0 
+        text-black  
+        text-base
+        self-center
+        font-sans;
+    }
+}
