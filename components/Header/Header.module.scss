@@ -137,7 +137,7 @@
 .profile {
     &:hover {
         .profile-dropdown {
-            @apply visible 
+            @apply visible
             delay-75;
         }
     }
@@ -152,7 +152,8 @@
     @apply fixed
     top-24
     right-6
-    flex
+    hidden
+    sm:flex
     flex-col
     justify-start
     items-start
