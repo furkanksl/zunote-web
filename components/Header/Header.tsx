@@ -253,7 +253,7 @@ function Header() {
         );
     }
 
-    return (
+    return checkPageSelected("/auth") ? null : (
         <div className={styles["header-wrapper"]}>
             <Link href={"/"}>
                 <img className={styles.logo} src="/icons/logo.svg" alt="ZUNOTE LOGO" />
