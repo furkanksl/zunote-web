@@ -137,6 +137,8 @@
     }
 }
 .profile {
+    @apply ml-[126px];
+
     &:hover {
         .profile-dropdown {
             @apply visible
