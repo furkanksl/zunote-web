@@ -704,7 +704,7 @@ function Header() {
                 <div className={styles.menu} id="mobile-menu">
                     {menuItems.map((item: any, index: number) => {
                         return (
-                            <Link href={item.route}>
+                            <Link href={item.route} key={index}>
                                 <div
                                     onClick={() => setIsMenuOpen(false)}
                                     className="flex flex-row items-center mr-auto gap-x-3 cursor-pointer"

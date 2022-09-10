@@ -13,3 +13,7 @@ body {
 
     background-color: $primary-color;
 }
+
+main {
+    height: calc(100vh - 135px);
+}
