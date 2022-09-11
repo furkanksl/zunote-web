@@ -1,7 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import Note from "../../src/models/Note.model";
+import VoiceNote from "../../src/models/VoiceNote.model";
+import { addNewNote } from "../../src/redux/features/note.reducer";
 import styles from "../../src/styles/home.module.scss";
 
 function HomePage() {
+    const dispatch = useDispatch();
+
+    const [inputValue, setInputValue] = useState("");
+    const [isVoiceNote, setIsVoiceNote] = useState(false);
+    const [savedVoiceNotes, setSavedVoiceNotes] = useState([]);
+    const [savedNotes, setSavedNotes] = useState<Note[]>([]);
+
+    function handleMessageChange(event: any) {
+        // 👇️ access textarea value
+        setInputValue(event.target.value);
+    }
+
+    function saveNote() {
+        const createdAt = Date.now().toString();
+
+        if (isVoiceNote) {
+        } else {
+            const newNote = new Note({
+                category: "",
+                createdAt: createdAt,
+                noteText: inputValue,
+                reminder: "0",
+            });
+
+            setSavedNotes([...savedNotes, newNote].reverse());
+
+            dispatch(addNewNote(newNote));
+        }
+
+        setInputValue("");
+    }
+
     return (
         <div className={styles["home-page-wrapper"]}>
             <div className={styles["just-added-container"]}>
@@ -9,13 +45,18 @@ function HomePage() {
                     <p>JUST ADDED</p>
                 </div>
                 <div className={styles["note-container"]}>
-                    <div className={styles["note-card"]}>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                    </div>
-                    <div className={styles["voice-note-card"]}>
-                        <p className={styles.lap}>00:08</p>
+                    {savedNotes?.map((noteItem: Note | VoiceNote, index: number) => {
+                        return (
+                            <div key={index} className={styles["note-card"]}>
+                                <p>{noteItem instanceof Note ? noteItem?.noteText : noteItem?.notes[0]?.noteText}</p>
+                            </div>
+                        );
+                    })}
+
+                    {/* <div className={styles["voice-note-card"]}>
+                        <p className={styles.lap}></p>
                         <p>Lorem ipsum dolor sit amet, consect adipisicing elit.</p>
-                    </div>
+                    </div> */}
                 </div>
             </div>
             <div className={styles["input-container"]}>
@@ -49,7 +90,12 @@ function HomePage() {
                     </div>
                 </div>
                 <div className={styles.textfield}>
-                    <textarea placeholder="Type something..." rows={5}></textarea>
+                    <textarea
+                        placeholder="Type something..."
+                        rows={5}
+                        value={inputValue}
+                        onChange={handleMessageChange}
+                    ></textarea>
                 </div>
 
                 <div className={styles["buttons-container"]}>
@@ -97,7 +143,14 @@ function HomePage() {
                         </defs>
                     </svg>
 
-                    <svg width="62" height="62" viewBox="0 0 62 62" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg
+                        onClick={saveNote}
+                        width="62"
+                        height="62"
+                        viewBox="0 0 62 62"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
                         <g clipPath="url(#clip0_1_475)">
                             <g filter="url(#filter0_d_1_475)">
                                 <path
