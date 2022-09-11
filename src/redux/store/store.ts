@@ -4,13 +4,13 @@ import noteReducer from "../features/note.reducer";
 import reminderReducer from "../features/reminder.reducer";
 import { createWrapper } from "next-redux-wrapper";
 
-type ReducerModel = {
-    reminder: Reducer<any, AnyAction>;
-    category: Reducer<any, AnyAction>;
-    note: Reducer<any, AnyAction>;
+export type StateModel = {
+    reminder: any;
+    category: any;
+    note: any;
 };
 
-const reducer: ReducerModel = {
+const reducer: StateModel = {
     reminder: reminderReducer,
     category: categoryReducer,
     note: noteReducer,
