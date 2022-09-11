@@ -1,6 +1,7 @@
 import "../src/styles/globals.scss";
 import type { AppProps } from "next/app";
 import Layout from "../components/Layout";
+import { wrapper } from "../src/redux/store/store";
 
 function MyApp({ Component, pageProps }: AppProps) {
     return (
@@ -12,4 +13,5 @@ function MyApp({ Component, pageProps }: AppProps) {
     );
 }
 
-export default MyApp;
+export default wrapper.withRedux(MyApp);
+// export default MyApp;
