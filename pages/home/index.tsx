@@ -4,6 +4,20 @@ import styles from "../../src/styles/home.module.scss";
 function HomePage() {
     return (
         <div className={styles["home-page-wrapper"]}>
+            <div className={styles["just-added-container"]}>
+                <div className={styles["title-box"]}>
+                    <p>JUST ADDED</p>
+                </div>
+                <div className={styles["note-container"]}>
+                    <div className={styles["note-card"]}>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                    </div>
+                    <div className={styles["voice-note-card"]}>
+                        <p className={styles.lap}>00:08</p>
+                        <p>Lorem ipsum dolor sit amet, consect adipisicing elit.</p>
+                    </div>
+                </div>
+            </div>
             <div className={styles["input-container"]}>
                 <div className={styles["property-field"]}>
                     <div className={styles.category}>
@@ -35,7 +49,7 @@ function HomePage() {
                     </div>
                 </div>
                 <div className={styles.textfield}>
-                    <input type="text" placeholder="Type something..." />
+                    <textarea placeholder="Type something..." rows={5}></textarea>
                 </div>
 
                 <div className={styles["buttons-container"]}>
