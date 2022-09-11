@@ -160,8 +160,6 @@ const allNotes = [...textNotes, ...voiceNotes];
 type NoteState = {
     isVoiceNote: boolean;
     notes: any[];
-    isNoteDetailOpen: boolean;
-    isNotesSectionOpen: boolean;
     isNoteEditing: boolean;
     selectedNote?: Note | VoiceNote;
     selectedNoteIndex: number;
@@ -174,8 +172,6 @@ export const noteSlice = createSlice({
     initialState: {
         isVoiceNote: false,
         notes: allNotes,
-        isNoteDetailOpen: false,
-        isNotesSectionOpen: false,
         isNoteEditing: false,
         selectedNote: undefined,
         selectedNoteIndex: 0,
@@ -209,10 +205,6 @@ export const noteSlice = createSlice({
             state.notes = [...state.notes];
         },
 
-        setIsNoteDetailOpen: (state: NoteState, action: any) => {
-            state.isNoteDetailOpen = action.payload;
-        },
-
         setIsNoteEditing: (state: NoteState, action: any) => {
             state.isNoteEditing = action.payload;
         },
@@ -220,15 +212,6 @@ export const noteSlice = createSlice({
         setSelectedNoteIndex: (state: NoteState, action: any) => {
             state.selectedNoteIndex = action.payload;
         },
-
-        toggleIsNoteDetailOpen: (state: NoteState) => {
-            state.isNoteDetailOpen = !state.isNoteDetailOpen;
-        },
-
-        setIsNotesSectionOpen: (state: NoteState, action: any) => {
-            state.isNotesSectionOpen = action.payload;
-        },
-
         setSelectedNote: (state: NoteState, action: any) => {
             state.selectedNote = action.payload;
         },
@@ -240,10 +223,7 @@ export const {
     addNewNote,
     removeNoteWithIndex,
     addNewVoiceNote,
-    setIsNoteDetailOpen,
-    setIsNotesSectionOpen,
     setSelectedNote,
-    toggleIsNoteDetailOpen,
     updateNoteWithIndex,
     setSelectedNoteIndex,
     setIsNoteEditing,
