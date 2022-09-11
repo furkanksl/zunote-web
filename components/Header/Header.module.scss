@@ -17,7 +17,7 @@
     sm:mb-[-10px]
     sm:max-w-[180px] 
     relative
-    
+    z-30
     cursor-pointer;
 }
 
@@ -44,7 +44,9 @@
     }
 
     :last-child {
-        @apply mr-[-3px] h-10;
+        @apply mr-[-3px] 
+        h-10 
+        z-30;
     }
 
     svg,
@@ -96,12 +98,13 @@
 
 .menu {
     background-color: $secondary-color;
-    width: calc(100% - 40px);
+    // width: calc(100% - 40px);
 
     @include shadowed-box();
 
     @apply fixed 
     top-[70px]
+    left-0
     flex
     flex-col
     justify-start
@@ -109,7 +112,10 @@
     gap-y-[25px]
     rounded-t-[0px]
     rounded-b-[10px]
-    px-5 py-3
+    px-5 pb-3 pt-24
+    z-20
+    -mt-[70px]
+    w-full
     sm:hidden;
 
     div {
