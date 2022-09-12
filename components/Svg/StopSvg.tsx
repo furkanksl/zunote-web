@@ -1,4 +1,6 @@
-const StopSvgComponent = (props: any) => (
+import SvgComponentProp from "../../src/models/types/SvgComponentProp";
+
+const StopSvgComponent = (props: SvgComponentProp) => (
     <svg
         onClick={props.function}
         width="62"

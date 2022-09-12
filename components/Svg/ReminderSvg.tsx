@@ -1,4 +1,6 @@
-const ReminderSvgComponent = (props: any) => (
+import SvgComponentProp from "../../src/models/types/SvgComponentProp";
+
+const ReminderSvgComponent = (props: SvgComponentProp) => (
     <svg onClick={props.function} width={24} height={29} fill="none" xmlns="http://www.w3.org/2000/svg">
         <mask id="a" fill="#fff">
             <path d="M21.113 20.945v-8.342c0-2.22-.692-4.376-1.962-6.118S16.107 3.515 14.114 3v-.734a2.406 2.406 0 0 0-.637-1.605A2.048 2.048 0 0 0 11.985 0c-.558 0-1.094.238-1.492.662-.398.424-.627 1-.637 1.605v.742c-1.986.52-3.752 1.75-5.016 3.49-1.264 1.74-1.952 3.89-1.953 6.104v8.342L0 24.075v1.446h24v-1.446l-2.887-3.13ZM8.792 25.521c-.002.454.078.905.237 1.326.158.42.391.803.686 1.127.295.323.646.58 1.033.756a2.98 2.98 0 0 0 1.22.27 3.07 3.07 0 0 0 2.262-1.001 3.612 3.612 0 0 0 .947-2.443v-.035" />
