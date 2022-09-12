@@ -95,6 +95,25 @@
     }
 }
 
+.voice-buttons-container {
+    @apply flex
+    flex-row
+    justify-start
+    items-center
+    gap-x-2;
+
+    svg {
+        @apply h-[50px] 
+        cursor-pointer;
+
+        &:hover {
+            g {
+                fill: #00000015;
+            }
+        }
+    }
+}
+
 .just-added-container {
     @apply flex
     flex-col
