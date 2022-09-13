@@ -1,13 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 
-import { useRecorder } from "voice-recorder-react";
-
+import { addNewNote } from "../../redux/features/note.reducer";
 import { useDispatch } from "react-redux";
 import Note from "../../models/Note.model";
-import VoiceNote from "../../models/VoiceNote.model";
-import { addNewNote } from "../../redux/features/note.reducer";
 import styles from "../../styles/home.module.scss";
-import Recorder from "./components/Recorder";
 import JustAdded from "./components/JustAdded";
 import InputField from "./components/InputField";
 
