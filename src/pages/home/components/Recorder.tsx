@@ -1,12 +1,18 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useRecorder } from "voice-recorder-react";
 
 import MicSvgComponent from "../../../../components/Svg/MicSvg";
 import PauseSvgComponent from "../../../../components/Svg/PauseSvg";
 import PlaySvgComponent from "../../../../components/Svg/PlaySvg";
 import StopSvgComponent from "../../../../components/Svg/StopSvg";
+import { setIsRecording, setLapTime } from "../../../redux/features/recorder.reducer";
+import UtilityService from "../../../services/utility.service";
 
 function Recorder() {
+    const dispatch = useDispatch();
+    const utilityService = new UtilityService();
+
     const [isActive, setIsActive] = useState(false);
     const [isStarted, setIsStarted] = useState(false);
 
@@ -17,13 +23,16 @@ function Recorder() {
         if (data.url && audioRef.current) {
             audioRef.current.src = data.url;
         }
-    }, [data?.url]);
+        dispatch(
+            setLapTime(utilityService.formatRecorderTime(time?.m) + ":" + utilityService.formatRecorderTime(time?.s))
+        );
+    }, [data?.url, time]);
 
     function startVoiceRecording() {
         start();
         setIsActive(true);
         setIsStarted(true);
-        // dispatch(setIsVoiceNote(true));
+        dispatch(setIsRecording(true));
     }
 
     function pauseVoiceRecording() {
@@ -38,10 +47,9 @@ function Recorder() {
 
     function stopVoiceRecording() {
         stop();
-        // Save voice not here
         setIsActive(false);
         setIsStarted(false);
-        // dispatch(setIsVoiceNote(false));
+        dispatch(setIsRecording(false));
     }
 
     // eslint-disable-next-line
@@ -71,9 +79,9 @@ function Recorder() {
             )}
             {isStarted ? (
                 <div className="time-details">
-                    <span className="minute">{time.m}</span>
+                    <span className="minute">{utilityService.formatRecorderTime(time.m)}</span>
                     <span>:</span>
-                    <span className="second">{time.s}</span>
+                    <span className="second">{utilityService.formatRecorderTime(time.s)}</span>
                 </div>
             ) : null}
             {isStarted ? <StopSvgComponent function={stopVoiceRecording} /> : null}
