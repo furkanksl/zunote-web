@@ -5,10 +5,11 @@ import { useDispatch, useSelector } from "react-redux";
 import Note from "../../models/Note.model";
 import JustAdded from "./components/JustAdded";
 import InputField from "./components/InputField";
-import { TimedNote } from "../../models/VoiceNote.model";
+import VoiceNote, { TimedNote } from "../../models/VoiceNote.model";
 
 import styles from "../../styles/home.module.scss";
 import { StateModel } from "../../redux/store/store";
+import { setIsNewRecordRecorder } from "../../redux/features/recorder.reducer";
 
 function HomePage() {
     const dispatch = useDispatch();
@@ -19,9 +20,24 @@ function HomePage() {
 
     const voiceNoteLapTime = useSelector((state: StateModel) => state.recorder.lapTime);
     const isVoiceNote = useSelector((state: StateModel) => state.recorder.isRecording);
+    const isNewRecordRecorded = useSelector((state: StateModel) => state.recorder.isNewRecordRecorded);
 
     function saveNote(inputValue: string) {
         const createdAt = Date.now().toString();
+
+        if (isNewRecordRecorded) {
+            const newVoiceNote: VoiceNote = new VoiceNote({
+                category: "",
+                createdAt: createdAt,
+                notes: savedVoiceNotes,
+                reminder: "0",
+                voiceUrl: "",
+            });
+
+            dispatch(addNewNote(newVoiceNote));
+            dispatch(setIsNewRecordRecorder(false));
+            setSavedVoiceNotes([]);
+        }
 
         if (isVoiceNote) {
             setSavedVoiceNotes([
@@ -51,11 +67,11 @@ function HomePage() {
                 reminder: "0",
             });
 
-            setSavedNotes([...savedNotes, newNote].reverse());
-            setJustAddedNotes([...savedNotes, newNote]);
-            console.log(justAddedNotes);
+            setSavedNotes([...savedNotes, newNote]);
+            setJustAddedNotes([...savedNotes, newNote].reverse());
+            // console.log(justAddedNotes);
 
-            // dispatch(addNewNote(newNote));
+            dispatch(addNewNote(newNote));
         }
     }
 
