@@ -1,11 +1,11 @@
 import React from "react";
 import Note from "../../../models/Note.model";
-import VoiceNote from "../../../models/VoiceNote.model";
+import VoiceNote, { TimedNote } from "../../../models/VoiceNote.model";
 
 import styles from "../../../styles/home.module.scss";
 
 type Props = {
-    list: VoiceNote[] | Note[];
+    list: TimedNote[] | Note[];
 };
 function JustAdded(props: Props) {
     return (
@@ -14,15 +14,15 @@ function JustAdded(props: Props) {
                 <p>JUST ADDED</p>
             </div>
             <div className={styles["note-container"]}>
-                {props.list?.map((noteItem: Note | VoiceNote, index: number) => {
+                {props.list?.map((noteItem: Note | TimedNote, index: number) => {
                     return noteItem instanceof Note ? (
                         <div key={index} className={styles["note-card"]}>
                             <p>{noteItem?.noteText}</p>
                         </div>
                     ) : (
-                        <div className={styles["voice-note-card"]}>
-                            <p className={styles.lap}>{noteItem?.notes[0]?.time}</p>
-                            <p>{noteItem?.notes[0]?.noteText}</p>
+                        <div key={index} className={styles["voice-note-card"]}>
+                            <p className={styles.lap}>{noteItem?.time}</p>
+                            <p>{noteItem?.noteText}</p>
                         </div>
                     );
                 })}
