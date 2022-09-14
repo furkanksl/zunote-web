@@ -63,13 +63,14 @@
     h-[150px]
     px-5 py-[10px];
 
-    input {
+    textarea {
         @apply w-full
         placeholder:text-gray-400
         bg-transparent
         font-sans
         text-base
         font-light
+        resize-none
         outline-none;
     }
 }
@@ -91,5 +92,111 @@
                 fill: #00000015;
             }
         }
+    }
+}
+
+.voice-buttons-container {
+    @apply flex
+    flex-row
+    justify-start
+    items-center
+    gap-x-2;
+
+    svg {
+        @apply h-[50px] 
+        cursor-pointer;
+
+        &:hover {
+            g {
+                fill: #00000015;
+            }
+        }
+    }
+}
+
+.just-added-container {
+    @apply flex
+    flex-col
+    justify-start
+    items-center
+    mb-auto
+    overflow-hidden
+    w-full;
+}
+
+.title-box {
+    background-color: $gray-color;
+
+    @include shadowed-box();
+
+    @apply mb-2
+    rounded-[10px]
+    py-2
+    px-9;
+
+    p {
+        @apply text-base 
+        font-semibold 
+        mb-0
+        font-sans;
+    }
+}
+
+.note-container {
+    @apply flex
+    flex-col
+    justify-start
+    items-center
+    overflow-scroll
+    mb-3
+    pb-3
+    w-full
+    gap-y-6;
+
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none;
+}
+
+.note-container::-webkit-scrollbar {
+    display: none;
+}
+
+.note-card {
+    background-color: $secondary-color;
+
+    @include shadowed-box();
+
+    @apply flex
+    rounded-[10px]
+    w-[99%]
+    py-3 px-6;
+
+    p {
+        @apply text-base 
+        font-sans 
+        font-normal;
+    }
+}
+
+.voice-note-card {
+    background-color: $secondary-color;
+
+    @include shadowed-box();
+
+    @apply flex
+    flex-col
+    gap-y-3
+    rounded-[10px]
+    w-[99%]
+    py-3 px-6;
+
+    p {
+        @apply text-base 
+        font-sans 
+        font-normal;
+    }
+
+    p.lap {
+        @apply font-light;
     }
 }
