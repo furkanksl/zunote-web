@@ -1,7 +1,8 @@
 import React from "react";
+import NotesPage from "../../src/pages/notes/NotesPage";
 
-function NotesPage() {
-    return <div>NotesPage</div>;
+function Notes() {
+    return <NotesPage />;
 }
 
-export default NotesPage;
+export default Notes;

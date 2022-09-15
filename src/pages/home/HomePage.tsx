@@ -2,14 +2,15 @@ import React, { useState } from "react";
 
 import { addNewNote } from "../../redux/features/note.reducer";
 import { useDispatch, useSelector } from "react-redux";
+import { StateModel } from "../../redux/store/store";
+import { setIsNewRecordRecorder } from "../../redux/features/recorder.reducer";
+import VoiceNote, { TimedNote } from "../../models/VoiceNote.model";
+
 import Note from "../../models/Note.model";
 import JustAdded from "./components/JustAdded";
 import InputField from "./components/InputField";
-import VoiceNote, { TimedNote } from "../../models/VoiceNote.model";
 
-import styles from "../../styles/home.module.scss";
-import { StateModel } from "../../redux/store/store";
-import { setIsNewRecordRecorder } from "../../redux/features/recorder.reducer";
+import styles from "./HomePage.module.scss";
 
 function HomePage() {
     const dispatch = useDispatch();
