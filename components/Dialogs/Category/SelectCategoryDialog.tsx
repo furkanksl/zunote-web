@@ -1,9 +1,10 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setIsCategoryVisible } from "../../../src/redux/features/dialog.reducer";
+import { setIsAddCategoryVisible, setIsCategoryVisible } from "../../../src/redux/features/dialog.reducer";
 import { StateModel } from "../../../src/redux/store/store";
 import PlusSvgComponent from "../../Svg/PlusSvg";
 import RemoveSvgComponent from "../../Svg/RemoveSvg";
+import TitleBox from "../../TitleBox";
 
 import styles from "./SelectCategoryDialog.module.scss";
 
@@ -14,16 +15,19 @@ function SelectCategoryDialog() {
 
     const closeDialog = () => dispatch(setIsCategoryVisible(false));
 
+    const openAddDialog = () => {
+        dispatch(setIsAddCategoryVisible(true));
+        closeDialog();
+    };
+
     return isCategoryVisible ? (
         <>
             <div className="dialog-wrapper" onClick={closeDialog}></div>
             <div className={styles["dialog-container"]}>
-                <div className={styles.title}>
-                    <p>CATEGORIES</p>
-                </div>
+                <TitleBox title="CATEGORIES" />
 
-                <div className={styles["add-category"]}>
-                    <PlusSvgComponent function={() => {}} />
+                <div className={styles["add-category"]} onClick={openAddDialog}>
+                    <PlusSvgComponent function={openAddDialog} />
                     <p>ADD</p>
                 </div>
 
