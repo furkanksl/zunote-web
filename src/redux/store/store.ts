@@ -5,12 +5,14 @@ import categoryReducer from "../features/category.reducer";
 import noteReducer from "../features/note.reducer";
 import reminderReducer from "../features/reminder.reducer";
 import recorderReducer from "../features/recorder.reducer";
+import dialogReducer from "../features/dialog.reducer";
 
 export type StateModel = {
     reminder: any;
     category: any;
     note: any;
     recorder: any;
+    dialog: any;
 };
 
 const reducer: StateModel = {
@@ -18,6 +20,7 @@ const reducer: StateModel = {
     category: categoryReducer,
     note: noteReducer,
     recorder: recorderReducer,
+    dialog: dialogReducer,
 };
 
 const makeStore = () =>

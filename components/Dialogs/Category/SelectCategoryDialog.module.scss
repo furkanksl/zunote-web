@@ -1,0 +1,98 @@
+@import "../../../src/styles/styles";
+
+.dialog-container {
+    background-color: $secondary-color;
+
+    @include shadowed-box();
+    @include rounded();
+
+    @apply absolute
+    top-[calc(50%-225px)]
+    left-0
+    right-0
+    mx-auto
+    z-50
+    flex
+    flex-col
+    justify-start
+    items-center
+    w-[calc(100%-40px)]
+    sm:w-full
+    max-w-[390px]
+    sm:h-full
+    max-h-[450px]
+    p-6;
+}
+
+.add-category {
+    background-color: $primary-color;
+
+    @include shadowed-box();
+    @include rounded();
+
+    @apply flex
+    flex-row
+    justify-start
+    items-center
+    cursor-pointer
+    w-full
+    mb-[15px]
+    p-[5px];
+
+    &:hover {
+        background-color: $shadowed-primary-color;
+    }
+
+    svg {
+        @apply max-h-[42px]
+        h-full
+        max-w-[42px]
+        w-full;
+    }
+
+    p {
+        color: $gray-text-color;
+
+        @apply mx-auto
+        text-base
+        font-semibold
+        font-sans
+        pr-[42px]
+        mb-0;
+    }
+}
+
+.categor-list {
+    @apply flex
+    flex-col
+    justify-start
+    items-center
+    gap-y-[15px]
+    w-full;
+}
+
+.category-card {
+    background-color: $primary-color;
+
+    @include shadowed-box();
+    @include rounded();
+
+    @apply flex
+    flex-row
+    justify-between
+    items-center
+    cursor-pointer
+    w-full
+    p-3;
+
+    &:hover {
+        background-color: $shadowed-primary-color;
+    }
+
+    p.category-name {
+        @apply text-base
+        font-semibold
+        font-sans
+        mb-0;
+    }
+}

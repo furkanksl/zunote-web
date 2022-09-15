@@ -142,7 +142,7 @@
     }
 }
 .profile {
-    @apply ml-[126px];
+    @apply sm:ml-[126px];
 
     &:hover {
         .profile-dropdown {
