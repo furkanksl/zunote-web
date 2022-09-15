@@ -620,7 +620,7 @@ function Header() {
                             fill="none"
                             xmlns="http://www.w3.org/2000/svg"
                         >
-                            <g filter="url(#a)">
+                            <g filter="url(#a1)">
                                 <path
                                     fillRule="evenodd"
                                     clipRule="evenodd"
@@ -630,7 +630,7 @@ function Header() {
                             </g>
                             <defs>
                                 <filter
-                                    id="a"
+                                    id="a1"
                                     x={0}
                                     y={0}
                                     width={48}

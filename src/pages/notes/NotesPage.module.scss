@@ -1,0 +1,46 @@
+@import "../../styles/styles";
+
+.notes-page-wrapper {
+    @apply flex
+    flex-col
+    justify-start
+    items-center
+    max-w-[390px]
+    mx-auto
+    w-full
+    h-full;
+}
+
+.category-tab {
+    background-color: $gray-color;
+
+    @include shadowed-box();
+    @include rounded();
+
+    @apply flex
+    flex-row
+    justify-between
+    items-center
+    p-1
+    w-[280px];
+
+    div {
+        @include rounded();
+
+        @apply bg-transparent
+        w-[135px]
+        py-[5px];
+
+        svg {
+            @apply mx-auto;
+        }
+    }
+
+    .selected {
+        background-color: $second-gray-color;
+
+        svg > g > path {
+            stroke: white;
+        }
+    }
+}
