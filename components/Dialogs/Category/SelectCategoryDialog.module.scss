@@ -53,9 +53,14 @@
     flex-row
     justify-start
     items-center
+    cursor-pointer
     w-full
     mb-[15px]
     p-[5px];
+
+    &:hover {
+        background-color: $shadowed-primary-color;
+    }
 
     svg {
         @apply max-h-[42px]
@@ -95,8 +100,13 @@
     flex-row
     justify-between
     items-center
+    cursor-pointer
     w-full
     p-3;
+
+    &:hover {
+        background-color: $shadowed-primary-color;
+    }
 
     p.category-name {
         @apply text-base
