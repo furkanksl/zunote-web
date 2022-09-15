@@ -1,5 +1,6 @@
 import Head from "next/head";
 import React, { ReactNode } from "react";
+import AddCategoryDialog from "./Dialogs/Category/AddCategoryDialog";
 import SelectCategoryDialog from "./Dialogs/Category/SelectCategoryDialog";
 import Header from "./Header/Header";
 
@@ -13,6 +14,7 @@ function Layout({ children }: { children: ReactNode }) {
             <Header />
             <main>{children}</main>
             <SelectCategoryDialog />
+            <AddCategoryDialog />
         </>
     );
 }
