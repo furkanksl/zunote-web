@@ -28,3 +28,22 @@ main {
     bottom-0
     z-40;
 }
+
+.title-box {
+    background-color: $gray-color;
+
+    @include shadowed-box();
+    @include rounded();
+
+    @apply mb-2
+        rounded-[10px]
+        py-2
+        px-9;
+
+    p {
+        @apply text-base 
+            font-semibold 
+            mb-0
+            font-sans;
+    }
+}
