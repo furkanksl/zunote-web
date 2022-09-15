@@ -1,22 +1,25 @@
 @import "../../../src/styles/styles";
 
 .dialog-container {
-    top: calc(50% - 225px);
-    left: calc(50% - 195px);
     background-color: $secondary-color;
 
     @include shadowed-box();
     @include rounded();
 
-    @apply fixed
+    @apply absolute
+    top-[calc(50%-225px)]
+    left-0
+    right-0
+    mx-auto
     z-50
     flex
     flex-col
     justify-start
     items-center
-    w-full
+    w-[calc(100%-40px)]
+    sm:w-full
     max-w-[390px]
-    h-full
+    sm:h-full
     max-h-[450px]
     p-6;
 }
