@@ -22,6 +22,7 @@
     justify-between
     items-center
     p-1
+    cursor-pointer
     w-[280px];
 
     div {
@@ -41,6 +42,188 @@
 
         svg > g > path {
             stroke: white;
+        }
+    }
+}
+
+.select-category {
+    background-color: $secondary-color;
+
+    @include shadowed-box();
+    @include rounded();
+
+    @apply flex
+    flex-row
+    items-center
+    justify-start
+    min-w-[150px]
+    px-[14px] py-[5px]
+    border-black
+    border-[1px]
+    gap-x-[10px]
+    my-4
+    cursor-pointer;
+
+    svg {
+        width: 29px;
+        height: 29px;
+    }
+
+    p {
+        @apply text-base
+        font-sans
+        font-normal;
+    }
+}
+
+.cards {
+    @apply flex
+    flex-col
+    justify-start
+    items-center
+    h-full
+    w-full
+    gap-y-[15px]
+    overflow-scroll
+    px-2 pb-2;
+
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none;
+}
+
+.cards::-webkit-scrollbar {
+    display: none;
+}
+
+.voice-card {
+    background-color: $secondary-color;
+
+    @include shadowed-box();
+    @include rounded();
+
+    @apply flex
+    flex-col
+    justify-start
+    items-start
+    w-full
+    p-2
+    cursor-pointer;
+
+    .note-text {
+        @apply flex
+        flex-row
+        justify-between
+        items-start
+        mb-1
+        w-full;
+
+        svg {
+            @apply ml-auto
+            cursor-pointer;
+
+            &:hover {
+                path,
+                g,
+                g > circle {
+                    stroke: red;
+                }
+            }
+        }
+
+        p {
+            @apply flex-1
+            text-base
+            font-sans 
+            ml-1
+            font-normal;
+        }
+    }
+
+    .details {
+        @apply flex
+        flex-row
+        justify-between
+        items-end
+        w-full;
+
+        svg {
+            @apply ml-0
+            cursor-pointer
+            h-8
+            w-8;
+
+            &:hover {
+                path,
+                g,
+                g > circle {
+                    stroke: white;
+                }
+            }
+        }
+
+        p {
+            @apply text-xs
+            font-light
+            font-sans;
+        }
+    }
+}
+
+.note-card {
+    background-color: $secondary-color;
+
+    @include shadowed-box();
+    @include rounded();
+
+    @apply flex
+    flex-col
+    justify-start
+    items-start
+    w-full
+    p-2
+    cursor-pointer;
+
+    .note-text {
+        @apply flex
+        flex-row
+        justify-between
+        items-start
+        mb-1
+        w-full;
+
+        svg {
+            @apply ml-auto
+            cursor-pointer;
+
+            &:hover {
+                path,
+                g,
+                g > circle {
+                    stroke: red;
+                }
+            }
+        }
+
+        p {
+            @apply flex-1
+            text-base
+            font-sans 
+            ml-1
+            font-normal;
+        }
+    }
+
+    .details {
+        @apply flex
+        flex-row
+        justify-end
+        items-end
+        w-full;
+
+        p {
+            @apply text-xs
+            font-light
+            font-sans;
         }
     }
 }
