@@ -4,14 +4,18 @@ import MiniPauseSvgComponent from "../../../../components/Svg/MiniResumeSvg";
 import RemoveSvgComponent from "../../../../components/Svg/RemoveSvg";
 
 import styles from "../NotesPage.module.scss";
-
-function VoiceNoteCard() {
+type Props = {
+    noteText: string;
+    createdAt: string;
+    voiceUrl: string;
+};
+function VoiceNoteCard(props: Props) {
     const [isPlaying, setIsPlaying] = useState(false);
 
     return (
         <div className={styles["voice-card"]}>
             <div className={styles["note-text"]}>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt nobis molest.</p>
+                <p>{props.noteText}</p>
                 <RemoveSvgComponent function={() => {}} />
             </div>
             <div className={styles["details"]}>
@@ -20,7 +24,7 @@ function VoiceNoteCard() {
                 ) : (
                     <MiniPlaySvgComponent function={() => setIsPlaying(true)} />
                 )}
-                <p>12 Aug 2022 08:07</p>
+                <p>{props.createdAt}</p>
             </div>
         </div>
     );
