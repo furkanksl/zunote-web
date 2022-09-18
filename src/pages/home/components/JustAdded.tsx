@@ -2,7 +2,7 @@ import React from "react";
 import Note from "../../../models/Note.model";
 import VoiceNote, { TimedNote } from "../../../models/VoiceNote.model";
 
-import styles from "../../../styles/home.module.scss";
+import styles from "../HomePage.module.scss";
 
 type Props = {
     list: TimedNote[] | Note[];

@@ -161,6 +161,7 @@ type NoteState = {
     isVoiceNote: boolean;
     notes: any[];
     isNoteEditing: boolean;
+    notesTabIndex: number;
     selectedNote?: Note | VoiceNote;
     selectedNoteIndex: number;
     voiceTimerText: string;
@@ -176,6 +177,7 @@ export const noteSlice = createSlice({
         selectedNote: undefined,
         selectedNoteIndex: 0,
         voiceTimerText: "00:00",
+        notesTabIndex: 0,
     },
 
     reducers: {
@@ -212,8 +214,13 @@ export const noteSlice = createSlice({
         setSelectedNoteIndex: (state: NoteState, action: any) => {
             state.selectedNoteIndex = action.payload;
         },
+
         setSelectedNote: (state: NoteState, action: any) => {
             state.selectedNote = action.payload;
+        },
+
+        setNotesTabIndex: (state: NoteState, action: any) => {
+            state.notesTabIndex = action.payload;
         },
     },
 });
@@ -228,6 +235,7 @@ export const {
     setSelectedNoteIndex,
     setIsNoteEditing,
     setVoiceTimerText,
+    setNotesTabIndex,
 } = noteSlice.actions;
 
 export default noteSlice.reducer;

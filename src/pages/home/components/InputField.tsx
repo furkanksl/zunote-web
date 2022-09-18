@@ -6,7 +6,7 @@ import CategorySvgComponent from "../../../../components/Svg/CategorySvg";
 import ReminderSvgComponent from "../../../../components/Svg/ReminderSvg";
 import { setIsCategoryVisible } from "../../../redux/features/dialog.reducer";
 
-import styles from "../../../styles/home.module.scss";
+import styles from "../HomePage.module.scss";
 import Recorder from "./Recorder";
 type Props = {
     onSave: (input: string) => any;
