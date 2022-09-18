@@ -63,7 +63,7 @@ function Header() {
         },
         {
             route: "/notes",
-            name: "Note",
+            name: "Notes",
             svg: (
                 <svg
                     className={checkPageSelected("/notes") ? styles["item-selected"] : ""}
