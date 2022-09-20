@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React, { useState } from "react";
-import LogoSvgComponent from "../../components/Svg/LogoSvg";
+import LogoSvgComponent from "../components/Svg/LogoSvg";
 import styles from "../../src/styles/auth.module.scss";
 
 function AuthPage() {
