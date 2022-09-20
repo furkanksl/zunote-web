@@ -1,31 +1,20 @@
 import React from "react";
-import CategorySvgComponent from "../../../components/Svg/CategorySvg";
-import ReminderSvgComponent from "../../../components/Svg/ReminderSvg";
 import RemoveSvgComponent from "../../../components/Svg/RemoveSvg";
+import WhiteTextSvgComponent from "../../../components/Svg/WhiteTextSvg";
 import WhiteVoiceSvgComponent from "../../../components/Svg/WhiteVoiceSvg";
+import CategoryAndReminderSection from "./components/CategoryAndReminderSection";
+import NoteSection from "./components/NoteSection";
 
 import styles from "./NoteDetailPage.module.scss";
 
 function NoteDetailPage() {
+    const isVoiceNote = true;
+
     return (
         <div className={styles["note-detail-page-wrapper"]}>
-            <WhiteVoiceSvgComponent />
-            <div className={styles["reminder-and-category-container"]}>
-                <div className={styles["category-row"]}>
-                    <div className={styles["icon-and-text"]}>
-                        <CategorySvgComponent function={() => {}} />
-                        <p>Category 1</p>
-                    </div>
-                    <RemoveSvgComponent function={() => {}} />
-                </div>
-                <div className={styles["reminder-row"]}>
-                    <div className={styles["icon-and-text"]}>
-                        <ReminderSvgComponent function={() => {}} />
-                        <p>12 Aug 2022 10:34</p>
-                    </div>
-                    <RemoveSvgComponent function={() => {}} />
-                </div>
-            </div>
+            {isVoiceNote ? <WhiteVoiceSvgComponent /> : <WhiteTextSvgComponent />}
+            <CategoryAndReminderSection />
+            <NoteSection />
         </div>
     );
 }
