@@ -1,0 +1,57 @@
+@import "../../styles/styles";
+
+.note-detail-page-wrapper {
+    @apply flex
+    flex-col
+    justify-start
+    items-center
+    max-w-[390px]
+    mx-auto
+    w-full
+    h-full;
+}
+
+.reminder-and-category-container {
+    @apply flex
+    flex-col
+    justify-start
+    items-start
+    gap-y-3
+    w-full
+    mt-[50px];
+
+    .category-row,
+    .reminder-row {
+        @apply flex 
+        flex-row
+        justify-between
+        items-center
+        w-full;
+
+        .icon-and-text {
+            @apply flex 
+            flex-row
+            justify-start
+            items-center
+            cursor-pointer
+            gap-x-6;
+
+            p {
+                @apply text-base
+                font-sans
+                font-normal
+                hover:text-white;
+            }
+        }
+
+        svg {
+            @apply cursor-pointer;
+
+            &:hover {
+                path {
+                    stroke: red;
+                }
+            }
+        }
+    }
+}
