@@ -1,7 +1,6 @@
 import React from "react";
+import NoteDetailPage from "../src/pages/note-detail/NoteDetailPage";
 
-function NoteDetailPage() {
-    return <div>NoteDetailPage</div>;
-}
+const NoteDetail = () => <NoteDetailPage />;
 
-export default NoteDetailPage;
+export default NoteDetail;
