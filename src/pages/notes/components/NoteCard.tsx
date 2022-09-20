@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 import { useDispatch } from "react-redux";
 
@@ -16,15 +17,17 @@ function NoteCard(props: Props) {
     const deleteItem = () => dispatch(setIsDeleteVisible(true));
 
     return (
-        <div className={styles["note-card"]}>
-            <div className={styles["note-text"]}>
-                <p>{props.noteText}</p>
-                <RemoveSvgComponent function={deleteItem} />
+        <Link href={"/note-detail"}>
+            <div className={styles["note-card"]}>
+                <div className={styles["note-text"]}>
+                    <p>{props.noteText}</p>
+                    <RemoveSvgComponent function={deleteItem} />
+                </div>
+                <div className={styles["details"]}>
+                    <p>{props.createdAt}</p>
+                </div>
             </div>
-            <div className={styles["details"]}>
-                <p>{props.createdAt}</p>
-            </div>
-        </div>
+        </Link>
     );
 }
 
