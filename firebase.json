@@ -5,6 +5,35 @@
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
-    ]
+    ],
+    "rewrites": [
+      {
+        "source": "/home",
+        "destination": "/home.html"
+      },
+      {
+        "source": "/notes",
+        "destination": "/notes.html"
+      },
+      {
+        "source": "/note-detail",
+        "destination": "/note-detail.html"
+      },
+      {
+        "source": "/about",
+        "destination": "/about.html"
+      },
+      {
+        "source": "/subscription",
+        "destination": "/subscription.html"
+      },
+      {
+        "source": "/auth",
+        "destination": "/auth.html"
+      },
+      {
+      "source": "**",
+      "destination": "/index.html"
+    } ]
   }
 }
