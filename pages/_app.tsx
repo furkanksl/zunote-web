@@ -1,4 +1,6 @@
 import "../src/styles/globals.scss";
+import "react-h5-audio-player/src/styles.scss";
+
 import type { AppProps } from "next/app";
 import Layout from "../components/Layout";
 import { wrapper } from "../src/redux/store/store";

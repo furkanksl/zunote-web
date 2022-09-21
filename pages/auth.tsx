@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React, { useState } from "react";
-import styles from "../../src/styles/auth.module.scss";
+import LogoSvgComponent from "../components/Svg/LogoSvg";
+import styles from "../src/styles/auth.module.scss";
 
 function AuthPage() {
     const [toggleIndex, setToggleIndex] = useState(0);
@@ -11,7 +12,7 @@ function AuthPage() {
 
     return (
         <div className={styles["aut-page-wrapper"]}>
-            <img className={styles.logo} src="/icons/logo.svg" alt="ZUNOTE LOGO" />
+            <LogoSvgComponent className={styles.logo} />
             <div className={styles["page-toggle"]}>
                 <div
                     onClick={() => changePageIndex(0)}

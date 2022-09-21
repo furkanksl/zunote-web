@@ -1,5 +1,5 @@
 import React from "react";
-import NotesPage from "../../src/pages/notes/NotesPage";
+import NotesPage from "../src/pages/notes/NotesPage";
 
 function Notes() {
     return <NotesPage />;

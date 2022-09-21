@@ -12,10 +12,11 @@
 
 .logo {
     @apply sm:w-full 
-    w-[130px]
-    mb-0
-    sm:mb-[-10px]
+    w-[150px]
+    mb-[-8px]
+    sm:mb-0
     sm:max-w-[180px] 
+    max-h-[70px]
     relative
     z-30
     cursor-pointer;
@@ -135,12 +136,28 @@
 
         svg {
             @apply flex 
-            h-10 
+            h-10
+            w-[55px]
             cursor-pointer 
             sm:hidden;
         }
     }
 }
+
+.mobile-menu-layer {
+    @apply fixed 
+    top-0
+    bottom-0
+    left-0
+    right-0
+    mx-auto
+    my-auto
+    z-[19]
+    w-full
+    h-full
+    sm:hidden;
+}
+
 .profile {
     @apply sm:ml-[126px];
 

@@ -47,3 +47,60 @@ main {
             font-sans;
     }
 }
+
+.rhap_container {
+    background-color: $gray-color !important;
+    border-radius: 20px;
+    padding: 8px 10px !important;
+}
+
+.rhap_progress-bar-show-download {
+    background-color: $second-gray-color !important;
+}
+
+.rhap_main-controls-button {
+    color: $gray-color !important;
+    font-size: 30px !important;
+    width: 30px !important;
+    height: 30px !important;
+
+    &:hover {
+        color: $secondary-color !important;
+    }
+}
+
+.rhap_button-clear {
+    background-color: $second-gray-color !important;
+    border-radius: 100%;
+}
+
+.rhap_volume-button {
+    color: $gray-color !important;
+    flex: 0 0 20px !important;
+    font-size: 20px !important;
+    width: 20px !important;
+    height: 20px !important;
+}
+
+.rhap_volume-bar {
+    background-color: $second-gray-color !important;
+}
+
+.rhap_stacked .rhap_controls-section {
+    margin-top: 1px !important;
+}
+
+.rhap_time {
+    font-size: 14px !important;
+    font-weight: 200 !important;
+}
+
+.rhap_volume-container {
+    flex: 0 1 80px !important;
+}
+
+.rhap_play-pause-button {
+    font-size: 35px !important;
+    width: 35px !important;
+    height: 35px !important;
+}
