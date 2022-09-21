@@ -1,9 +1,8 @@
-import React from "react";
-import RemoveSvgComponent from "../../../components/Svg/RemoveSvg";
 import WhiteTextSvgComponent from "../../../components/Svg/WhiteTextSvg";
 import WhiteVoiceSvgComponent from "../../../components/Svg/WhiteVoiceSvg";
 import CategoryAndReminderSection from "./components/CategoryAndReminderSection";
 import NoteSection from "./components/NoteSection";
+import PlayerAndButtons from "./components/PlayerAndButtons";
 
 import styles from "./NoteDetailPage.module.scss";
 
@@ -12,9 +11,12 @@ function NoteDetailPage() {
 
     return (
         <div className={styles["note-detail-page-wrapper"]}>
-            {isVoiceNote ? <WhiteVoiceSvgComponent /> : <WhiteTextSvgComponent />}
+            <div className={styles["note-icon-container"]}>
+                {isVoiceNote ? <WhiteVoiceSvgComponent /> : <WhiteTextSvgComponent />}
+            </div>
             <CategoryAndReminderSection />
             <NoteSection />
+            <PlayerAndButtons />
         </div>
     );
 }

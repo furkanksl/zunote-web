@@ -11,6 +11,10 @@
     h-full;
 }
 
+.note-icon-container {
+    width: 60px;
+}
+
 .reminder-and-category-container {
     @apply flex
     flex-col
@@ -19,6 +23,22 @@
     gap-y-3
     w-full
     mt-[50px];
+
+    :first-child > .icon-and-text > svg {
+        &:hover {
+            path {
+                stroke: black !important;
+            }
+        }
+    }
+
+    :last-child > .icon-and-text > svg {
+        &:hover {
+            path {
+                stroke: inherit !important;
+            }
+        }
+    }
 
     .category-row,
     .reminder-row {
@@ -33,8 +53,12 @@
             flex-row
             justify-start
             items-center
-            cursor-pointer
-            gap-x-6;
+            cursor-pointer;
+
+            svg {
+                @apply cursor-pointer
+                w-7;
+            }
 
             p {
                 @apply text-base
@@ -45,7 +69,8 @@
         }
 
         svg {
-            @apply cursor-pointer;
+            @apply mr-2
+            cursor-pointer;
 
             &:hover {
                 path {
@@ -56,14 +81,23 @@
     }
 }
 
+.note-section ::-webkit-scrollbar {
+    display: none;
+}
+
 .note-section {
     @apply flex
     flex-col
     justify-start
     items-start
-    w-full
+    w-[calc(100%+8px)]
     gap-y-3
+    overflow-scroll
+    p-1
     mt-3;
+
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none;
 
     .note-card {
         background-color: $secondary-color;
@@ -133,4 +167,46 @@
             }
         }
     }
+}
+
+.player-and-buttons-section {
+    @apply flex
+    flex-col
+    justify-start
+    items-start
+    w-full
+    mt-auto
+    gap-y-6;
+
+    .buttons {
+        @apply flex
+        flex-row
+        justify-between
+        items-center
+        w-full;
+
+        .button {
+            background-color: $gray-color;
+            @include shadowed-box();
+            @include rounded();
+
+            @apply flex
+            justify-center
+            items-center
+            text-base
+            w-[160px]
+            py-[11px]
+            cursor-pointer;
+
+            &:hover {
+                background-color: $secondary-color;
+            }
+        }
+    }
+}
+
+.audio-player {
+    @apply mt-6;
+    @include rounded();
+    // max-width: 230px;
 }
