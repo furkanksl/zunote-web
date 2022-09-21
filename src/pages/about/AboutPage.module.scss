@@ -1,0 +1,25 @@
+@import "../../styles/styles";
+
+.about-page-wrapper {
+    @apply flex
+    flex-col
+    justify-start
+    items-center
+    max-w-[870px]
+    mx-auto
+    w-full
+    h-full;
+}
+
+p.title {
+    @apply text-xl
+    font-sans
+    font-light;
+}
+
+p.desc {
+    @apply text-lg
+    font-sans
+    font-normal
+    my-auto;
+}
