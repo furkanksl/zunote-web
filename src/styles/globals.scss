@@ -15,8 +15,13 @@ body {
 }
 
 main {
-    margin-top: 82px;
-    height: calc(100vh - 150px);
+    @apply mt-[82px]
+    h-[calc(100vh-120px)]
+    sm:h-[calc(100vh-150px)];
+}
+
+.remove-mt {
+    margin-top: 0px !important;
 }
 
 .dialog-wrapper {
