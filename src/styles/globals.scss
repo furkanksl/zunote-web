@@ -17,7 +17,8 @@ body {
 main {
     @apply mt-[82px]
     h-[calc(100vh-120px)]
-    sm:h-[calc(100vh-150px)];
+    sm:h-[calc(100vh-150px)]
+    overflow-scroll;
 }
 
 .remove-mt {

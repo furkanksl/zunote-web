@@ -9,8 +9,6 @@
     mx-auto
     w-full
     h-full
-    overflow-scroll
-    sm:overflow-hidden
     pb-10
     sm:pb-0;
 }
@@ -152,6 +150,30 @@ ul.plan-details {
             text-white
             font-light
             font-sans;
+        }
+    }
+}
+
+p.mobile-text {
+    @apply text-base
+    mt-6
+    mb-5;
+}
+
+.mobile-links {
+    @apply flex
+    flex-row
+    justify-center
+    items-center
+    gap-x-6;
+
+    svg {
+        @apply cursor-pointer;
+
+        &:hover {
+            path {
+                fill: white;
+            }
         }
     }
 }
