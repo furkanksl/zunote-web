@@ -1,0 +1,157 @@
+@import "../../styles/styles";
+
+.subs-page-wrapper {
+    @apply flex
+    flex-col
+    justify-start
+    items-center
+    max-w-[350px]
+    mx-auto
+    w-full
+    h-full
+    overflow-scroll
+    sm:overflow-hidden
+    pb-10
+    sm:pb-0;
+}
+
+.current-plan-card {
+    background-color: $primary-btn-color;
+
+    @include shadowed-box();
+
+    @apply flex
+    justify-center
+    items-center
+    w-[200px]
+    h-[200px]
+    rounded-full
+    my-auto;
+
+    svg {
+        height: 100px;
+        width: 100%;
+    }
+}
+
+p.current-plan {
+    @apply text-xl
+    font-normal
+    font-sans
+    mb-4;
+
+    span {
+        @apply font-semibold;
+    }
+}
+
+ul.plan-details {
+    @apply list-disc
+    mb-11;
+
+    li {
+        @apply text-base
+        font-sans
+        font-light;
+    }
+}
+
+.metamask-info-container {
+    @apply flex
+    flex-row
+    justify-start
+    items-center
+    gap-x-3;
+
+    svg {
+        @apply w-[60px];
+    }
+}
+
+.plans-container {
+    @apply flex
+    flex-row
+    justify-between
+    items-start
+    mt-11
+    w-full;
+}
+
+.pland-card {
+    @apply flex
+    flex-col
+    justify-start
+    items-center
+    h-full
+    w-full;
+
+    div {
+        @apply flex;
+
+        svg {
+            @apply w-[90px]
+            h-[40px];
+        }
+    }
+
+    p.name {
+        @apply text-base
+        font-semibold
+        font-sans;
+    }
+
+    ul.plan-details {
+        @apply mb-8 mt-4 ml-6;
+    }
+
+    .buy-button {
+        background-color: $primary-btn-color;
+
+        @include shadowed-box();
+        @include rounded();
+
+        @apply flex
+        flex-col
+        justify-between
+        items-center
+        w-[160px]
+        h-[160px]
+        cursor-pointer
+        p-3
+        mt-auto;
+
+        &:hover {
+            background-color: $shadowed-primary-color;
+
+            div.upgrade-svg {
+                @apply flex 
+                mt-[10px]
+                mb-2;
+
+                svg > path {
+                    stroke: $primary-btn-color;
+                    stroke-width: 3;
+                }
+            }
+        }
+
+        div.upgrade-svg {
+            @apply flex 
+            mt-[14px]
+            mb-1;
+        }
+
+        p.price {
+            @apply text-xl
+            font-light
+            font-sans;
+        }
+
+        p.upgrade {
+            @apply text-[14px]
+            text-white
+            font-light
+            font-sans;
+        }
+    }
+}
