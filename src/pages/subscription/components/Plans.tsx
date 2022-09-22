@@ -1,4 +1,6 @@
+import AppStoreSvgComponent from "../../../../components/Svg/AppStoreSvg";
 import MetamaskSvgComponent from "../../../../components/Svg/MetamaskSvg";
+import PlayStoreSvgComponent from "../../../../components/Svg/PlayStoreSvg";
 import PremiumPlanSvgComponent from "../../../../components/Svg/PremiumPlanSvg";
 import StandartPlanSvgComponent from "../../../../components/Svg/StandartPlanSvg";
 import UpgradeSvgComponent from "../../../../components/Svg/UpgradeSvg";
@@ -62,6 +64,12 @@ function Plans(props: Props) {
                         </div>
                     );
                 })}
+            </div>
+
+            <p className={styles["mobile-text"]}>You can also upgrade from mobile app.</p>
+            <div className={styles["mobile-links"]}>
+                <PlayStoreSvgComponent />
+                <AppStoreSvgComponent />
             </div>
         </>
     );
