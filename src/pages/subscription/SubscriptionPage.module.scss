@@ -15,7 +15,26 @@
     sm:pb-0;
 }
 
-p.currently-plan {
+.current-plan-card {
+    background-color: $primary-btn-color;
+
+    @include shadowed-box();
+
+    @apply flex
+    justify-center
+    items-center
+    w-[200px]
+    h-[200px]
+    rounded-full
+    my-auto;
+
+    svg {
+        height: 100px;
+        width: 100%;
+    }
+}
+
+p.current-plan {
     @apply text-xl
     font-normal
     font-sans
