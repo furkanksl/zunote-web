@@ -4,8 +4,15 @@ import AddCategoryDialog from "./Dialogs/Category/AddCategoryDialog";
 import SelectCategoryDialog from "./Dialogs/Category/SelectCategoryDialog";
 import DeleteDialog from "./Dialogs/Delete/DeleteDialog";
 import Header from "./Header/Header";
+import { useRouter } from "next/router";
 
 function Layout({ children }: { children: ReactNode }) {
+    const router = useRouter();
+
+    function checkPagePath(path: string): boolean {
+        return path === router.pathname;
+    }
+
     return (
         <>
             <Head>
@@ -13,7 +20,7 @@ function Layout({ children }: { children: ReactNode }) {
                 <link rel="icon" href="./favicon.svg" />{" "}
             </Head>
             <Header />
-            <main>{children}</main>
+            <main className={checkPagePath("/auth") ? " remove-mt" : ""}>{children}</main>
             <SelectCategoryDialog />
             <AddCategoryDialog />
             <DeleteDialog />
