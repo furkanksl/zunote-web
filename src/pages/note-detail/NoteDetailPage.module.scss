@@ -13,6 +13,8 @@
 
 .note-icon-container {
     width: 60px;
+    display: flex;
+    justify-content: center;
 }
 
 .reminder-and-category-container {
@@ -22,7 +24,8 @@
     items-start
     gap-y-3
     w-full
-    mt-[50px];
+    mt-3
+    sm:mt-[50px];
 
     :first-child > .icon-and-text > svg {
         &:hover {
