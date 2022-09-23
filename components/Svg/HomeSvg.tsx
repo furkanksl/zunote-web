@@ -6,47 +6,18 @@ type Props = {
 const HomeSvgComponent = (props: Props) => (
     <svg
         className={props.className}
-        width="55"
-        height="56"
-        viewBox="0 0 55 56"
+        width="47"
+        height="43"
+        viewBox="0 0 47 43"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
     >
-        <g filter={"url(#filter0_d_1_309)" + props.filterId}>
-            <path
-                d="M48.6667 41.0181V24.7139C48.6668 23.5796 48.4353 22.4572 47.9865 21.4155C47.5376 20.3737 46.8808 19.4346 46.0562 18.6556L30.6958 4.13893C29.9222 3.40753 28.898 3 27.8333 3C26.7687 3 25.7445 3.40753 24.9708 4.13893L9.61042 18.6556C8.78588 19.4346 8.12907 20.3737 7.6802 21.4155C7.23134 22.4572 6.99988 23.5796 7 24.7139V41.0181C7 42.1232 7.43899 43.183 8.22039 43.9644C9.00179 44.7458 10.0616 45.1848 11.1667 45.1848H44.5C45.6051 45.1848 46.6649 44.7458 47.4463 43.9644C48.2277 43.183 48.6667 42.1232 48.6667 41.0181Z"
-                stroke="black"
-                strokeWidth="4.16667"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                shapeRendering="crispEdges"
-            />
-        </g>
-        <defs>
-            <filter
-                id={"filter0_d_1_309" + props.filterId}
-                x="0.916664"
-                y="0.916687"
-                width="53.8333"
-                height="54.3514"
-                filterUnits="userSpaceOnUse"
-                colorInterpolationFilters="sRGB"
-            >
-                <feFlood floodOpacity="0" result="BackgroundImageFix" />
-                <feColorMatrix
-                    in="SourceAlpha"
-                    type="matrix"
-                    values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-                    result="hardAlpha"
-                />
-                <feOffset dy="4" />
-                <feGaussianBlur stdDeviation="2" />
-                <feComposite in2="hardAlpha" operator="out" />
-                <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
-                <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1_309" />
-                <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1_309" result="shape" />
-            </filter>
-        </defs>
+        <path
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M20.2068 0.96724C21.0155 0.340354 22.0109 0 23.0355 0C24.0601 0 25.0555 0.340354 25.8642 0.96724L45.177 15.933C46.9115 17.2804 45.9533 20.0463 43.7603 20.0463H41.4637V38.4093C41.4637 39.6268 40.9783 40.7945 40.1143 41.6554C39.2503 42.5163 38.0785 43 36.8566 43H9.21434C7.99247 43 6.82065 42.5163 5.95666 41.6554C5.09267 40.7945 4.60729 39.6268 4.60729 38.4093V20.0463H2.31067C0.115415 20.0463 -0.838244 17.2781 0.894007 15.9353L20.2068 0.969535V0.96724ZM8.35052 15.9721C8.87802 16.3967 9.21434 17.0463 9.21434 17.7739V38.4093H36.8566V17.7739C36.8566 17.0463 37.193 16.3967 37.7205 15.9721L23.0355 4.59162L8.35052 15.9721Z"
+            fill="black"
+        />
     </svg>
 );
 

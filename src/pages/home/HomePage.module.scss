@@ -49,7 +49,7 @@
 }
 
 .textfield {
-    background-color: $gray-color;
+    background-color: $secondary-color;
 
     @include shadowed-box();
 
@@ -63,7 +63,7 @@
 
     textarea {
         @apply w-full
-        placeholder:text-gray-400
+        placeholder:text-[#0000006b]
         bg-transparent
         font-sans
         text-base

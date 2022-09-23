@@ -7,8 +7,8 @@ const NotesSvgComponent = (props: Props) => (
     <svg
         className={props.className}
         width="46"
-        height="54"
-        viewBox="0 0 46 54"
+        height="50"
+        viewBox="-2 -2 50 50"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
     >

@@ -37,6 +37,21 @@
     sm:flex;
 }
 
+div.circle {
+    @apply flex
+    justify-center
+    items-center
+    h-[60px]
+    w-[60px]
+    bg-transparent
+    rounded-full;
+}
+
+.show-circle {
+    @include shadowed-box();
+    background-color: $secondary-color !important;
+}
+
 .mobile-menu-items {
     @apply flex
     flex-row
@@ -47,7 +62,7 @@
     sm:hidden;
 
     :first-child {
-        @apply h-12;
+        @apply -mt-[3px];
     }
 
     :last-child {
@@ -76,9 +91,26 @@
     cursor-pointer 
     sm:flex;
 
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+
     &:hover {
         path {
             fill: white;
+        }
+    }
+}
+
+.item-g {
+    @apply hidden 
+    h-12 
+    cursor-pointer 
+    sm:flex;
+
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+
+    &:hover {
+        path {
+            stroke: white;
         }
     }
 }
@@ -98,7 +130,13 @@
 
 .item-selected {
     path {
-        fill: $gray-color !important;
+        fill: white !important;
+    }
+}
+
+.item-selected-g {
+    path {
+        stroke: white !important;
     }
 }
 
@@ -123,6 +161,16 @@
     -mt-[70px]
     w-full
     sm:hidden;
+
+    :nth-child(2),
+    :nth-child(4) {
+        &:hover {
+            svg > g > path {
+                stroke: white !important;
+                fill: transparent !important;
+            }
+        }
+    }
 
     div {
         p {
@@ -176,13 +224,13 @@
 }
 
 .profile-dropdown {
-    background-color: $gray-color;
+    background-color: $secondary-color;
     border-radius: $border-10;
 
     @include shadowed-box();
 
     @apply fixed
-    top-24
+    top-20
     right-6
     hidden
     sm:flex
@@ -198,9 +246,18 @@
     p {
         @apply text-[13px] font-extralight mx-auto mb-2;
     }
-    div:hover {
-        svg > path,
+
+    :nth-child(2):hover {
         svg > g > path {
+            stroke: white;
+        }
+        p {
+            @apply text-white;
+        }
+    }
+
+    div:hover {
+        svg > path {
             fill: white;
         }
 
@@ -211,7 +268,7 @@
 
     div > .item-selected {
         path {
-            fill: $primary-color !important;
+            fill: white !important;
         }
     }
 
