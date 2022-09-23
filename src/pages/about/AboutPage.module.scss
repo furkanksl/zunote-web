@@ -10,6 +10,13 @@
     w-full
     h-full
     overflow-scroll;
+
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.about-page-wrapper::-webkit-scrollbar {
+    display: none;
 }
 
 p.title {

@@ -5,12 +5,15 @@
     flex-col
     justify-start
     items-center
-    pt-10
+    pt-0
+    sm:pt-10
     w-full;
 }
 
 .logo {
-    @apply w-[180px];
+    @apply w-[180px]
+    h-[100px]
+    sm:h-[180px];
 }
 
 .page-toggle {
