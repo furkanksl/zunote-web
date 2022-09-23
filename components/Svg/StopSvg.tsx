@@ -10,7 +10,8 @@ const StopSvgComponent = (props: SvgComponentProp) => (
         xmlns="http://www.w3.org/2000/svg"
     >
         <g filter="url(#filter0_d_1_260)">
-            <circle cx="31" cy="27" r="26" stroke="black" strokeWidth="2" shapeRendering="crispEdges" />
+            <circle cx="31" cy="27" r="25" fill="#FCD36E" />
+            <circle cx="31" cy="27" r="26" stroke="black" strokeWidth="2" />
         </g>
         <path
             d="M39.5556 15H22.4444C21.0944 15 20 16.0944 20 17.4444V34.5556C20 35.9056 21.0944 37 22.4444 37H39.5556C40.9056 37 42 35.9056 42 34.5556V17.4444C42 16.0944 40.9056 15 39.5556 15Z"
