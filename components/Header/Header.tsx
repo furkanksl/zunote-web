@@ -33,17 +33,7 @@ function Header() {
             svg: (
                 <NotesSvgComponent
                     filterId="1"
-                    className={checkPageSelected("/notes") ? styles["item-selected"] : ""}
-                />
-            ),
-        },
-        {
-            route: "/about",
-            name: "About",
-            svg: (
-                <AboutSvgComponent
-                    filterId="1"
-                    className={checkPageSelected("/about") ? styles["item-selected"] : ""}
+                    className={checkPageSelected("/notes") ? styles["item-selected-g"] : ""}
                 />
             ),
         },
@@ -54,6 +44,16 @@ function Header() {
                 <SubscriptionDropdownSvgComponent
                     filterId="1"
                     className={checkPageSelected("/subscription") ? styles["item-selected"] : ""}
+                />
+            ),
+        },
+        {
+            route: "/about",
+            name: "About",
+            svg: (
+                <AboutSvgComponent
+                    filterId="1"
+                    className={checkPageSelected("/about") ? styles["item-selected-g"] : ""}
                 />
             ),
         },
@@ -81,7 +81,13 @@ function Header() {
             </Link>
             <div className={styles["menu-items"]}>
                 <Link href={"/home"}>
-                    <div>
+                    <div
+                        className={
+                            styles.circle +
+                            " " +
+                            (checkPageSelected("/home") || checkPageSelected("/") ? styles["show-circle"] : "")
+                        }
+                    >
                         <HomeSvgComponent
                             filterId="2"
                             className={
@@ -93,18 +99,28 @@ function Header() {
                     </div>
                 </Link>
                 <Link href={"/notes"}>
-                    <div>
+                    <div className={styles.circle + " " + (checkPageSelected("/notes") ? styles["show-circle"] : "")}>
                         <NotesSvgComponent
                             filterId="2"
-                            className={styles.item + " " + (checkPageSelected("/notes") ? styles["item-selected"] : "")}
+                            className={
+                                styles["item-g"] + " " + (checkPageSelected("/notes") ? styles["item-selected-g"] : "")
+                            }
                         />
                     </div>
                 </Link>
-                <Link href={"/about"}>
-                    <div>
-                        <AboutSvgComponent
+                <Link href={"/subscription"}>
+                    <div
+                        className={
+                            styles.circle + " " + (checkPageSelected("/subscription") ? styles["show-circle"] : "")
+                        }
+                    >
+                        <SubscriptionDropdownSvgComponent
                             filterId="2"
-                            className={styles.item + " " + (checkPageSelected("/about") ? styles["item-selected"] : "")}
+                            className={
+                                styles["item"] +
+                                " " +
+                                (checkPageSelected("/subscription") ? styles["item-selected"] : "")
+                            }
                         />
                     </div>
                 </Link>
@@ -113,13 +129,13 @@ function Header() {
                 <ProfileSvgComponent className={styles.item} />
                 <div className={styles["profile-dropdown"]}>
                     <p>abc...@gmal.com</p>
-                    <Link href={"/subscription"}>
+                    <Link href={"/about"}>
                         <div className="flex flex-row justify-start items-center mr-auto gap-x-1 cursor-pointer">
-                            <SubscriptionDropdownSvgComponent
+                            <AboutSvgComponent
                                 filterId="2"
-                                className={checkPageSelected("/subscription") ? styles["item-selected"] : ""}
+                                className={checkPageSelected("/about") ? styles["item-selected-g"] : ""}
                             />
-                            <p>Subscription</p>
+                            <p>About</p>
                         </div>
                     </Link>
                     <Link href={"/auth"}>
@@ -132,13 +148,21 @@ function Header() {
             </div>
             <div className={styles["mobile-menu-items"]}>
                 <Link href={"/home"}>
-                    <div>
-                        <HomeSvgComponent
-                            filterId="3"
-                            className={
-                                checkPageSelected("/home") || checkPageSelected("/") ? styles["item-selected"] : ""
-                            }
-                        />
+                    <div
+                        className={
+                            styles.circle +
+                            " " +
+                            (checkPageSelected("/home") || checkPageSelected("/") ? styles["show-circle"] : "")
+                        }
+                    >
+                        {isMenuOpen ? null : (
+                            <HomeSvgComponent
+                                filterId="3"
+                                className={
+                                    checkPageSelected("/home") || checkPageSelected("/") ? styles["item-selected"] : ""
+                                }
+                            />
+                        )}
                     </div>
                 </Link>
                 <div onClick={onMenuToggle}>
@@ -155,7 +179,7 @@ function Header() {
                                 <Link href={item.route} key={index}>
                                     <div
                                         onClick={() => setIsMenuOpen(false)}
-                                        className="flex flex-row items-center mr-auto gap-x-3 cursor-pointer"
+                                        className="flex flex-row items-center mr-auto gap-x-3 cursor-pointer w-full"
                                     >
                                         {item.svg}
                                         <p>{item.name}</p>

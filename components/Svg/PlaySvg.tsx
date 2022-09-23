@@ -10,7 +10,8 @@ const PlaySvgComponent = (props: SvgComponentProp) => (
         xmlns="http://www.w3.org/2000/svg"
     >
         <g filter="url(#filter0_d_1_263)">
-            <circle cx="31" cy="27" r="26" stroke="black" strokeWidth="2" shapeRendering="crispEdges" />
+            <circle cx="31" cy="27" r="25" fill="#FCD36E" />
+            <circle cx="31" cy="27" r="26" stroke="black" strokeWidth="2" />
         </g>
         <path
             d="M23 14V39M45 26.5L23 39M45 26.5L23 14"

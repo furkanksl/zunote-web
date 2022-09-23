@@ -10,7 +10,8 @@ const PauseSvgComponent = (props: SvgComponentProp) => (
         xmlns="http://www.w3.org/2000/svg"
     >
         <g filter="url(#filter0_d_1_215)">
-            <circle cx="31" cy="27" r="26" stroke="black" strokeWidth="2" shapeRendering="crispEdges" />
+            <circle cx="31" cy="27" r="25" fill="#FCD36E" />
+            <circle cx="31" cy="27" r="26" stroke="black" strokeWidth="2" />
         </g>
         <path d="M23 16V38M39 16V38" stroke="black" strokeWidth="4.16667" strokeLinecap="round" />
         <defs>
