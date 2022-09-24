@@ -5,6 +5,7 @@ import SelectCategoryDialog from "./Dialogs/Category/SelectCategoryDialog";
 import DeleteDialog from "./Dialogs/Delete/DeleteDialog";
 import Header from "./Header/Header";
 import { useRouter } from "next/router";
+import { ToastContainer } from "react-toastify";
 
 function Layout({ children }: { children: ReactNode }) {
     const router = useRouter();
@@ -24,6 +25,7 @@ function Layout({ children }: { children: ReactNode }) {
             <SelectCategoryDialog />
             <AddCategoryDialog />
             <DeleteDialog />
+            <ToastContainer />
         </>
     );
 }

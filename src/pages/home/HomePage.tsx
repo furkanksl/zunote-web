@@ -11,6 +11,7 @@ import JustAdded from "./components/JustAdded";
 import InputField from "./components/InputField";
 
 import styles from "./HomePage.module.scss";
+import { toast } from "react-toastify";
 
 function HomePage() {
     const dispatch = useDispatch();
@@ -24,6 +25,11 @@ function HomePage() {
     const isNewRecordRecorded = useSelector((state: StateModel) => state.recorder.isNewRecordRecorded);
 
     function saveNote(inputValue: string) {
+        if (inputValue === "") {
+            toast.error("Please fill the textfield before saving the note!");
+            return;
+        }
+
         const createdAt = Date.now().toString();
 
         if (isNewRecordRecorded) {
