@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Note from "../../../models/Note.model";
@@ -11,11 +12,15 @@ import VoiceNoteCard from "./VoiceNoteCard";
 
 function NoteList() {
     const dispatch = useDispatch();
+    const router = useRouter();
 
     const categoryIndex = useSelector((state: StateModel) => state.note.notesTabIndex);
     const notes = useSelector((state: StateModel) => state.note.notes);
 
-    const selectNote = (index: number) => dispatch(setSelectedNote(notes[index]));
+    const selectNote = async (index: number) => {
+        dispatch(setSelectedNote(notes[index]));
+        await router.push("/note-detail");
+    };
 
     return (
         <div className={styles["cards"]}>

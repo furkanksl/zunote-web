@@ -1,5 +1,4 @@
-import Link from "next/link";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import MiniPlaySvgComponent from "../../../../components/Svg/MiniPlaySvg";
 import MiniPauseSvgComponent from "../../../../components/Svg/MiniResumeSvg";
@@ -17,25 +16,27 @@ function VoiceNoteCard(props: Props) {
     const dispatch = useDispatch();
     const [isPlaying, setIsPlaying] = useState(false);
 
-    const deleteItem = () => dispatch(setIsDeleteVisible(true));
+    const deleteItem = (event: any) => {
+        dispatch(setIsDeleteVisible(true));
+
+        event.stopPropagation();
+    };
 
     return (
-        <Link href={"/note-detail"}>
-            <div className={styles["voice-card"]} onClick={props.onClick}>
-                <div className={styles["note-text"]}>
-                    <p>{props.noteText}</p>
-                    <RemoveSvgComponent function={deleteItem} />
-                </div>
-                <div className={styles["details"]}>
-                    {isPlaying ? (
-                        <MiniPauseSvgComponent function={() => setIsPlaying(false)} />
-                    ) : (
-                        <MiniPlaySvgComponent function={() => setIsPlaying(true)} />
-                    )}
-                    <p>{props.createdAt}</p>
-                </div>
+        <div className={styles["voice-card"]} onClick={props.onClick}>
+            <div className={styles["note-text"]}>
+                <p>{props.noteText}</p>
+                <RemoveSvgComponent function={deleteItem} />
             </div>
-        </Link>
+            <div className={styles["details"]}>
+                {isPlaying ? (
+                    <MiniPauseSvgComponent function={() => setIsPlaying(false)} />
+                ) : (
+                    <MiniPlaySvgComponent function={() => setIsPlaying(true)} />
+                )}
+                <p>{props.createdAt}</p>
+            </div>
+        </div>
     );
 }
 

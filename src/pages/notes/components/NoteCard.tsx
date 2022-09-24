@@ -15,20 +15,22 @@ type Props = {
 function NoteCard(props: Props) {
     const dispatch = useDispatch();
 
-    const deleteItem = () => dispatch(setIsDeleteVisible(true));
+    const deleteItem = (event: any) => {
+        dispatch(setIsDeleteVisible(true));
+
+        event.stopPropagation();
+    };
 
     return (
-        <Link href={"/note-detail"}>
-            <div className={styles["note-card"]} onClick={props.onClick}>
-                <div className={styles["note-text"]}>
-                    <p>{props.noteText}</p>
-                    <RemoveSvgComponent function={deleteItem} />
-                </div>
-                <div className={styles["details"]}>
-                    <p>{props.createdAt}</p>
-                </div>
+        <div className={styles["note-card"]} onClick={props.onClick}>
+            <div className={styles["note-text"]}>
+                <p>{props.noteText}</p>
+                <RemoveSvgComponent function={deleteItem} />
             </div>
-        </Link>
+            <div className={styles["details"]}>
+                <p>{props.createdAt}</p>
+            </div>
+        </div>
     );
 }
 
