@@ -3,7 +3,7 @@ import WhiteTextSvgComponent from "../../../components/Svg/WhiteTextSvg";
 import WhiteVoiceSvgComponent from "../../../components/Svg/WhiteVoiceSvg";
 import VoiceNote from "../../models/VoiceNote.model";
 import { StateModel } from "../../redux/store/store";
-import CategoryAndReminderSection from "./components/CategoryAndReminderSection";
+import CategoryAndReminderSection from "../../../components/Common/CategoryAndReminderSection";
 import NoteSection from "./components/NoteSection";
 import PlayerAndButtons from "./components/PlayerAndButtons";
 
@@ -19,8 +19,8 @@ function NoteDetailPage() {
             <div className={styles["note-icon-container"]}>
                 {isVoiceNote ? <WhiteVoiceSvgComponent /> : <WhiteTextSvgComponent />}
             </div>
-            <CategoryAndReminderSection />
             <NoteSection selectedNote={selectedNote} isVoiceNote={isVoiceNote} />
+            <CategoryAndReminderSection />
             <PlayerAndButtons />
         </div>
     );

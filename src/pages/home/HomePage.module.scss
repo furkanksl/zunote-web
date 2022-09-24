@@ -23,9 +23,9 @@
 
 .property-field {
     @apply flex
-    flex-row
-    justify-between
-    items-center
+    flex-col
+    justify-start
+    items-start
     px-5
     w-full;
 

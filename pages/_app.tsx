@@ -1,6 +1,7 @@
 import "../src/styles/globals.scss";
 import "react-h5-audio-player/src/styles.scss";
 import "react-toastify/dist/ReactToastify.css";
+import "react-datetime/css/react-datetime.css";
 
 import type { AppProps } from "next/app";
 import Layout from "../components/Layout";

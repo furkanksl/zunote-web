@@ -2,12 +2,11 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 
 import AddSvgCompoenent from "../../../../components/Svg/AddSvg";
-import CategorySvgComponent from "../../../../components/Svg/CategorySvg";
-import ReminderSvgComponent from "../../../../components/Svg/ReminderSvg";
 import { setIsCategoryVisible } from "../../../redux/features/dialog.reducer";
 
 import styles from "../HomePage.module.scss";
 import Recorder from "./Recorder";
+import CategoryAndReminderSection from "../../../../components/Common/CategoryAndReminderSection";
 
 type Props = {
     onSave: (input: string) => any;
@@ -16,7 +15,6 @@ type Props = {
 
 function InputField(props: Props) {
     const dispatch = useDispatch();
-
     const [inputValue, setInputValue] = useState("");
 
     function handleMessageChange(event: any) {
@@ -34,16 +32,7 @@ function InputField(props: Props) {
 
     return (
         <div className={styles["input-container"]}>
-            <div className={styles["property-field"]}>
-                <div className={styles.category}>
-                    <CategorySvgComponent function={showCategoryDialog} />
-                    <p>Category 1</p>
-                </div>
-                <div className={styles.reminder}>
-                    <p>18:00 Aug 18 2022</p>
-                    <ReminderSvgComponent function={() => {}} />
-                </div>
-            </div>
+            <CategoryAndReminderSection />
             <div className={styles.textfield}>
                 <textarea
                     placeholder="Type something..."
