@@ -46,7 +46,7 @@ main {
 }
 
 .title-box {
-    background-color: white;
+    background-color: $primary-btn-color;
 
     @include shadowed-box();
     @include rounded();
