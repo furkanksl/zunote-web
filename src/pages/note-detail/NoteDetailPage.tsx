@@ -1,5 +1,8 @@
+import { useSelector } from "react-redux";
 import WhiteTextSvgComponent from "../../../components/Svg/WhiteTextSvg";
 import WhiteVoiceSvgComponent from "../../../components/Svg/WhiteVoiceSvg";
+import VoiceNote from "../../models/VoiceNote.model";
+import { StateModel } from "../../redux/store/store";
 import CategoryAndReminderSection from "./components/CategoryAndReminderSection";
 import NoteSection from "./components/NoteSection";
 import PlayerAndButtons from "./components/PlayerAndButtons";
@@ -7,7 +10,9 @@ import PlayerAndButtons from "./components/PlayerAndButtons";
 import styles from "./NoteDetailPage.module.scss";
 
 function NoteDetailPage() {
-    const isVoiceNote = true;
+    const selectedNote = useSelector((state: StateModel) => state.note.selectedNote);
+
+    const isVoiceNote = selectedNote instanceof VoiceNote;
 
     return (
         <div className={styles["note-detail-page-wrapper"]}>
@@ -15,7 +20,7 @@ function NoteDetailPage() {
                 {isVoiceNote ? <WhiteVoiceSvgComponent /> : <WhiteTextSvgComponent />}
             </div>
             <CategoryAndReminderSection />
-            <NoteSection />
+            <NoteSection selectedNote={selectedNote} isVoiceNote={isVoiceNote} />
             <PlayerAndButtons />
         </div>
     );

@@ -11,6 +11,7 @@ type Props = {
     noteText: string;
     createdAt: string;
     voiceUrl: string;
+    onClick: () => any;
 };
 function VoiceNoteCard(props: Props) {
     const dispatch = useDispatch();
@@ -20,7 +21,7 @@ function VoiceNoteCard(props: Props) {
 
     return (
         <Link href={"/note-detail"}>
-            <div className={styles["voice-card"]}>
+            <div className={styles["voice-card"]} onClick={props.onClick}>
                 <div className={styles["note-text"]}>
                     <p>{props.noteText}</p>
                     <RemoveSvgComponent function={deleteItem} />

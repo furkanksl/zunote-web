@@ -1,33 +1,36 @@
+import Note from "../../../models/Note.model";
+import VoiceNote, { TimedNote } from "../../../models/VoiceNote.model";
 import styles from "../NoteDetailPage.module.scss";
 import NoteDetailCard from "./NoteDetailCard";
 
-function NoteSection() {
+type Props = {
+    selectedNote: VoiceNote | Note;
+    isVoiceNote: boolean;
+};
+
+function NoteSection(props: Props) {
     return (
         <div className={styles["note-section"]}>
-            <NoteDetailCard
-                isVoiceNote={true}
-                createdAt="14 Aug 2022 13:34"
-                lapTime="00:13"
-                noteText="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsam, delectus obcaecati. Impedit architecto"
-            />
-            <NoteDetailCard
-                isVoiceNote={true}
-                createdAt="14 Aug 2022 13:34"
-                lapTime="00:13"
-                noteText="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsam, delectus obcaecati. Impedit architecto"
-            />
-            <NoteDetailCard
-                isVoiceNote={true}
-                createdAt="14 Aug 2022 13:34"
-                lapTime="00:13"
-                noteText="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsam, delectus obcaecati. Impedit architecto"
-            />
-            <NoteDetailCard
-                isVoiceNote={true}
-                createdAt="14 Aug 2022 13:34"
-                lapTime="00:13"
-                noteText="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsam, delectus obcaecati. Impedit architecto"
-            />
+            {props.selectedNote instanceof VoiceNote ? (
+                props.selectedNote.notes.map((note: TimedNote, index: number) => {
+                    return (
+                        <NoteDetailCard
+                            key={index}
+                            isVoiceNote={props.isVoiceNote}
+                            createdAt={note.createdAt}
+                            lapTime={note.time}
+                            noteText={note.noteText}
+                        />
+                    );
+                })
+            ) : (
+                <NoteDetailCard
+                    isVoiceNote={props.isVoiceNote}
+                    createdAt={props.selectedNote?.createdAt ?? ""}
+                    lapTime={""}
+                    noteText={props.selectedNote?.noteText ?? ""}
+                />
+            )}
         </div>
     );
 }

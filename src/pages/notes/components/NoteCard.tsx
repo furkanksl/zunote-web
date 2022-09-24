@@ -10,6 +10,7 @@ import styles from "../NotesPage.module.scss";
 type Props = {
     noteText: string;
     createdAt: string;
+    onClick: () => any;
 };
 function NoteCard(props: Props) {
     const dispatch = useDispatch();
@@ -18,7 +19,7 @@ function NoteCard(props: Props) {
 
     return (
         <Link href={"/note-detail"}>
-            <div className={styles["note-card"]}>
+            <div className={styles["note-card"]} onClick={props.onClick}>
                 <div className={styles["note-text"]}>
                     <p>{props.noteText}</p>
                     <RemoveSvgComponent function={deleteItem} />
