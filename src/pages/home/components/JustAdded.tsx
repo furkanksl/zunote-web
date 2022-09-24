@@ -10,9 +10,11 @@ type Props = {
 function JustAdded(props: Props) {
     return (
         <div className={styles["just-added-container"]}>
-            <div className={styles["title-box"]}>
-                <p>JUST ADDED</p>
-            </div>
+            {props.list.length === 0 ? null : (
+                <div className={styles["title-box"]}>
+                    <p>JUST ADDED</p>
+                </div>
+            )}
             <div className={styles["note-container"]}>
                 {props.list?.map((noteItem: Note | TimedNote, index: number) => {
                     return noteItem instanceof Note ? (
