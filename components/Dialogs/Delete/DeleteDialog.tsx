@@ -18,8 +18,12 @@ function DeleteDialog() {
             <div className="dialog-wrapper" onClick={closeDialog}></div>
             <div className={styles["delete-container"]}>
                 <TitleBox title="DELETE" />
-                <p>You can recover from trash.</p>
-                <p>Do you want to proceed?</p>
+                <p>
+                    You can recover from trash.
+                    <br />
+                    Do you want to proceed?{" "}
+                </p>
+
                 <div className={styles.buttons}>
                     <div className={styles["cancel-button"]} onClick={closeDialog}>
                         Cancel
