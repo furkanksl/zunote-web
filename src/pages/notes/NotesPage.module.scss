@@ -12,7 +12,7 @@
 }
 
 .category-tab {
-    background-color: white;
+    background-color: $primary-btn-color;
 
     @include shadowed-box();
     @include rounded();
@@ -39,6 +39,7 @@
 
     .selected {
         background-color: $secondary-color;
+        @include shadowed-box();
 
         svg > g > path {
             stroke: white;
@@ -47,6 +48,7 @@
 
     .selected-g {
         background-color: $secondary-color;
+        @include shadowed-box();
 
         svg > g > path {
             fill: white;
