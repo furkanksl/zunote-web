@@ -19,7 +19,7 @@ function CategoryTabs() {
             <div className={categoryIndex == 0 ? styles.selected : ""} onClick={() => changeTab(0)}>
                 <VoiceSvgComponent function={() => {}} />
             </div>
-            <div className={categoryIndex == 1 ? styles.selected : ""} onClick={() => changeTab(1)}>
+            <div className={categoryIndex == 1 ? styles["selected-g"] : ""} onClick={() => changeTab(1)}>
                 <TextSvgComponent function={() => {}} />
             </div>
         </div>

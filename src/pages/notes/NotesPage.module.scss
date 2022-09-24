@@ -12,7 +12,7 @@
 }
 
 .category-tab {
-    background-color: $gray-color;
+    background-color: white;
 
     @include shadowed-box();
     @include rounded();
@@ -38,10 +38,18 @@
     }
 
     .selected {
-        background-color: $second-gray-color;
+        background-color: $secondary-color;
 
         svg > g > path {
             stroke: white;
+        }
+    }
+
+    .selected-g {
+        background-color: $secondary-color;
+
+        svg > g > path {
+            fill: white;
         }
     }
 }

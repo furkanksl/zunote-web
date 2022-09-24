@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { addNewNote } from "../../redux/features/note.reducer";
 import { useDispatch, useSelector } from "react-redux";
 import { StateModel } from "../../redux/store/store";
-import { setIsNewRecordRecorder } from "../../redux/features/recorder.reducer";
 import VoiceNote, { TimedNote } from "../../models/VoiceNote.model";
 
 import Note from "../../models/Note.model";
@@ -22,7 +21,6 @@ function HomePage() {
 
     const voiceNoteLapTime = useSelector((state: StateModel) => state.recorder.lapTime);
     const isVoiceNote = useSelector((state: StateModel) => state.recorder.isRecording);
-    const isNewRecordRecorded = useSelector((state: StateModel) => state.recorder.isNewRecordRecorded);
 
     function saveNote(inputValue: string) {
         if (inputValue === "") {
@@ -31,20 +29,6 @@ function HomePage() {
         }
 
         const createdAt = Date.now().toString();
-
-        if (isNewRecordRecorded) {
-            const newVoiceNote: VoiceNote = new VoiceNote({
-                category: "",
-                createdAt: createdAt,
-                notes: savedVoiceNotes,
-                reminder: "0",
-                voiceUrl: "",
-            });
-
-            dispatch(addNewNote(newVoiceNote));
-            dispatch(setIsNewRecordRecorder(false));
-            setSavedVoiceNotes([]);
-        }
 
         if (isVoiceNote) {
             setSavedVoiceNotes([
@@ -82,10 +66,25 @@ function HomePage() {
         }
     }
 
+    function saveVoiceRecord() {
+        const createdAt = Date.now().toString();
+
+        const newVoiceNote: VoiceNote = new VoiceNote({
+            category: "",
+            createdAt: createdAt,
+            notes: savedVoiceNotes,
+            reminder: "0",
+            voiceUrl: "",
+        });
+
+        dispatch(addNewNote(newVoiceNote));
+        setSavedVoiceNotes([]);
+    }
+
     return (
         <div className={styles["home-page-wrapper"]}>
             <JustAdded list={justAddedNotes} />
-            <InputField onSave={saveNote} />
+            <InputField onSave={saveNote} onVoiceRecord={saveVoiceRecord} />
         </div>
     );
 }

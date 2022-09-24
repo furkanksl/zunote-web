@@ -8,9 +8,12 @@ import { setIsCategoryVisible } from "../../../redux/features/dialog.reducer";
 
 import styles from "../HomePage.module.scss";
 import Recorder from "./Recorder";
+
 type Props = {
     onSave: (input: string) => any;
+    onVoiceRecord: () => any;
 };
+
 function InputField(props: Props) {
     const dispatch = useDispatch();
 
@@ -52,7 +55,7 @@ function InputField(props: Props) {
 
             <div className={styles["buttons-container"]}>
                 <div className={styles["voice-buttons-container"]}>
-                    <Recorder />
+                    <Recorder onRecord={props.onVoiceRecord} />
                 </div>
                 <AddSvgCompoenent function={saveNote} />
             </div>
