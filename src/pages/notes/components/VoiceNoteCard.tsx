@@ -30,9 +30,19 @@ function VoiceNoteCard(props: Props) {
             </div>
             <div className={styles["details"]}>
                 {isPlaying ? (
-                    <MiniPauseSvgComponent function={() => setIsPlaying(false)} />
+                    <MiniPauseSvgComponent
+                        function={(event: any) => {
+                            setIsPlaying(false);
+                            event.stopPropagation();
+                        }}
+                    />
                 ) : (
-                    <MiniPlaySvgComponent function={() => setIsPlaying(true)} />
+                    <MiniPlaySvgComponent
+                        function={(event: any) => {
+                            setIsPlaying(true);
+                            event.stopPropagation();
+                        }}
+                    />
                 )}
                 <p>{props.createdAt}</p>
             </div>
