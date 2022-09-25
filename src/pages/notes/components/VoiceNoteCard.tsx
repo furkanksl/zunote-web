@@ -4,17 +4,20 @@ import MiniPlaySvgComponent from "../../../../components/Svg/MiniPlaySvg";
 import MiniPauseSvgComponent from "../../../../components/Svg/MiniResumeSvg";
 import RemoveSvgComponent from "../../../../components/Svg/RemoveSvg";
 import { setIsDeleteVisible } from "../../../redux/features/dialog.reducer";
+import UtilityService from "../../../services/utility.service";
 
 import styles from "../NotesPage.module.scss";
 type Props = {
     noteText: string;
-    createdAt: string;
+    createdAt: number;
     voiceUrl: string;
     onClick: () => any;
 };
 function VoiceNoteCard(props: Props) {
     const dispatch = useDispatch();
     const [isPlaying, setIsPlaying] = useState(false);
+
+    const utilityService = new UtilityService();
 
     const deleteItem = (event: any) => {
         dispatch(setIsDeleteVisible(true));
@@ -44,7 +47,7 @@ function VoiceNoteCard(props: Props) {
                         }}
                     />
                 )}
-                <p>{props.createdAt}</p>
+                <p>{utilityService.timestampToString(props.createdAt)}</p>
             </div>
         </div>
     );

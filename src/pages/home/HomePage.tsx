@@ -24,11 +24,14 @@ function HomePage() {
 
     function saveNote(inputValue: string) {
         if (inputValue === "") {
-            toast.error("Please fill the textfield before saving the note!");
+            toast.error("Please fill the text field before saving the note!");
             return;
         }
 
-        const createdAt = Date.now().toString();
+        const createdAt = new Date().getTime();
+        console.log(new Date().getTime());
+
+        console.log(createdAt);
 
         if (isVoiceNote) {
             setSavedVoiceNotes([
@@ -67,7 +70,7 @@ function HomePage() {
     }
 
     function saveVoiceRecord() {
-        const createdAt = Date.now().toString();
+        const createdAt = new Date().getTime();
 
         const newVoiceNote: VoiceNote = new VoiceNote({
             category: "",

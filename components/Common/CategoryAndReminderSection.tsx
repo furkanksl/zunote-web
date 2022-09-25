@@ -14,7 +14,7 @@ function CategoryAndReminderSection() {
 
     const isReminderSelected = useSelector((state: any) => state.reminder.value);
     const reminderDate = useSelector((state: any) => state.reminder.reminderDate);
-    var dateString = moment.unix(reminderDate).format("YYYY-MMM-DD HH:mm");
+    var dateString = moment.utc(reminderDate).format("YYYY-MMM-DD HH:mm");
 
     function removeReminder() {
         dispatch(unsetReminder());

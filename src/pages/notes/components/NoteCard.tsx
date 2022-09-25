@@ -4,16 +4,19 @@ import { useDispatch } from "react-redux";
 
 import RemoveSvgComponent from "../../../../components/Svg/RemoveSvg";
 import { setIsDeleteVisible } from "../../../redux/features/dialog.reducer";
+import UtilityService from "../../../services/utility.service";
 
 import styles from "../NotesPage.module.scss";
 
 type Props = {
     noteText: string;
-    createdAt: string;
+    createdAt: number;
     onClick: () => any;
 };
 function NoteCard(props: Props) {
     const dispatch = useDispatch();
+
+    const utilityService = new UtilityService();
 
     const deleteItem = (event: any) => {
         dispatch(setIsDeleteVisible(true));
@@ -28,7 +31,7 @@ function NoteCard(props: Props) {
                 <RemoveSvgComponent function={deleteItem} />
             </div>
             <div className={styles["details"]}>
-                <p>{props.createdAt}</p>
+                <p>{utilityService.timestampToString(props.createdAt)}</p>
             </div>
         </div>
     );
