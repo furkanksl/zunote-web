@@ -29,9 +29,6 @@ function HomePage() {
         }
 
         const createdAt = new Date().getTime();
-        console.log(new Date().getTime());
-
-        console.log(createdAt);
 
         if (isVoiceNote) {
             setSavedVoiceNotes([
@@ -63,7 +60,6 @@ function HomePage() {
 
             setSavedNotes([...savedNotes, newNote]);
             setJustAddedNotes([...savedNotes, newNote].reverse());
-            // console.log(justAddedNotes);
 
             dispatch(addNewNote(newNote));
         }
