@@ -14,8 +14,8 @@ function DatetimePicker() {
     }
 
     function onChangeDatetime(val: any) {
-        // console.log(val.unix());
-        dispatch(setReminder(val.unix()));
+        // console.log(val.utc());
+        dispatch(setReminder(val.utc()));
     }
 
     return (
