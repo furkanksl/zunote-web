@@ -1,5 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { removeCategoryWithIndex, setSelectedCategory } from "../../../src/redux/features/category.reducer";
 import { setIsAddCategoryVisible, setIsCategoryVisible } from "../../../src/redux/features/dialog.reducer";
 import { StateModel } from "../../../src/redux/store/store";
 import PlusSvgComponent from "../../Svg/PlusSvg";
@@ -12,6 +13,7 @@ function SelectCategoryDialog() {
     const dispatch = useDispatch();
 
     const isCategoryVisible = useSelector((state: StateModel) => state.dialog.isCategoryVisible);
+    const categories = useSelector((state: StateModel) => state.category.categories);
 
     const closeDialog = () => dispatch(setIsCategoryVisible(false));
 
@@ -19,6 +21,15 @@ function SelectCategoryDialog() {
         dispatch(setIsAddCategoryVisible(true));
         closeDialog();
     };
+
+    function selectCategory(cat: string) {
+        dispatch(setSelectedCategory(cat));
+        closeDialog();
+    }
+
+    function deleteCategory(index: number) {
+        dispatch(removeCategoryWithIndex(index));
+    }
 
     return isCategoryVisible ? (
         <>
@@ -32,10 +43,14 @@ function SelectCategoryDialog() {
                 </div>
 
                 <div className={styles["categor-list"]}>
-                    <div className={styles["category-card"]}>
-                        <p className={styles["category-name"]}>CATEGORY 1</p>
-                        <RemoveSvgComponent function={() => {}} />
-                    </div>
+                    {categories.map((cat: string, index: number) => {
+                        return (
+                            <div key={index} className={styles["category-card"]} onClick={() => selectCategory(cat)}>
+                                <p className={styles["category-name"]}>{cat}</p>
+                                <RemoveSvgComponent function={() => {}} />
+                            </div>
+                        );
+                    })}
                 </div>
             </div>
         </>

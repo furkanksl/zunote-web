@@ -11,6 +11,8 @@ import InputField from "./components/InputField";
 
 import styles from "./HomePage.module.scss";
 import { toast } from "react-toastify";
+import { setReminder } from "../../redux/features/reminder.reducer";
+import { setSelectedCategory } from "../../redux/features/category.reducer";
 
 function HomePage() {
     const dispatch = useDispatch();
@@ -21,6 +23,8 @@ function HomePage() {
 
     const voiceNoteLapTime = useSelector((state: StateModel) => state.recorder.lapTime);
     const isVoiceNote = useSelector((state: StateModel) => state.recorder.isRecording);
+    const selectedCategory = useSelector((state: StateModel) => state.category.selectedCategory);
+    const reminderDate = useSelector((state: StateModel) => state.reminder.reminderDate);
 
     function saveNote(inputValue: string) {
         if (inputValue === "") {
@@ -52,16 +56,18 @@ function HomePage() {
             );
         } else {
             const newNote = new Note({
-                category: "",
+                category: selectedCategory ?? "",
                 createdAt: createdAt,
                 noteText: inputValue,
-                reminder: "0",
+                reminder: reminderDate ?? 0,
             });
 
             setSavedNotes([...savedNotes, newNote]);
             setJustAddedNotes([...savedNotes, newNote].reverse());
 
             dispatch(addNewNote(newNote));
+            dispatch(setReminder(0));
+            dispatch(setSelectedCategory(""));
         }
     }
 
@@ -69,15 +75,17 @@ function HomePage() {
         const createdAt = new Date().getTime();
 
         const newVoiceNote: VoiceNote = new VoiceNote({
-            category: "",
+            category: selectedCategory ?? "",
             createdAt: createdAt,
             notes: savedVoiceNotes,
-            reminder: "0",
+            reminder: reminderDate,
             voiceUrl: "",
         });
 
         dispatch(addNewNote(newVoiceNote));
         setSavedVoiceNotes([]);
+        dispatch(setReminder(0));
+        dispatch(setSelectedCategory(""));
     }
 
     return (
