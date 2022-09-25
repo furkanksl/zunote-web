@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
 
 type CategoryState = {
     isCategoryOpened: boolean;
@@ -61,6 +62,13 @@ export const categorySlice = createSlice({
         },
 
         addNewCategory: (state: CategoryState, action: any) => {
+            let isAlreadyAdded = state.categories.some((cat: string) => cat == action.payload);
+
+            if (isAlreadyAdded) {
+                toast.error("This category already added!");
+                return;
+            }
+
             state.categories.splice(0, 0, action.payload);
         },
 
