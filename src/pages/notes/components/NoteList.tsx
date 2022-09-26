@@ -14,8 +14,11 @@ function NoteList() {
     const dispatch = useDispatch();
     const router = useRouter();
 
+    const sortingCat = useSelector((state: StateModel) => state.category.sortingCategory);
+
     const categoryIndex = useSelector((state: StateModel) => state.note.notesTabIndex);
     const notes = useSelector((state: StateModel) => state.note.notes);
+    const sortedNotes = sortingCat === "All" ? notes : notes.filter((note: Note) => note.category === sortingCat);
 
     const selectNote = async (index: number) => {
         dispatch(setSelectedNote(notes[index]));
@@ -24,7 +27,7 @@ function NoteList() {
 
     return (
         <div className={styles["cards"]}>
-            {notes.map((note: VoiceNote | Note, index: number) => {
+            {sortedNotes.map((note: VoiceNote | Note, index: number) => {
                 return note instanceof VoiceNote ? (
                     categoryIndex === 0 ? (
                         <VoiceNoteCard
