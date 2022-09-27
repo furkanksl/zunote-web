@@ -48,7 +48,7 @@ function PlayerAndButtons() {
                 <AudioPlayer className={styles["audio-player"]} volume={0.5} src={""} customAdditionalControls={[]} />
             ) : null}
             <div className={styles.buttons}>
-                <div className={styles.button} onClick={isNoteEditing ? onSave : onEdit}>
+                <div className={styles.button} onClick={async () => (isNoteEditing ? onSave() : onEdit())}>
                     {isNoteEditing ? "SAVE" : "EDIT"}
                 </div>
                 <div className={styles.button} onClick={() => setIsDeleteVisible(true)}>
