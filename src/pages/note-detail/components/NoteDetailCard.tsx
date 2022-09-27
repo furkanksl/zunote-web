@@ -1,6 +1,8 @@
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import DeleteDialog from "../../../../components/Dialogs/Delete/DeleteDialog";
 import RemoveSvgComponent from "../../../../components/Svg/RemoveSvg";
+import { setIsDeleteVisible } from "../../../redux/features/dialog.reducer";
 import { setIsNoteEditing, setSelectedNote } from "../../../redux/features/note.reducer";
 import { StateModel } from "../../../redux/store/store";
 import UtilityService from "../../../services/utility.service";
@@ -17,6 +19,8 @@ type Props = {
 function NoteDetailCard(props: Props) {
     const dispatch = useDispatch();
 
+    const [isDeleteVisible, setIsDeleteVisible] = useState(false);
+
     const isNoteEditing = useSelector((state: StateModel) => state.note.isNoteEditing);
     let selectedNote = useSelector((state: StateModel) => state.note.selectedNote);
     const utilityService = new UtilityService();
@@ -32,12 +36,17 @@ function NoteDetailCard(props: Props) {
         } else {
             selectedNote.noteText = value;
         }
+
+        resizeTextArea();
     }
 
     function onTextAreaClick() {
         dispatch(setIsNoteEditing(true));
-        resizeTextArea();
     }
+
+    useEffect(() => {
+        resizeTextArea();
+    }, []);
 
     function resizeTextArea() {
         // return props.noteText.split(/\r|\r\n|\n/).length + 1;
@@ -57,7 +66,7 @@ function NoteDetailCard(props: Props) {
         <div className={styles["note-card"]}>
             <div className={styles["lap-row"]}>
                 {props.isVoiceNote ? <p>{props.lapTime}</p> : null}
-                <RemoveSvgComponent function={() => {}} />
+                {props.isVoiceNote ? <RemoveSvgComponent function={() => setIsDeleteVisible(true)} /> : null}
             </div>
             <textarea
                 onClick={onTextAreaClick}
@@ -72,6 +81,19 @@ function NoteDetailCard(props: Props) {
             <div className={styles["details"]}>
                 <p>{utilityService.timestampToString(props.createdAt)}</p>
             </div>
+
+            {isDeleteVisible ? (
+                <DeleteDialog
+                    onConfirm={async () => {
+                        selectedNote.notes.splice(props.noteIndex, 1);
+                        selectedNote.notes = [...selectedNote.notes];
+                        dispatch(setSelectedNote(selectedNote));
+                    }}
+                    onCancel={() => {
+                        setIsDeleteVisible(false);
+                    }}
+                />
+            ) : null}
         </div>
     );
 }
