@@ -20,6 +20,7 @@ function NoteSection(props: Props) {
                             createdAt={note.createdAt}
                             lapTime={note.time}
                             noteText={note.noteText}
+                            noteIndex={index}
                         />
                     );
                 })
@@ -29,6 +30,7 @@ function NoteSection(props: Props) {
                     createdAt={props.selectedNote?.createdAt ?? ""}
                     lapTime={""}
                     noteText={props.selectedNote?.noteText ?? ""}
+                    noteIndex={0}
                 />
             )}
         </div>

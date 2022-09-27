@@ -1,14 +1,14 @@
 interface INote {
     createdAt: number;
     noteText: string;
-    reminder: string;
+    reminder: number;
     category: string;
 }
 
 export default class Note implements INote {
     createdAt: number = 0;
     noteText: string = "";
-    reminder: string = "";
+    reminder: number = 0;
     category: string = "";
 
     constructor(note: INote) {

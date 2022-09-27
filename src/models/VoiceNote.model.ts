@@ -1,7 +1,7 @@
 interface IVoiceNote {
     createdAt: number;
     notes: TimedNote[];
-    reminder: string;
+    reminder: number;
     category: string;
     voiceUrl: string;
 }
@@ -27,7 +27,7 @@ export class TimedNote implements ITimedNote {
 export default class VoiceNote implements IVoiceNote {
     createdAt: number = 0;
     notes: TimedNote[] = [];
-    reminder: string = "";
+    reminder: number = 0;
     category: string = "";
     voiceUrl: string = "";
 

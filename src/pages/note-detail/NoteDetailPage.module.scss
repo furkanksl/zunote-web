@@ -147,3 +147,30 @@
     @include rounded();
     // max-width: 230px;
 }
+
+textarea.text-field {
+    padding: 8px;
+    font-size: 16px;
+    border-width: 4px;
+    height: 100%;
+    border-radius: 10px;
+    background-color: transparent; // #fff293;
+    border-color: transparent;
+    font-style: none;
+    resize: none;
+    color: black;
+    margin-bottom: 0px;
+    width: 100%;
+    overflow: hidden;
+
+    &::placeholder {
+        /* Chrome, Firefox, Opera, Safari 10.1+ */
+        color: #00000046;
+        opacity: 1; /* Firefox */
+        text-shadow: none;
+    }
+
+    &:focus {
+        outline: none;
+    }
+}
