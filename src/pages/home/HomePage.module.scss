@@ -23,9 +23,9 @@
 
 .property-field {
     @apply flex
-    flex-row
-    justify-between
-    items-center
+    flex-col
+    justify-start
+    items-start
     px-5
     w-full;
 
@@ -123,7 +123,7 @@
 }
 
 .title-box {
-    background-color: $gray-color;
+    background-color: $primary-btn-color;
 
     @include shadowed-box();
 

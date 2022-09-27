@@ -1,9 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
 
 type CategoryState = {
-    isCategoryOpened: boolean;
+    isSorting: boolean;
     selectedCategory: string;
-    isNewCategoryAdding: boolean;
+    sortingCategory: string;
     categories: string[];
 };
 
@@ -33,21 +34,13 @@ export const categorySlice = createSlice({
     name: "category",
 
     initialState: {
-        isCategoryOpened: false,
+        isSorting: false,
         selectedCategory: "",
-        isNewCategoryAdding: false,
+        sortingCategory: "All",
         categories: categories,
     },
 
     reducers: {
-        toggleCategory: (state: CategoryState) => {
-            state.isCategoryOpened = !state.isCategoryOpened;
-        },
-
-        setCategoryState: (state: CategoryState, action: any) => {
-            state.isCategoryOpened = action.payload;
-        },
-
         unselectCategory: (state: CategoryState) => {
             state.selectedCategory = "";
         },
@@ -56,11 +49,22 @@ export const categorySlice = createSlice({
             state.selectedCategory = action.payload;
         },
 
-        setIsNewCategoryAdding: (state: CategoryState, action: any) => {
-            state.isNewCategoryAdding = action.payload;
+        setSortingCategory: (state: CategoryState, action: any) => {
+            state.sortingCategory = action.payload;
+        },
+
+        setIsSorting: (state: CategoryState, action: any) => {
+            state.isSorting = action.payload;
         },
 
         addNewCategory: (state: CategoryState, action: any) => {
+            let isAlreadyAdded = state.categories.some((cat: string) => cat == action.payload);
+
+            if (isAlreadyAdded) {
+                toast.error("This category already added!");
+                return;
+            }
+
             state.categories.splice(0, 0, action.payload);
         },
 
@@ -72,11 +76,10 @@ export const categorySlice = createSlice({
 });
 
 export const {
-    toggleCategory,
-    setCategoryState,
     unselectCategory,
     setSelectedCategory,
-    setIsNewCategoryAdding,
+    setSortingCategory,
+    setIsSorting,
     addNewCategory,
     removeCategoryWithIndex,
 } = categorySlice.actions;

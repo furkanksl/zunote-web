@@ -1,9 +1,9 @@
 import SvgComponentProp from "../../src/models/types/SvgComponentProp";
 
-const MiniPlaySvgComponent = (props: SvgComponentProp) => {
+const MiniPlaySvgComponent = (props: any) => {
     return (
         <svg
-            onClick={props.function}
+            onClick={(event: any) => props.function(event)}
             width="35"
             height="35"
             viewBox="0 -2 35 30"

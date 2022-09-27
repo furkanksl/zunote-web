@@ -1,19 +1,19 @@
 interface IVoiceNote {
-    createdAt: string;
+    createdAt: number;
     notes: TimedNote[];
-    reminder: string;
+    reminder: number;
     category: string;
     voiceUrl: string;
 }
 
 interface ITimedNote {
-    createdAt: string;
+    createdAt: number;
     noteText: string;
     time: string; // minute and second , like 00:34
 }
 
 export class TimedNote implements ITimedNote {
-    createdAt: string = "";
+    createdAt: number = 0;
     noteText: string = "";
     time: string = "";
 
@@ -25,9 +25,9 @@ export class TimedNote implements ITimedNote {
 }
 
 export default class VoiceNote implements IVoiceNote {
-    createdAt: string = "";
+    createdAt: number = 0;
     notes: TimedNote[] = [];
-    reminder: string = "";
+    reminder: number = 0;
     category: string = "";
     voiceUrl: string = "";
 

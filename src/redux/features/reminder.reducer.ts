@@ -7,9 +7,6 @@ export const reminderSlice = createSlice({
         reminderDate: 0,
     },
     reducers: {
-        toggleReminder: (state) => {
-            state.value = !state.value;
-        },
         setReminderState: (state, action) => {
             state.value = action.payload;
         },
@@ -23,6 +20,6 @@ export const reminderSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { toggleReminder, setReminderState, unsetReminder, setReminder } = reminderSlice.actions;
+export const { setReminderState, unsetReminder, setReminder } = reminderSlice.actions;
 
 export default reminderSlice.reducer;

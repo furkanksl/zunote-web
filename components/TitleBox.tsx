@@ -1,8 +1,7 @@
-import React from "react";
-
 type Props = {
     title: string;
 };
+
 function TitleBox(props: Props) {
     return (
         <div className="title-box">

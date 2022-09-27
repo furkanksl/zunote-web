@@ -18,73 +18,6 @@
     justify-content: center;
 }
 
-.reminder-and-category-container {
-    @apply flex
-    flex-col
-    justify-start
-    items-start
-    gap-y-3
-    w-full
-    mt-3
-    sm:mt-[50px];
-
-    :first-child > .icon-and-text > svg {
-        &:hover {
-            path {
-                stroke: black !important;
-            }
-        }
-    }
-
-    :last-child > .icon-and-text > svg {
-        &:hover {
-            path {
-                stroke: inherit !important;
-            }
-        }
-    }
-
-    .category-row,
-    .reminder-row {
-        @apply flex 
-        flex-row
-        justify-between
-        items-center
-        w-full;
-
-        .icon-and-text {
-            @apply flex 
-            flex-row
-            justify-start
-            items-center
-            cursor-pointer;
-
-            svg {
-                @apply cursor-pointer
-                w-7;
-            }
-
-            p {
-                @apply text-base
-                font-sans
-                font-normal
-                hover:text-white;
-            }
-        }
-
-        svg {
-            @apply mr-2
-            cursor-pointer;
-
-            &:hover {
-                path {
-                    stroke: red;
-                }
-            }
-        }
-    }
-}
-
 .note-section ::-webkit-scrollbar {
     display: none;
 }
@@ -98,7 +31,8 @@
     gap-y-3
     overflow-scroll
     p-1
-    mt-3;
+    mt-3
+    h-full;
 
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none;
@@ -179,7 +113,6 @@
     justify-start
     items-start
     w-full
-    mt-auto
     gap-y-6;
 
     .buttons {
@@ -213,4 +146,31 @@
     @apply mt-6;
     @include rounded();
     // max-width: 230px;
+}
+
+textarea.text-field {
+    padding: 8px;
+    font-size: 16px;
+    border-width: 4px;
+    height: 100%;
+    border-radius: 10px;
+    background-color: transparent; // #fff293;
+    border-color: transparent;
+    font-style: none;
+    resize: none;
+    color: black;
+    margin-bottom: 0px;
+    width: 100%;
+    overflow: hidden;
+
+    &::placeholder {
+        /* Chrome, Firefox, Opera, Safari 10.1+ */
+        color: #00000046;
+        opacity: 1; /* Firefox */
+        text-shadow: none;
+    }
+
+    &:focus {
+        outline: none;
+    }
 }

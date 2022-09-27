@@ -1,40 +1,74 @@
-import Link from "next/link";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
+import DeleteDialog from "../../../../components/Dialogs/Delete/DeleteDialog";
 import MiniPlaySvgComponent from "../../../../components/Svg/MiniPlaySvg";
 import MiniPauseSvgComponent from "../../../../components/Svg/MiniResumeSvg";
 import RemoveSvgComponent from "../../../../components/Svg/RemoveSvg";
 import { setIsDeleteVisible } from "../../../redux/features/dialog.reducer";
+import { removeNoteWithIndex, setSelectedNoteIndex } from "../../../redux/features/note.reducer";
+import UtilityService from "../../../services/utility.service";
 
 import styles from "../NotesPage.module.scss";
+
 type Props = {
     noteText: string;
-    createdAt: string;
+    createdAt: number;
     voiceUrl: string;
+    index: number;
+    onClick: (event: any) => any;
 };
+
 function VoiceNoteCard(props: Props) {
     const dispatch = useDispatch();
-    const [isPlaying, setIsPlaying] = useState(false);
 
-    const deleteItem = () => dispatch(setIsDeleteVisible(true));
+    const [isPlaying, setIsPlaying] = useState(false);
+    const [isDeleteVisible, setIsDeleteVisible] = useState(false);
+
+    const utilityService = new UtilityService();
+
+    const deleteItem = () => {
+        dispatch(setSelectedNoteIndex(props.index));
+        setIsDeleteVisible(true);
+    };
 
     return (
-        <Link href={"/note-detail"}>
-            <div className={styles["voice-card"]}>
-                <div className={styles["note-text"]}>
-                    <p>{props.noteText}</p>
-                    <RemoveSvgComponent function={deleteItem} />
-                </div>
-                <div className={styles["details"]}>
-                    {isPlaying ? (
-                        <MiniPauseSvgComponent function={() => setIsPlaying(false)} />
-                    ) : (
-                        <MiniPlaySvgComponent function={() => setIsPlaying(true)} />
-                    )}
-                    <p>{props.createdAt}</p>
-                </div>
+        <div className={styles["voice-card"]} onClick={props.onClick}>
+            <div className={styles["note-text"]}>
+                <p>{props.noteText}</p>
+                <RemoveSvgComponent
+                    function={(event: any) => {
+                        deleteItem();
+                        event.stopPropagation();
+                    }}
+                />
             </div>
-        </Link>
+            <div className={styles["details"]}>
+                {isPlaying ? (
+                    <MiniPauseSvgComponent
+                        function={(event: any) => {
+                            setIsPlaying(false);
+                            event.stopPropagation();
+                        }}
+                    />
+                ) : (
+                    <MiniPlaySvgComponent
+                        function={(event: any) => {
+                            setIsPlaying(true);
+                            event.stopPropagation();
+                        }}
+                    />
+                )}
+                <p>{utilityService.timestampToString(props.createdAt)}</p>
+            </div>
+            {isDeleteVisible ? (
+                <DeleteDialog
+                    onConfirm={() => {
+                        dispatch(removeNoteWithIndex());
+                    }}
+                    onCancel={() => setIsDeleteVisible(false)}
+                />
+            ) : null}
+        </div>
     );
 }
 

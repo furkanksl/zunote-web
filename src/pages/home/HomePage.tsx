@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { addNewNote } from "../../redux/features/note.reducer";
 import { useDispatch, useSelector } from "react-redux";
 import { StateModel } from "../../redux/store/store";
-import { setIsNewRecordRecorder } from "../../redux/features/recorder.reducer";
 import VoiceNote, { TimedNote } from "../../models/VoiceNote.model";
 
 import Note from "../../models/Note.model";
@@ -11,6 +10,9 @@ import JustAdded from "./components/JustAdded";
 import InputField from "./components/InputField";
 
 import styles from "./HomePage.module.scss";
+import { toast } from "react-toastify";
+import { setReminder } from "../../redux/features/reminder.reducer";
+import { setSelectedCategory } from "../../redux/features/category.reducer";
 
 function HomePage() {
     const dispatch = useDispatch();
@@ -21,24 +23,16 @@ function HomePage() {
 
     const voiceNoteLapTime = useSelector((state: StateModel) => state.recorder.lapTime);
     const isVoiceNote = useSelector((state: StateModel) => state.recorder.isRecording);
-    const isNewRecordRecorded = useSelector((state: StateModel) => state.recorder.isNewRecordRecorded);
+    const selectedCategory = useSelector((state: StateModel) => state.category.selectedCategory);
+    const reminderDate = useSelector((state: StateModel) => state.reminder.reminderDate);
 
     function saveNote(inputValue: string) {
-        const createdAt = Date.now().toString();
-
-        if (isNewRecordRecorded) {
-            const newVoiceNote: VoiceNote = new VoiceNote({
-                category: "",
-                createdAt: createdAt,
-                notes: savedVoiceNotes,
-                reminder: "0",
-                voiceUrl: "",
-            });
-
-            dispatch(addNewNote(newVoiceNote));
-            dispatch(setIsNewRecordRecorder(false));
-            setSavedVoiceNotes([]);
+        if (inputValue === "") {
+            toast.error("Please fill the text field before saving the note!");
+            return;
         }
+
+        const createdAt = new Date().getTime();
 
         if (isVoiceNote) {
             setSavedVoiceNotes([
@@ -62,24 +56,42 @@ function HomePage() {
             );
         } else {
             const newNote = new Note({
-                category: "",
+                category: selectedCategory ?? "",
                 createdAt: createdAt,
                 noteText: inputValue,
-                reminder: "0",
+                reminder: reminderDate ?? 0,
             });
 
             setSavedNotes([...savedNotes, newNote]);
             setJustAddedNotes([...savedNotes, newNote].reverse());
-            // console.log(justAddedNotes);
 
             dispatch(addNewNote(newNote));
+            dispatch(setReminder(0));
+            dispatch(setSelectedCategory(""));
         }
+    }
+
+    function saveVoiceRecord() {
+        const createdAt = new Date().getTime();
+
+        const newVoiceNote: VoiceNote = new VoiceNote({
+            category: selectedCategory ?? "",
+            createdAt: createdAt,
+            notes: savedVoiceNotes,
+            reminder: reminderDate,
+            voiceUrl: "",
+        });
+
+        dispatch(addNewNote(newVoiceNote));
+        setSavedVoiceNotes([]);
+        dispatch(setReminder(0));
+        dispatch(setSelectedCategory(""));
     }
 
     return (
         <div className={styles["home-page-wrapper"]}>
             <JustAdded list={justAddedNotes} />
-            <InputField onSave={saveNote} />
+            <InputField onSave={saveNote} onVoiceRecord={saveVoiceRecord} />
         </div>
     );
 }

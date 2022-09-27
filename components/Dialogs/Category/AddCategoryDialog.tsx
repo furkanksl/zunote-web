@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setIsAddCategoryVisible } from "../../../src/redux/features/dialog.reducer";
+import { toast } from "react-toastify";
+import { addNewCategory } from "../../../src/redux/features/category.reducer";
+import { setIsAddCategoryVisible, setIsCategoryVisible } from "../../../src/redux/features/dialog.reducer";
 import { StateModel } from "../../../src/redux/store/store";
 import TitleBox from "../../TitleBox";
 
@@ -18,6 +20,17 @@ function AddCategoryDialog() {
         setInputValue(event.target.value);
     }
 
+    function addCategory() {
+        if (inputValue === "") {
+            toast.info("Please fill the text field to add a new category");
+            return;
+        }
+        dispatch(addNewCategory(inputValue));
+        setInputValue("");
+        closeDialog();
+        dispatch(setIsCategoryVisible(true));
+    }
+
     return isAddCategoryVisible ? (
         <>
             <div className="dialog-wrapper" onClick={closeDialog}></div>
@@ -31,7 +44,9 @@ function AddCategoryDialog() {
                         onChange={handleMessageChange}
                     ></textarea>
                 </div>
-                <div className={styles["add-button"]}>ADD</div>
+                <div className={styles["add-button"]} onClick={addCategory}>
+                    ADD
+                </div>
             </div>
         </>
     ) : (

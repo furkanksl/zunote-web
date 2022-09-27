@@ -5,7 +5,6 @@ export const recorderSlice = createSlice({
     initialState: {
         isRecording: false,
         lapTime: "00:00",
-        isNewRecordRecorded: false,
     },
     reducers: {
         setIsRecording: (state, action) => {
@@ -17,13 +16,10 @@ export const recorderSlice = createSlice({
         setLapTime: (state, action) => {
             state.lapTime = action.payload;
         },
-        setIsNewRecordRecorder: (state, action) => {
-            state.isNewRecordRecorded = action.payload;
-        },
     },
 });
 
 // Action creators are generated for each case reducer function
-export const { setIsRecording, resetLapTime, setLapTime, setIsNewRecordRecorder } = recorderSlice.actions;
+export const { setIsRecording, resetLapTime, setLapTime } = recorderSlice.actions;
 
 export default recorderSlice.reducer;

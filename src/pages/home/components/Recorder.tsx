@@ -6,10 +6,14 @@ import MicSvgComponent from "../../../../components/Svg/MicSvg";
 import PauseSvgComponent from "../../../../components/Svg/PauseSvg";
 import PlaySvgComponent from "../../../../components/Svg/PlaySvg";
 import StopSvgComponent from "../../../../components/Svg/StopSvg";
-import { setIsNewRecordRecorder, setIsRecording, setLapTime } from "../../../redux/features/recorder.reducer";
+import { setIsRecording, setLapTime } from "../../../redux/features/recorder.reducer";
 import UtilityService from "../../../services/utility.service";
 
-function Recorder() {
+type Props = {
+    onRecord: () => any;
+};
+
+function Recorder(props: Props) {
     const dispatch = useDispatch();
     const utilityService = new UtilityService();
 
@@ -46,11 +50,11 @@ function Recorder() {
     }
 
     function stopVoiceRecording() {
+        props.onRecord();
         stop();
         setIsActive(false);
         setIsStarted(false);
         dispatch(setIsRecording(false));
-        dispatch(setIsNewRecordRecorder(true));
     }
 
     // eslint-disable-next-line

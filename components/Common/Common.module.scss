@@ -1,0 +1,66 @@
+.reminder-and-category-container {
+    @apply flex
+    flex-col
+    justify-start
+    items-start
+    gap-y-3
+    w-full
+    mt-3
+    sm:mt-5;
+
+    :first-child > .icon-and-text > svg {
+        &:hover {
+            path {
+                stroke: black !important;
+            }
+        }
+    }
+
+    :last-child > .icon-and-text > svg {
+        &:hover {
+            path {
+                stroke: inherit !important;
+            }
+        }
+    }
+
+    .category-row,
+    .reminder-row {
+        @apply flex 
+        flex-row
+        justify-between
+        items-center
+        w-full;
+
+        .icon-and-text {
+            @apply flex 
+            flex-row
+            justify-start
+            items-center
+            cursor-pointer;
+
+            svg {
+                @apply cursor-pointer
+                w-7;
+            }
+
+            p {
+                @apply text-base
+                font-sans
+                font-normal
+                hover:text-white;
+            }
+        }
+
+        svg {
+            @apply mr-2
+            cursor-pointer;
+
+            &:hover {
+                path {
+                    stroke: red;
+                }
+            }
+        }
+    }
+}

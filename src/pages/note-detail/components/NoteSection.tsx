@@ -1,33 +1,22 @@
-import styles from "../NoteDetailPage.module.scss";
+import VoiceNote, { TimedNote } from "../../../models/VoiceNote.model";
 import NoteDetailCard from "./NoteDetailCard";
 
+import styles from "../NoteDetailPage.module.scss";
+import { useSelector } from "react-redux";
+import { StateModel } from "../../../redux/store/store";
+
 function NoteSection() {
+    const selectedNote = useSelector((state: StateModel) => state.note.selectedNote);
+
     return (
         <div className={styles["note-section"]}>
-            <NoteDetailCard
-                isVoiceNote={true}
-                createdAt="14 Aug 2022 13:34"
-                lapTime="00:13"
-                noteText="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsam, delectus obcaecati. Impedit architecto"
-            />
-            <NoteDetailCard
-                isVoiceNote={true}
-                createdAt="14 Aug 2022 13:34"
-                lapTime="00:13"
-                noteText="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsam, delectus obcaecati. Impedit architecto"
-            />
-            <NoteDetailCard
-                isVoiceNote={true}
-                createdAt="14 Aug 2022 13:34"
-                lapTime="00:13"
-                noteText="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsam, delectus obcaecati. Impedit architecto"
-            />
-            <NoteDetailCard
-                isVoiceNote={true}
-                createdAt="14 Aug 2022 13:34"
-                lapTime="00:13"
-                noteText="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsam, delectus obcaecati. Impedit architecto"
-            />
+            {selectedNote instanceof VoiceNote ? (
+                selectedNote.notes.map((note: TimedNote, index: number) => {
+                    return <NoteDetailCard key={index} index={index} />;
+                })
+            ) : (
+                <NoteDetailCard index={0} />
+            )}
         </div>
     );
 }

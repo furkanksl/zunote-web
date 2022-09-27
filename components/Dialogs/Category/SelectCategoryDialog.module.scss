@@ -68,7 +68,16 @@
     justify-start
     items-center
     gap-y-[15px]
-    w-full;
+    w-full
+    overflow-y-scroll
+    py-[10px] px-[5px];
+
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.categor-list::-webkit-scrollbar {
+    display: none !important;
 }
 
 .category-card {

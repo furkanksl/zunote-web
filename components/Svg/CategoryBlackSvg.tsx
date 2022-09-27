@@ -1,4 +1,3 @@
-import React from "react";
 import SvgComponentProp from "../../src/models/types/SvgComponentProp";
 
 const CategoryBlackSvgComponent = (props: SvgComponentProp) => {

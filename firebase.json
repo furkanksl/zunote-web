@@ -17,7 +17,7 @@
       },
       {
         "source": "/note-detail",
-        "destination": "/note-detail.html"
+        "destination": "/notes.html"
       },
       {
         "source": "/about",

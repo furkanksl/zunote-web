@@ -6,87 +6,89 @@ import VoiceNote from "../../models/VoiceNote.model";
 const textNotes: Note[] = [
     new Note({
         category: "Cat1",
-        createdAt: "asdsd",
+        createdAt: 0,
         noteText:
             "Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro ipsum fugiat quibusdam sit quidem a deleniti quam culpa beatae corrupti, reiciendis consequatur, esse distinctio eius, mollitia veniam ullam doloremque at!",
-        reminder: "0",
+
+        reminder: 0,
     }),
     new Note({
         category: "Cat2",
-        createdAt: "asdsd",
+        createdAt: 0,
         noteText:
             "Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro ipsum fugiat quibusdam sit quidem a deleniti quam culpa beatae corrupti, reiciendis consequatur, esse distinctio eius, mollitia veniam ullam doloremque at!",
-        reminder: "0",
+
+        reminder: 0,
     }),
     new Note({
         category: "Cat3",
-        createdAt: "asdsd",
+        createdAt: 0,
         noteText:
             "Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro ipsum fugiat quibusdam sit quidem a deleniti quam culpa beatae corrupti, reiciendis consequatur, esse distinctio eius, mollitia veniam ullam doloremque at!",
-        reminder: "0",
+        reminder: 0,
     }),
     new Note({
         category: "Cat4",
-        createdAt: "asdsd",
+        createdAt: 0,
         noteText:
             "Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro ipsum fugiat quibusdam sit quidem a deleniti quam culpa beatae corrupti, reiciendis consequatur, esse distinctio eius, mollitia veniam ullam doloremque at!",
-        reminder: "0",
+        reminder: 0,
     }),
     new Note({
         category: "Cat5",
-        createdAt: "asdsd",
+        createdAt: 0,
         noteText:
             "Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro ipsum fugiat quibusdam sit quidem a deleniti quam culpa beatae corrupti, reiciendis consequatur, esse distinctio eius, mollitia veniam ullam doloremque at!",
-        reminder: "0",
+        reminder: 0,
     }),
     new Note({
         category: "Cat6",
-        createdAt: "asdsd",
+        createdAt: 0,
         noteText:
             "Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro ipsum fugiat quibusdam sit quidem a deleniti quam culpa beatae corrupti, reiciendis consequatur, esse distinctio eius, mollitia veniam ullam doloremque at!",
-        reminder: "0",
+        reminder: 0,
     }),
 ];
 
 const voiceNotes: VoiceNote[] = [
     new VoiceNote({
         category: "Cat1",
-        createdAt: "asdsd",
-        reminder: "0",
+        createdAt: 0,
+        reminder: 0,
         voiceUrl: "http",
         notes: [
             {
-                createdAt: "a",
+                createdAt: 0,
                 noteText:
                     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro ipsum fugiat quibusdam sit quidem a deleniti quam culpa beatae corrupti, reiciendis consequatur, esse distinctio eius, mollitia veniam ullam doloremque at!",
                 time: "00:10",
             },
             {
-                createdAt: "a",
+                createdAt: 0,
                 noteText:
                     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro ipsum fugiat quibusdam sit quidem a deleniti quam culpa beatae corrupti, reiciendis consequatur, esse distinctio eius, mollitia veniam ullam doloremque at!",
                 time: "01:10",
             },
             {
-                createdAt: "a",
+                createdAt: 0,
                 noteText:
                     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro ipsum fugiat quibusdam sit quidem a deleniti quam culpa beatae corrupti, reiciendis consequatur, esse distinctio eius, mollitia veniam ullam doloremque at!",
                 time: "01:14",
             },
             {
-                createdAt: "a",
+                createdAt: 0,
                 noteText:
                     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro ipsum fugiat quibusdam sit quidem a deleniti quam culpa beatae corrupti, reiciendis consequatur, esse distinctio eius, mollitia veniam ullam doloremque at!",
                 time: "01:45",
             },
             {
-                createdAt: "a",
+                createdAt: 0,
                 noteText:
                     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro ipsum fugiat quibusdam sit quidem a deleniti quam culpa beatae corrupti, reiciendis consequatur, esse distinctio eius, mollitia veniam ullam doloremque at!",
                 time: "01:45",
             },
             {
-                createdAt: "a",
+                createdAt: 0,
                 noteText:
                     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro ipsum fugiat quibusdam sit quidem a deleniti quam culpa beatae corrupti, reiciendis consequatur, esse distinctio eius, mollitia veniam ullam doloremque at!",
                 time: "01:45",
@@ -95,62 +97,62 @@ const voiceNotes: VoiceNote[] = [
     }),
     new VoiceNote({
         category: "Cat2",
-        createdAt: "asdsd",
-        reminder: "0",
+        createdAt: 0,
+        reminder: 0,
         voiceUrl: "http",
         notes: [
-            { createdAt: "a", noteText: "adasdasd", time: "00:10" },
-            { createdAt: "a", noteText: "adasdasd", time: "01:10" },
-            { createdAt: "a", noteText: "adasdasd", time: "01:14" },
-            { createdAt: "a", noteText: "adasdasd", time: "01:45" },
+            { createdAt: 0, noteText: "adasdasd", time: "00:10" },
+            { createdAt: 0, noteText: "adasdasd", time: "01:10" },
+            { createdAt: 0, noteText: "adasdasd", time: "01:14" },
+            { createdAt: 0, noteText: "adasdasd", time: "01:45" },
         ],
     }),
     new VoiceNote({
         category: "Cat3",
-        createdAt: "asdsd",
-        reminder: "0",
+        createdAt: 0,
+        reminder: 0,
         voiceUrl: "http",
         notes: [
-            { createdAt: "a", noteText: "adasdasd", time: "00:10" },
-            { createdAt: "a", noteText: "adasdasd", time: "01:10" },
-            { createdAt: "a", noteText: "adasdasd", time: "01:14" },
-            { createdAt: "a", noteText: "adasdasd", time: "01:45" },
+            { createdAt: 0, noteText: "adasdasd", time: "00:10" },
+            { createdAt: 0, noteText: "adasdasd", time: "01:10" },
+            { createdAt: 0, noteText: "adasdasd", time: "01:14" },
+            { createdAt: 0, noteText: "adasdasd", time: "01:45" },
         ],
     }),
     new VoiceNote({
         category: "Cat4",
-        createdAt: "asdsd",
-        reminder: "0",
+        createdAt: 0,
+        reminder: 0,
         voiceUrl: "http",
         notes: [
-            { createdAt: "a", noteText: "adasdasd", time: "00:10" },
-            { createdAt: "a", noteText: "adasdasd", time: "01:10" },
-            { createdAt: "a", noteText: "adasdasd", time: "01:14" },
-            { createdAt: "a", noteText: "adasdasd", time: "01:45" },
+            { createdAt: 0, noteText: "adasdasd", time: "00:10" },
+            { createdAt: 0, noteText: "adasdasd", time: "01:10" },
+            { createdAt: 0, noteText: "adasdasd", time: "01:14" },
+            { createdAt: 0, noteText: "adasdasd", time: "01:45" },
         ],
     }),
     new VoiceNote({
         category: "Cat5",
-        createdAt: "asdsd",
-        reminder: "0",
+        createdAt: 0,
+        reminder: 0,
         voiceUrl: "http",
         notes: [
-            { createdAt: "a", noteText: "adasdasd", time: "00:10" },
-            { createdAt: "a", noteText: "adasdasd", time: "01:10" },
-            { createdAt: "a", noteText: "adasdasd", time: "01:14" },
-            { createdAt: "a", noteText: "adasdasd", time: "01:45" },
+            { createdAt: 0, noteText: "adasdasd", time: "00:10" },
+            { createdAt: 0, noteText: "adasdasd", time: "01:10" },
+            { createdAt: 0, noteText: "adasdasd", time: "01:14" },
+            { createdAt: 0, noteText: "adasdasd", time: "01:45" },
         ],
     }),
     new VoiceNote({
         category: "Cat6",
-        createdAt: "asdsd",
-        reminder: "0",
+        createdAt: 0,
+        reminder: 0,
         voiceUrl: "http",
         notes: [
-            { createdAt: "a", noteText: "adasdasd", time: "00:10" },
-            { createdAt: "a", noteText: "adasdasd", time: "01:10" },
-            { createdAt: "a", noteText: "adasdasd", time: "01:14" },
-            { createdAt: "a", noteText: "adasdasd", time: "01:45" },
+            { createdAt: 0, noteText: "adasdasd", time: "00:10" },
+            { createdAt: 0, noteText: "adasdasd", time: "01:10" },
+            { createdAt: 0, noteText: "adasdasd", time: "01:14" },
+            { createdAt: 0, noteText: "adasdasd", time: "01:45" },
         ],
     }),
 ];
@@ -158,42 +160,26 @@ const voiceNotes: VoiceNote[] = [
 const allNotes = [...textNotes, ...voiceNotes];
 
 type NoteState = {
-    isVoiceNote: boolean;
     notes: any[];
     isNoteEditing: boolean;
     notesTabIndex: number;
     selectedNote?: Note | VoiceNote;
     selectedNoteIndex: number;
-    voiceTimerText: string;
 };
 
 export const noteSlice = createSlice({
     name: "note",
 
     initialState: {
-        isVoiceNote: false,
-        notes: allNotes,
+        notes: allNotes, //[],
         isNoteEditing: false,
         selectedNote: undefined,
         selectedNoteIndex: 0,
-        voiceTimerText: "00:00",
         notesTabIndex: 0,
     },
 
     reducers: {
-        setIsVoiceNote: (state: NoteState, action: any) => {
-            state.isVoiceNote = action.payload;
-        },
-
-        setVoiceTimerText: (state: NoteState, action: any) => {
-            state.voiceTimerText = action.payload;
-        },
-
         addNewNote: (state: NoteState, action: any) => {
-            state.notes.splice(0, 0, action.payload);
-        },
-
-        addNewVoiceNote: (state: NoteState, action: any) => {
             state.notes.splice(0, 0, action.payload);
         },
 
@@ -226,15 +212,12 @@ export const noteSlice = createSlice({
 });
 
 export const {
-    setIsVoiceNote,
     addNewNote,
     removeNoteWithIndex,
-    addNewVoiceNote,
     setSelectedNote,
     updateNoteWithIndex,
     setSelectedNoteIndex,
     setIsNoteEditing,
-    setVoiceTimerText,
     setNotesTabIndex,
 } = noteSlice.actions;
 
