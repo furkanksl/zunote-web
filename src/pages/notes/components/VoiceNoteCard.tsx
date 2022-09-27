@@ -4,7 +4,6 @@ import DeleteDialog from "../../../../components/Dialogs/Delete/DeleteDialog";
 import MiniPlaySvgComponent from "../../../../components/Svg/MiniPlaySvg";
 import MiniPauseSvgComponent from "../../../../components/Svg/MiniResumeSvg";
 import RemoveSvgComponent from "../../../../components/Svg/RemoveSvg";
-import { setIsDeleteVisible } from "../../../redux/features/dialog.reducer";
 import { removeNoteWithIndex, setSelectedNoteIndex } from "../../../redux/features/note.reducer";
 import UtilityService from "../../../services/utility.service";
 
