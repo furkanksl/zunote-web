@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
-import DeleteDialog from "../../../../components/Dialogs/Delete/DeleteDialog";
-
-import RemoveSvgComponent from "../../../../components/Svg/RemoveSvg";
 import { removeNoteWithIndex, setSelectedNoteIndex } from "../../../redux/features/note.reducer";
+
+import DeleteDialog from "../../../../components/Dialogs/Delete/DeleteDialog";
+import RemoveSvgComponent from "../../../../components/Svg/RemoveSvg";
 import UtilityService from "../../../services/utility.service";
 
 import styles from "../NotesPage.module.scss";
@@ -14,6 +14,7 @@ type Props = {
     onClick: (event: any) => any;
     index: number;
 };
+
 function NoteCard(props: Props) {
     const dispatch = useDispatch();
 

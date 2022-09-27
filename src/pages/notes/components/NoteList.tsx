@@ -1,16 +1,16 @@
 import { useRouter } from "next/router";
-import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Note from "../../../models/Note.model";
-import VoiceNote from "../../../models/VoiceNote.model";
 import { setSelectedCategory } from "../../../redux/features/category.reducer";
 import { setSelectedNote, setSelectedNoteIndex } from "../../../redux/features/note.reducer";
 import { setReminder } from "../../../redux/features/reminder.reducer";
 import { StateModel } from "../../../redux/store/store";
 
-import styles from "../NotesPage.module.scss";
+import Note from "../../../models/Note.model";
+import VoiceNote from "../../../models/VoiceNote.model";
 import NoteCard from "./NoteCard";
 import VoiceNoteCard from "./VoiceNoteCard";
+
+import styles from "../NotesPage.module.scss";
 
 function NoteList() {
     const dispatch = useDispatch();
@@ -20,10 +20,8 @@ function NoteList() {
 
     const categoryIndex = useSelector((state: StateModel) => state.note.notesTabIndex);
     const notes = useSelector((state: StateModel) => state.note.notes);
-    // const sortedNotes = sortingCat === "All" ? notes : notes.filter((note: Note) => note.category === sortingCat);
 
     const selectNote = async (event: any, index: number) => {
-        // event.preventDefault();
         dispatch(setSelectedNoteIndex(index));
         dispatch(setSelectedNote(notes[index]));
         dispatch(setReminder(notes[index].reminder));

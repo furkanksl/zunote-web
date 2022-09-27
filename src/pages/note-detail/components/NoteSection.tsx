@@ -1,8 +1,8 @@
-import DeleteDialog from "../../../../components/Dialogs/Delete/DeleteDialog";
 import Note from "../../../models/Note.model";
 import VoiceNote, { TimedNote } from "../../../models/VoiceNote.model";
-import styles from "../NoteDetailPage.module.scss";
 import NoteDetailCard from "./NoteDetailCard";
+
+import styles from "../NoteDetailPage.module.scss";
 
 type Props = {
     selectedNote: VoiceNote | Note;

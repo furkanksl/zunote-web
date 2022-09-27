@@ -1,4 +1,3 @@
-import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CategoryBlackSvgComponent from "../../../../components/Svg/CategoryBlackSvg";
 import { setIsSorting } from "../../../redux/features/category.reducer";

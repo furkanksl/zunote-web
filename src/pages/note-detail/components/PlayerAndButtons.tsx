@@ -1,12 +1,12 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
-import AudioPlayer from "react-h5-audio-player";
 import { useDispatch, useSelector } from "react-redux";
+
+import AudioPlayer from "react-h5-audio-player";
 import DeleteDialog from "../../../../components/Dialogs/Delete/DeleteDialog";
 import DeleteSvgComponent from "../../../../components/Svg/DeleteSvg";
 import VoiceNote from "../../../models/VoiceNote.model";
 import { unselectCategory } from "../../../redux/features/category.reducer";
-import { setIsDeleteVisible } from "../../../redux/features/dialog.reducer";
 import { removeNoteWithIndex, setIsNoteEditing, setSelectedNote } from "../../../redux/features/note.reducer";
 import { unsetReminder } from "../../../redux/features/reminder.reducer";
 import { StateModel } from "../../../redux/store/store";

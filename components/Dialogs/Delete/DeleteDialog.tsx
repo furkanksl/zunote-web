@@ -1,7 +1,3 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { setIsDeleteVisible } from "../../../src/redux/features/dialog.reducer";
-import { StateModel } from "../../../src/redux/store/store";
 import TitleBox from "../../TitleBox";
 
 import styles from "./DeleteDialog.module.scss";

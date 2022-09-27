@@ -1,6 +1,5 @@
-import React from "react";
 import Note from "../../../models/Note.model";
-import VoiceNote, { TimedNote } from "../../../models/VoiceNote.model";
+import { TimedNote } from "../../../models/VoiceNote.model";
 
 import styles from "../HomePage.module.scss";
 

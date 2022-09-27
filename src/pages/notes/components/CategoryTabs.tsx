@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import TextSvgComponent from "../../../../components/Svg/TextSvg";
 import VoiceSvgComponent from "../../../../components/Svg/VoiceSvg";

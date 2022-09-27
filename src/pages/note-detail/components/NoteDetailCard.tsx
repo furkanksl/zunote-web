@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import DeleteDialog from "../../../../components/Dialogs/Delete/DeleteDialog";
 import RemoveSvgComponent from "../../../../components/Svg/RemoveSvg";
-import { setIsDeleteVisible } from "../../../redux/features/dialog.reducer";
 import { setIsNoteEditing, setSelectedNote } from "../../../redux/features/note.reducer";
 import { StateModel } from "../../../redux/store/store";
 import UtilityService from "../../../services/utility.service";
@@ -49,17 +48,12 @@ function NoteDetailCard(props: Props) {
     }, []);
 
     function resizeTextArea() {
-        // return props.noteText.split(/\r|\r\n|\n/).length + 1;
-
         if (textAreaRef.current) {
             textAreaRef.current.style.height = "0px";
             const scrollHeight = textAreaRef.current.scrollHeight;
 
             textAreaRef.current.style.height = scrollHeight + "px";
-
-            // return scrollHeight + "px";
         }
-        // else return "100px";
     }
 
     return (

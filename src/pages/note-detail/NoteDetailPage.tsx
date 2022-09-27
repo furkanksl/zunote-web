@@ -1,8 +1,9 @@
 import { useSelector } from "react-redux";
+import { StateModel } from "../../redux/store/store";
+
 import WhiteTextSvgComponent from "../../../components/Svg/WhiteTextSvg";
 import WhiteVoiceSvgComponent from "../../../components/Svg/WhiteVoiceSvg";
 import VoiceNote from "../../models/VoiceNote.model";
-import { StateModel } from "../../redux/store/store";
 import CategoryAndReminderSection from "../../../components/Common/CategoryAndReminderSection";
 import NoteSection from "./components/NoteSection";
 import PlayerAndButtons from "./components/PlayerAndButtons";
