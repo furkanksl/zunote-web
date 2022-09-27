@@ -2,7 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 
 type CategoryState = {
-    isCategoryOpened: boolean;
     isSorting: boolean;
     selectedCategory: string;
     sortingCategory: string;
@@ -35,7 +34,6 @@ export const categorySlice = createSlice({
     name: "category",
 
     initialState: {
-        isCategoryOpened: false,
         isSorting: false,
         selectedCategory: "",
         sortingCategory: "All",
@@ -43,14 +41,6 @@ export const categorySlice = createSlice({
     },
 
     reducers: {
-        toggleCategory: (state: CategoryState) => {
-            state.isCategoryOpened = !state.isCategoryOpened;
-        },
-
-        setCategoryState: (state: CategoryState, action: any) => {
-            state.isCategoryOpened = action.payload;
-        },
-
         unselectCategory: (state: CategoryState) => {
             state.selectedCategory = "";
         },
@@ -86,8 +76,6 @@ export const categorySlice = createSlice({
 });
 
 export const {
-    toggleCategory,
-    setCategoryState,
     unselectCategory,
     setSelectedCategory,
     setSortingCategory,
