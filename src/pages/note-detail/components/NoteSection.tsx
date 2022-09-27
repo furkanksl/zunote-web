@@ -1,3 +1,4 @@
+import DeleteDialog from "../../../../components/Dialogs/Delete/DeleteDialog";
 import Note from "../../../models/Note.model";
 import VoiceNote, { TimedNote } from "../../../models/VoiceNote.model";
 import styles from "../NoteDetailPage.module.scss";

@@ -1,10 +1,9 @@
-import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import DeleteDialog from "../../../../components/Dialogs/Delete/DeleteDialog";
 
 import RemoveSvgComponent from "../../../../components/Svg/RemoveSvg";
-import { setIsDeleteVisible } from "../../../redux/features/dialog.reducer";
-import { setSelectedNoteIndex } from "../../../redux/features/note.reducer";
+import { removeNoteWithIndex, setSelectedNoteIndex } from "../../../redux/features/note.reducer";
 import UtilityService from "../../../services/utility.service";
 
 import styles from "../NotesPage.module.scss";
@@ -12,16 +11,18 @@ import styles from "../NotesPage.module.scss";
 type Props = {
     noteText: string;
     createdAt: number;
-    onClick: () => any;
+    onClick: (event: any) => any;
     index: number;
 };
 function NoteCard(props: Props) {
     const dispatch = useDispatch();
 
+    const [isDeleteVisible, setIsDeleteVisible] = useState(false);
+
     const utilityService = new UtilityService();
 
     const deleteItem = (event: any) => {
-        dispatch(setIsDeleteVisible(true));
+        setIsDeleteVisible(true);
         dispatch(setSelectedNoteIndex(props.index));
         event.stopPropagation();
     };
@@ -35,6 +36,15 @@ function NoteCard(props: Props) {
             <div className={styles["details"]}>
                 <p>{utilityService.timestampToString(props.createdAt)}</p>
             </div>
+
+            {isDeleteVisible ? (
+                <DeleteDialog
+                    onConfirm={() => {
+                        dispatch(removeNoteWithIndex());
+                    }}
+                    onCancel={() => setIsDeleteVisible(false)}
+                />
+            ) : null}
         </div>
     );
 }

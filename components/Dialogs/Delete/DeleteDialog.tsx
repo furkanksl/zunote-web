@@ -8,29 +8,29 @@ import styles from "./DeleteDialog.module.scss";
 
 type Props = {
     onConfirm: () => any;
+    onCancel: () => any;
 };
 
 function DeleteDialog(props: Props) {
-    const dispatch = useDispatch();
-
-    const isDeleteVisible = useSelector((state: StateModel) => state.dialog.isDeleteVisible);
-
-    const closeDialog = () => dispatch(setIsDeleteVisible(false));
-
-    function confrim() {
+    function confrim(event: any) {
         props.onConfirm();
-        closeDialog();
+        cancel(event);
     }
 
-    return isDeleteVisible ? (
+    const cancel = (event: any) => {
+        props.onCancel();
+        event.stopPropagation();
+    };
+
+    return (
         <>
-            <div className="dialog-wrapper" onClick={closeDialog}></div>
+            <div className="dialog-wrapper" onClick={cancel}></div>
             <div className={styles["delete-container"]}>
                 <TitleBox title="DELETE" />
                 <p>Do you want to proceed? </p>
 
                 <div className={styles.buttons}>
-                    <div className={styles["cancel-button"]} onClick={closeDialog}>
+                    <div className={styles["cancel-button"]} onClick={cancel}>
                         Cancel
                     </div>
 
@@ -40,8 +40,6 @@ function DeleteDialog(props: Props) {
                 </div>
             </div>
         </>
-    ) : (
-        <></>
     );
 }
 

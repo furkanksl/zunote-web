@@ -1,11 +1,10 @@
 import { useRouter } from "next/router";
-import React from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import DeleteDialog from "../../../../components/Dialogs/Delete/DeleteDialog";
 import Note from "../../../models/Note.model";
 import VoiceNote from "../../../models/VoiceNote.model";
 import { setSelectedCategory } from "../../../redux/features/category.reducer";
-import { removeNoteWithIndex, setSelectedNote, setSelectedNoteIndex } from "../../../redux/features/note.reducer";
+import { setSelectedNote, setSelectedNoteIndex } from "../../../redux/features/note.reducer";
 import { setReminder } from "../../../redux/features/reminder.reducer";
 import { StateModel } from "../../../redux/store/store";
 
@@ -21,9 +20,10 @@ function NoteList() {
 
     const categoryIndex = useSelector((state: StateModel) => state.note.notesTabIndex);
     const notes = useSelector((state: StateModel) => state.note.notes);
-    const sortedNotes = sortingCat === "All" ? notes : notes.filter((note: Note) => note.category === sortingCat);
+    // const sortedNotes = sortingCat === "All" ? notes : notes.filter((note: Note) => note.category === sortingCat);
 
-    const selectNote = async (index: number) => {
+    const selectNote = async (event: any, index: number) => {
+        // event.preventDefault();
         dispatch(setSelectedNoteIndex(index));
         dispatch(setSelectedNote(notes[index]));
         dispatch(setReminder(notes[index].reminder));
@@ -40,7 +40,7 @@ function NoteList() {
                     noteText={note.notes[0]?.noteText ?? ""}
                     createdAt={note.createdAt}
                     voiceUrl={note.voiceUrl}
-                    onClick={() => selectNote(index)}
+                    onClick={(event: any) => selectNote(event, index)}
                 />
             ) : null
         ) : categoryIndex === 1 ? (
@@ -49,7 +49,7 @@ function NoteList() {
                 index={index}
                 noteText={note?.noteText ?? ""}
                 createdAt={note.createdAt}
-                onClick={() => selectNote(index)}
+                onClick={(event: any) => selectNote(event, index)}
             />
         ) : null;
     }
@@ -63,12 +63,6 @@ function NoteList() {
                     ? noteCard(note, index)
                     : null
             )}
-
-            <DeleteDialog
-                onConfirm={() => {
-                    dispatch(removeNoteWithIndex());
-                }}
-            />
         </div>
     );
 }

@@ -2,10 +2,12 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import AudioPlayer from "react-h5-audio-player";
 import { useDispatch, useSelector } from "react-redux";
+import DeleteDialog from "../../../../components/Dialogs/Delete/DeleteDialog";
 import DeleteSvgComponent from "../../../../components/Svg/DeleteSvg";
 import VoiceNote from "../../../models/VoiceNote.model";
 import { unselectCategory } from "../../../redux/features/category.reducer";
-import { setIsNoteEditing, setSelectedNote } from "../../../redux/features/note.reducer";
+import { setIsDeleteVisible } from "../../../redux/features/dialog.reducer";
+import { removeNoteWithIndex, setIsNoteEditing, setSelectedNote } from "../../../redux/features/note.reducer";
 import { unsetReminder } from "../../../redux/features/reminder.reducer";
 import { StateModel } from "../../../redux/store/store";
 
@@ -14,6 +16,8 @@ import styles from "../NoteDetailPage.module.scss";
 function PlayerAndButtons() {
     const dispatch = useDispatch();
     const router = useRouter();
+
+    const [isDeleteVisible, setIsDeleteVisible] = useState(false);
 
     const isNoteEditing = useSelector((state: StateModel) => state.note.isNoteEditing);
     const selectedNote = useSelector((state: StateModel) => state.note.selectedNote);
@@ -47,10 +51,21 @@ function PlayerAndButtons() {
                 <div className={styles.button} onClick={isNoteEditing ? onSave : onEdit}>
                     {isNoteEditing ? "SAVE" : "EDIT"}
                 </div>
-                <div className={styles.button}>
-                    <DeleteSvgComponent function={() => {}} />
+                <div className={styles.button} onClick={() => setIsDeleteVisible(true)}>
+                    <DeleteSvgComponent function={() => setIsDeleteVisible(true)} />
                 </div>
             </div>
+            {isDeleteVisible ? (
+                <DeleteDialog
+                    onConfirm={async () => {
+                        dispatch(removeNoteWithIndex());
+                        await router.push("/notes");
+                    }}
+                    onCancel={() => {
+                        setIsDeleteVisible(false);
+                    }}
+                />
+            ) : null}
         </div>
     );
 }
