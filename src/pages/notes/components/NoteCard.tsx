@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 
 import RemoveSvgComponent from "../../../../components/Svg/RemoveSvg";
 import { setIsDeleteVisible } from "../../../redux/features/dialog.reducer";
+import { setSelectedNoteIndex } from "../../../redux/features/note.reducer";
 import UtilityService from "../../../services/utility.service";
 
 import styles from "../NotesPage.module.scss";
@@ -12,6 +13,7 @@ type Props = {
     noteText: string;
     createdAt: number;
     onClick: () => any;
+    index: number;
 };
 function NoteCard(props: Props) {
     const dispatch = useDispatch();
@@ -20,7 +22,7 @@ function NoteCard(props: Props) {
 
     const deleteItem = (event: any) => {
         dispatch(setIsDeleteVisible(true));
-
+        dispatch(setSelectedNoteIndex(props.index));
         event.stopPropagation();
     };
 

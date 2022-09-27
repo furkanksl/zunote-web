@@ -4,6 +4,7 @@ import MiniPlaySvgComponent from "../../../../components/Svg/MiniPlaySvg";
 import MiniPauseSvgComponent from "../../../../components/Svg/MiniResumeSvg";
 import RemoveSvgComponent from "../../../../components/Svg/RemoveSvg";
 import { setIsDeleteVisible } from "../../../redux/features/dialog.reducer";
+import { setSelectedNoteIndex } from "../../../redux/features/note.reducer";
 import UtilityService from "../../../services/utility.service";
 
 import styles from "../NotesPage.module.scss";
@@ -11,6 +12,7 @@ type Props = {
     noteText: string;
     createdAt: number;
     voiceUrl: string;
+    index: number;
     onClick: () => any;
 };
 function VoiceNoteCard(props: Props) {
@@ -20,6 +22,7 @@ function VoiceNoteCard(props: Props) {
     const utilityService = new UtilityService();
 
     const deleteItem = (event: any) => {
+        dispatch(setSelectedNoteIndex(props.index));
         dispatch(setIsDeleteVisible(true));
 
         event.stopPropagation();

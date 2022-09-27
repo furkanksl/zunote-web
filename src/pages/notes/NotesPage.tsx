@@ -1,5 +1,3 @@
-import React from "react";
-
 import CategoryTabs from "./components/CategoryTabs";
 import NoteList from "./components/NoteList";
 import SelectCategoryBox from "./components/SelectCategoryBox";

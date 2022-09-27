@@ -1,10 +1,11 @@
 import { useRouter } from "next/router";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import DeleteDialog from "../../../../components/Dialogs/Delete/DeleteDialog";
 import Note from "../../../models/Note.model";
 import VoiceNote from "../../../models/VoiceNote.model";
 import { setSelectedCategory } from "../../../redux/features/category.reducer";
-import { setSelectedNote } from "../../../redux/features/note.reducer";
+import { removeNoteWithIndex, setSelectedNote, setSelectedNoteIndex } from "../../../redux/features/note.reducer";
 import { setReminder } from "../../../redux/features/reminder.reducer";
 import { StateModel } from "../../../redux/store/store";
 
@@ -23,9 +24,7 @@ function NoteList() {
     const sortedNotes = sortingCat === "All" ? notes : notes.filter((note: Note) => note.category === sortingCat);
 
     const selectNote = async (index: number) => {
-        // console.log(notes[index] instanceof VoiceNote);
-        // console.log(index);
-
+        dispatch(setSelectedNoteIndex(index));
         dispatch(setSelectedNote(notes[index]));
         dispatch(setReminder(notes[index].reminder));
         dispatch(setSelectedCategory(notes[index].category));
@@ -37,6 +36,7 @@ function NoteList() {
             categoryIndex === 0 ? (
                 <VoiceNoteCard
                     key={index}
+                    index={index}
                     noteText={note.notes[0]?.noteText ?? ""}
                     createdAt={note.createdAt}
                     voiceUrl={note.voiceUrl}
@@ -46,6 +46,7 @@ function NoteList() {
         ) : categoryIndex === 1 ? (
             <NoteCard
                 key={index}
+                index={index}
                 noteText={note?.noteText ?? ""}
                 createdAt={note.createdAt}
                 onClick={() => selectNote(index)}
@@ -62,6 +63,12 @@ function NoteList() {
                     ? noteCard(note, index)
                     : null
             )}
+
+            <DeleteDialog
+                onConfirm={() => {
+                    dispatch(removeNoteWithIndex());
+                }}
+            />
         </div>
     );
 }
