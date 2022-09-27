@@ -20,7 +20,7 @@ function NoteDetailPage() {
             <div className={styles["note-icon-container"]}>
                 {isVoiceNote ? <WhiteVoiceSvgComponent /> : <WhiteTextSvgComponent />}
             </div>
-            <NoteSection selectedNote={selectedNote} isVoiceNote={isVoiceNote} />
+            <NoteSection />
             <CategoryAndReminderSection />
             <PlayerAndButtons />
         </div>

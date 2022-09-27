@@ -1,38 +1,21 @@
-import Note from "../../../models/Note.model";
 import VoiceNote, { TimedNote } from "../../../models/VoiceNote.model";
 import NoteDetailCard from "./NoteDetailCard";
 
 import styles from "../NoteDetailPage.module.scss";
+import { useSelector } from "react-redux";
+import { StateModel } from "../../../redux/store/store";
 
-type Props = {
-    selectedNote: VoiceNote | Note;
-    isVoiceNote: boolean;
-};
+function NoteSection() {
+    const selectedNote = useSelector((state: StateModel) => state.note.selectedNote);
 
-function NoteSection(props: Props) {
     return (
         <div className={styles["note-section"]}>
-            {props.selectedNote instanceof VoiceNote ? (
-                props.selectedNote.notes.map((note: TimedNote, index: number) => {
-                    return (
-                        <NoteDetailCard
-                            key={index}
-                            isVoiceNote={props.isVoiceNote}
-                            createdAt={note.createdAt}
-                            lapTime={note.time}
-                            noteText={note.noteText}
-                            noteIndex={index}
-                        />
-                    );
+            {selectedNote instanceof VoiceNote ? (
+                selectedNote.notes.map((note: TimedNote, index: number) => {
+                    return <NoteDetailCard key={index} index={index} />;
                 })
             ) : (
-                <NoteDetailCard
-                    isVoiceNote={props.isVoiceNote}
-                    createdAt={props.selectedNote?.createdAt ?? ""}
-                    lapTime={""}
-                    noteText={props.selectedNote?.noteText ?? ""}
-                    noteIndex={0}
-                />
+                <NoteDetailCard index={0} />
             )}
         </div>
     );

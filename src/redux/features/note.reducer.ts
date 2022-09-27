@@ -195,10 +195,6 @@ export const noteSlice = createSlice({
             state.notes.splice(0, 0, action.payload);
         },
 
-        addNewVoiceNote: (state: NoteState, action: any) => {
-            state.notes.splice(0, 0, action.payload);
-        },
-
         removeNoteWithIndex: (state: NoteState) => {
             state.notes.splice(state.selectedNoteIndex, 1);
             state.notes = [...state.notes];
@@ -231,7 +227,6 @@ export const {
     setIsVoiceNote,
     addNewNote,
     removeNoteWithIndex,
-    addNewVoiceNote,
     setSelectedNote,
     updateNoteWithIndex,
     setSelectedNoteIndex,

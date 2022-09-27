@@ -1,18 +1,17 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import DeleteDialog from "../../../../components/Dialogs/Delete/DeleteDialog";
-import RemoveSvgComponent from "../../../../components/Svg/RemoveSvg";
 import { setIsNoteEditing, setSelectedNote } from "../../../redux/features/note.reducer";
 import { StateModel } from "../../../redux/store/store";
+
+import VoiceNote from "../../../models/VoiceNote.model";
+import DeleteDialog from "../../../../components/Dialogs/Delete/DeleteDialog";
+import RemoveSvgComponent from "../../../../components/Svg/RemoveSvg";
 import UtilityService from "../../../services/utility.service";
+
 import styles from "../NoteDetailPage.module.scss";
 
 type Props = {
-    isVoiceNote: boolean;
-    noteText: string;
-    createdAt: number;
-    lapTime: string;
-    noteIndex: number;
+    index: number;
 };
 
 function NoteDetailCard(props: Props) {
@@ -21,8 +20,9 @@ function NoteDetailCard(props: Props) {
     const [isDeleteVisible, setIsDeleteVisible] = useState(false);
 
     const isNoteEditing = useSelector((state: StateModel) => state.note.isNoteEditing);
-    let selectedNote = useSelector((state: StateModel) => state.note.selectedNote);
+    const selectedNote = useSelector((state: StateModel) => state.note.selectedNote);
     const utilityService = new UtilityService();
+    const isVoiceNote = selectedNote instanceof VoiceNote;
     const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
     function onChange(e: any) {
@@ -30,8 +30,8 @@ function NoteDetailCard(props: Props) {
 
         const value = e.target.value;
 
-        if (props.isVoiceNote) {
-            selectedNote.notes[props.noteIndex].noteText = value;
+        if (isVoiceNote) {
+            selectedNote.notes[props.index].noteText = value;
         } else {
             selectedNote.noteText = value;
         }
@@ -56,31 +56,40 @@ function NoteDetailCard(props: Props) {
         }
     }
 
-    return (
+    return (isVoiceNote ? selectedNote.notes[props.index] !== undefined : true) ? (
         <div className={styles["note-card"]}>
             <div className={styles["lap-row"]}>
-                {props.isVoiceNote ? <p>{props.lapTime}</p> : null}
-                {props.isVoiceNote ? <RemoveSvgComponent function={() => setIsDeleteVisible(true)} /> : null}
+                {isVoiceNote ? <p>{selectedNote?.notes[props.index]?.time}</p> : null}
+                {isVoiceNote ? (
+                    <RemoveSvgComponent
+                        function={() => {
+                            setIsDeleteVisible(true);
+                        }}
+                    />
+                ) : null}
             </div>
             <textarea
                 onClick={onTextAreaClick}
                 className={styles["text-field"]}
-                key={props.noteText}
-                defaultValue={props.noteText}
+                key={isVoiceNote ? selectedNote?.notes[props.index].noteText : selectedNote.noteText}
+                defaultValue={isVoiceNote ? selectedNote?.notes[props.index].noteText : selectedNote.noteText}
                 readOnly={!isNoteEditing}
                 onChange={(e: any) => onChange(e)}
                 ref={textAreaRef}
                 onBlur={() => dispatch(setSelectedNote(selectedNote))}
             />
             <div className={styles["details"]}>
-                <p>{utilityService.timestampToString(props.createdAt)}</p>
+                <p>
+                    {utilityService.timestampToString(
+                        isVoiceNote ? selectedNote?.notes[props.index]?.createdAt : selectedNote.createdAt
+                    )}
+                </p>
             </div>
 
             {isDeleteVisible ? (
                 <DeleteDialog
-                    onConfirm={async () => {
-                        selectedNote.notes.splice(props.noteIndex, 1);
-                        selectedNote.notes = [...selectedNote.notes];
+                    onConfirm={() => {
+                        selectedNote.notes.splice(props.index, 1);
                         dispatch(setSelectedNote(selectedNote));
                     }}
                     onCancel={() => {
@@ -89,7 +98,7 @@ function NoteDetailCard(props: Props) {
                 />
             ) : null}
         </div>
-    );
+    ) : null;
 }
 
 export default NoteDetailCard;
