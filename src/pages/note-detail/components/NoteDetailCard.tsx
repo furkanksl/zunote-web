@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import RemoveSvgComponent from "../../../../components/Svg/RemoveSvg";
 import { setIsNoteEditing, setSelectedNote } from "../../../redux/features/note.reducer";
@@ -19,6 +20,7 @@ function NoteDetailCard(props: Props) {
     const isNoteEditing = useSelector((state: StateModel) => state.note.isNoteEditing);
     let selectedNote = useSelector((state: StateModel) => state.note.selectedNote);
     const utilityService = new UtilityService();
+    const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
     function onChange(e: any) {
         e.preventDefault();
@@ -34,6 +36,21 @@ function NoteDetailCard(props: Props) {
 
     function onTextAreaClick() {
         dispatch(setIsNoteEditing(true));
+        resizeTextArea();
+    }
+
+    function resizeTextArea() {
+        // return props.noteText.split(/\r|\r\n|\n/).length + 1;
+
+        if (textAreaRef.current) {
+            textAreaRef.current.style.height = "0px";
+            const scrollHeight = textAreaRef.current.scrollHeight;
+
+            textAreaRef.current.style.height = scrollHeight + "px";
+
+            // return scrollHeight + "px";
+        }
+        // else return "100px";
     }
 
     return (
@@ -49,6 +66,7 @@ function NoteDetailCard(props: Props) {
                 defaultValue={props.noteText}
                 readOnly={!isNoteEditing}
                 onChange={(e: any) => onChange(e)}
+                ref={textAreaRef}
                 onBlur={() => dispatch(setSelectedNote(selectedNote))}
             />
             <div className={styles["details"]}>

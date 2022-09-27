@@ -55,7 +55,6 @@ function NoteList() {
 
     return (
         <div className={styles["cards"]}>
-            <p>{categoryIndex}</p>
             {notes.map((note: VoiceNote | Note, index: number) =>
                 sortingCat === "All"
                     ? noteCard(note, index)
