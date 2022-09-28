@@ -4,14 +4,12 @@ import "react-toastify/dist/ReactToastify.css";
 import "react-datetime/css/react-datetime.css";
 
 import type { AppProps } from "next/app";
-import Layout from "../components/Layout";
 import { wrapper } from "../src/redux/store/store";
-import FirebaseService from "../src/services/firebase/firebase.service";
-import ProtectedRoute from "../components/ProtectedRoute";
 import { useRouter } from "next/router";
+import Layout from "../components/Layout";
+import ProtectedRoute from "../components/ProtectedRoute";
 
 function MyApp({ Component, pageProps }: AppProps) {
-    const firebaseService = new FirebaseService();
     const router = useRouter();
     const noAuthRequiredRoutes = ["/auth"];
 
