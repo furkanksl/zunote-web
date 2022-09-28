@@ -1,16 +1,24 @@
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { auth } from "../firebase";
+import { setUser } from "../src/redux/features/auth.reducer";
 import { StateModel } from "../src/redux/store/store";
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
-    const user = useSelector((state: StateModel) => state.aut.user);
+    const dispatch = useDispatch();
+    const user = useSelector((state: StateModel) => state.auth.user);
     const router = useRouter();
 
     useEffect(() => {
-        if (!user) {
-            router.replace("/auth");
-        }
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+                dispatch(setUser(user));
+            } else {
+                dispatch(setUser(null));
+                router.replace("/auth");
+            }
+        });
     }, [user]);
 
     return <>{user ? children : null}</>;
