@@ -1,9 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { auth } from "../../../firebase";
 
 export const authSlice = createSlice({
     name: "auth",
     initialState: {
-        user: null,
+        user: auth?.currentUser ?? null,
     },
     reducers: {
         setUser: (state, action) => {

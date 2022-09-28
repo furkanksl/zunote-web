@@ -14,7 +14,7 @@ export type StateModel = {
     note: any;
     recorder: any;
     dialog: any;
-    aut: any;
+    auth: any;
 };
 
 const reducer: StateModel = {
@@ -23,7 +23,7 @@ const reducer: StateModel = {
     note: noteReducer,
     recorder: recorderReducer,
     dialog: dialogReducer,
-    aut: authReducer,
+    auth: authReducer,
 };
 
 const makeStore = () =>
