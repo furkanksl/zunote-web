@@ -12,16 +12,19 @@ export default class FirebaseService {
 
             if (auth.currentUser) {
                 sendEmailVerification(auth.currentUser);
-                toast.info("We sent a verification link to your mail.\nCheck you mailbox to verify your email!");
-            }
-
-            setTimeout(() => {
-                toast.info("Please login to continue");
-            }, 1500);
+                toast.info("We sent a verification link to your mail.\nCheck you mailbox to verify your email!", {
+                    icon: "📧",
+                });
+            } else
+                setTimeout(() => {
+                    toast.info("Please login to continue");
+                }, 1000);
 
             return true;
         } catch (error) {
-            toast.error("Something went wrong");
+            toast.error("Something went wrong", {
+                icon: "🤔",
+            });
             return false;
         }
     }
@@ -40,7 +43,10 @@ export default class FirebaseService {
             return true;
         } catch (error: any) {
             if (error.message.includes("auth")) toast.error("Wrong email/password");
-            else toast.error("Something went wrong");
+            else
+                toast.error("Something went wrong", {
+                    icon: "🤔",
+                });
 
             return false;
         }
