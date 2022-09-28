@@ -37,7 +37,7 @@ function AuthPage() {
     function checkInputField() {
         if (toggleIndex == 0) {
             if (email === "" || pass === "") {
-                toast.error("Please fill the all inputs!");
+                toast.error("Please fill the all inputs!", { icon: "😬" });
                 return false;
             } else if (pass.length <= 5) {
                 toast.error("Password should be at least 6 characters");
@@ -45,13 +45,17 @@ function AuthPage() {
             }
         } else {
             if (email === "" || pass === "" || passAgain === "") {
-                toast.error("Please fill the all inputs!");
+                toast.error("Please fill the all inputs!", { icon: "😬" });
                 return false;
             } else if (pass !== passAgain) {
-                toast.error("Passwords are not matching!");
+                toast.error("Passwords are not matching!", {
+                    icon: "😱",
+                });
                 return false;
             } else if (pass.length <= 5) {
-                toast.error("Password should be at least 6 characters");
+                toast.error("Password should be at least 6 characters", {
+                    icon: "😡",
+                });
                 return false;
             }
         }
