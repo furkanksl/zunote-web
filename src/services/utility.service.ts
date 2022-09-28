@@ -9,4 +9,9 @@ export default class UtilityService {
         const localTime = moment.utc(value).toDate();
         return moment(localTime).format("DD-MMM-YYYY  HH:mm");
     }
+
+    validateEmail(email: string) {
+        var re = /\S+@\S+\.\S+/;
+        return re.test(email);
+    }
 }
