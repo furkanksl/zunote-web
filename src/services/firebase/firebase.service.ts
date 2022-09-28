@@ -12,6 +12,7 @@ export default class FirebaseService {
 
             if (auth.currentUser) {
                 sendEmailVerification(auth.currentUser);
+
                 toast.info("We sent a verification link to your mail.\nCheck you mailbox to verify your email!", {
                     icon: "📧",
                 });
@@ -21,10 +22,13 @@ export default class FirebaseService {
                 }, 1000);
 
             return true;
-        } catch (error) {
-            toast.error("Something went wrong", {
-                icon: "🤔",
-            });
+        } catch (error: any) {
+            if (error?.message?.includes("auth/email-already-in-use")) toast.error("This email is already registered!");
+            else
+                toast.error("Something went wrong", {
+                    icon: "🤔",
+                });
+
             return false;
         }
     }
@@ -42,7 +46,7 @@ export default class FirebaseService {
 
             return true;
         } catch (error: any) {
-            if (error.message.includes("auth")) toast.error("Wrong email/password");
+            if (error?.message?.includes("auth")) toast.error("Wrong email/password");
             else
                 toast.error("Something went wrong", {
                     icon: "🤔",
