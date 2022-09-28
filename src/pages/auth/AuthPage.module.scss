@@ -1,4 +1,4 @@
-@import "./styles";
+@import "../../styles/styles";
 
 .aut-page-wrapper {
     @apply flex
@@ -105,4 +105,16 @@
         self-center
         font-sans;
     }
+}
+
+.loading {
+    @apply cursor-not-allowed;
+
+    &:hover {
+        background-color: $secondary-color !important;
+    }
+}
+
+.cease {
+    cursor: not-allowed !important;
 }
