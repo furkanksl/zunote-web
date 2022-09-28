@@ -12,9 +12,13 @@ import LogoutSvgComponent from "../Svg/LogoutSvg";
 import CloseMenuSvgComponent from "../Svg/CloseMenuSvg";
 import HamburgerMenuSvgComponent from "../Svg/HamburgerMenuSvg";
 import FirebaseService from "../../src/services/firebase/firebase.service";
+import UtilityService from "../../src/services/utility.service";
+import { auth } from "../../firebase";
 
 function Header() {
     const firebaseService = new FirebaseService();
+    const utilityService = new UtilityService();
+
     const router = useRouter();
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -135,7 +139,7 @@ function Header() {
             <div className={styles.profile}>
                 <ProfileSvgComponent className={styles.item} />
                 <div className={styles["profile-dropdown"]}>
-                    <p>abc...@gmal.com</p>
+                    <p>{utilityService.shortEmailAddress(auth.currentUser?.email ?? "")}</p>
                     <Link href={"/about"}>
                         <div className="flex flex-row justify-start items-center mr-auto gap-x-1 cursor-pointer">
                             <AboutSvgComponent
