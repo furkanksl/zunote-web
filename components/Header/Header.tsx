@@ -11,9 +11,12 @@ import SubscriptionDropdownSvgComponent from "../Svg/SubscriptionDropdownSvg";
 import LogoutSvgComponent from "../Svg/LogoutSvg";
 import CloseMenuSvgComponent from "../Svg/CloseMenuSvg";
 import HamburgerMenuSvgComponent from "../Svg/HamburgerMenuSvg";
+import FirebaseService from "../../src/services/firebase/firebase.service";
 
 function Header() {
+    const firebaseService = new FirebaseService();
     const router = useRouter();
+
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const menuItems = [
@@ -70,6 +73,10 @@ function Header() {
 
     function onMenuToggle() {
         setIsMenuOpen(!isMenuOpen);
+    }
+
+    async function logout() {
+        await firebaseService.logout();
     }
 
     return checkPageSelected("/auth") ? null : (
@@ -138,12 +145,13 @@ function Header() {
                             <p>About</p>
                         </div>
                     </Link>
-                    <Link href={"/auth"}>
-                        <div className="flex flex-row justify-start items-center mr-auto gap-x-1 cursor-pointer">
-                            <LogoutSvgComponent />
-                            <p>Logout</p>
-                        </div>
-                    </Link>
+                    <div
+                        onClick={async () => await logout()}
+                        className="flex flex-row justify-start items-center mr-auto gap-x-1 cursor-pointer"
+                    >
+                        <LogoutSvgComponent />
+                        <p>Logout</p>
+                    </div>
                 </div>
             </div>
             <div className={styles["mobile-menu-items"]}>
@@ -178,7 +186,12 @@ function Header() {
                             return (
                                 <Link href={item.route} key={index}>
                                     <div
-                                        onClick={() => setIsMenuOpen(false)}
+                                        onClick={async () => {
+                                            setIsMenuOpen(false);
+                                            if (index === menuItems.length - 1) {
+                                                await logout();
+                                            }
+                                        }}
                                         className="flex flex-row items-center mr-auto gap-x-3 cursor-pointer w-full"
                                     >
                                         {item.svg}

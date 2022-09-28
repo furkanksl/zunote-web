@@ -117,11 +117,16 @@ function AuthPage() {
 
             <div className={styles.input}>
                 <EmailSvgComponent />
-                <input type="text" placeholder="email" onChange={(e: any) => setEmail(e.target.value)} />
+                <input type="text" value={email} placeholder="email" onChange={(e: any) => setEmail(e.target.value)} />
             </div>
             <div className={styles.input}>
                 <PasswordSvgComponent />
-                <input type="password" placeholder="password" onChange={(e: any) => setPass(e.target.value)} />
+                <input
+                    type="password"
+                    value={pass}
+                    placeholder="password"
+                    onChange={(e: any) => setPass(e.target.value)}
+                />
             </div>
 
             {toggleIndex == 1 ? (
@@ -129,6 +134,7 @@ function AuthPage() {
                     <PasswordSvgComponent />
                     <input
                         type="password"
+                        value={passAgain}
                         placeholder="password again"
                         onChange={(e: any) => setPassAgain(e.target.value)}
                     />
