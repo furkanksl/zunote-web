@@ -23,7 +23,7 @@ function Layout({ children }: { children: ReactNode }) {
             <main className={checkPagePath("/auth") ? " remove-mt" : ""}>{children}</main>
             <SelectCategoryDialog />
             <AddCategoryDialog />
-            <ToastContainer />
+            <ToastContainer theme="colored" autoClose={2500} limit={1} />
         </>
     );
 }

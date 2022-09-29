@@ -1,7 +1,5 @@
 import NotesPage from "../src/pages/notes/NotesPage";
 
-function Notes() {
-    return <NotesPage />;
-}
+const Notes = () => <NotesPage />;
 
 export default Notes;

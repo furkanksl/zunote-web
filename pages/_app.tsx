@@ -4,15 +4,28 @@ import "react-toastify/dist/ReactToastify.css";
 import "react-datetime/css/react-datetime.css";
 
 import type { AppProps } from "next/app";
-import Layout from "../components/Layout";
 import { wrapper } from "../src/redux/store/store";
+import { useRouter } from "next/router";
+import Layout from "../components/Layout";
+import ProtectedRoute from "../components/ProtectedRoute";
 
 function MyApp({ Component, pageProps }: AppProps) {
+    const router = useRouter();
+    const noAuthRequiredRoutes = ["/auth"];
+
     return (
         <>
-            <Layout>
-                <Component {...pageProps} />
-            </Layout>
+            {noAuthRequiredRoutes.includes(router.pathname) ? (
+                <Layout>
+                    <Component {...pageProps} />
+                </Layout>
+            ) : (
+                <ProtectedRoute>
+                    <Layout>
+                        <Component {...pageProps} />
+                    </Layout>
+                </ProtectedRoute>
+            )}
         </>
     );
 }
