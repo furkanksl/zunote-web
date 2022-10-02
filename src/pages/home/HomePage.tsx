@@ -1,21 +1,24 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 import { addNewNote } from "../../redux/features/note.reducer";
 import { useDispatch, useSelector } from "react-redux";
 import { StateModel } from "../../redux/store/store";
+import { setReminder } from "../../redux/features/reminder.reducer";
+import { setSelectedCategory } from "../../redux/features/category.reducer";
 import VoiceNote, { TimedNote } from "../../models/VoiceNote.model";
+import { toast } from "react-toastify";
+import { AudioData } from "voice-recorder-react/lib";
 
 import Note from "../../models/Note.model";
 import JustAdded from "./components/JustAdded";
 import InputField from "./components/InputField";
 
 import styles from "./HomePage.module.scss";
-import { toast } from "react-toastify";
-import { setReminder } from "../../redux/features/reminder.reducer";
-import { setSelectedCategory } from "../../redux/features/category.reducer";
+import AwsService from "../../services/aws.service";
 
 function HomePage() {
     const dispatch = useDispatch();
+    const awsService = new AwsService();
 
     const [savedVoiceNotes, setSavedVoiceNotes] = useState<TimedNote[]>([]);
     const [savedNotes, setSavedNotes] = useState<Note[]>([]);
@@ -71,8 +74,10 @@ function HomePage() {
         }
     }
 
-    function saveVoiceRecord() {
+    async function saveVoiceRecord(data: AudioData) {
         const createdAt = new Date().getTime();
+
+        await awsService.upload(`${createdAt}`, "audio/mpeg", data.blob);
 
         const newVoiceNote: VoiceNote = new VoiceNote({
             category: selectedCategory ?? "",
