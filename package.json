@@ -10,8 +10,10 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.5",
+    "@types/formidable": "^2.0.5",
     "@types/jest": "^29.0.0",
     "firebase": "^9.10.0",
+    "formidable": "^2.0.1",
     "moment": "^2.29.4",
     "next": "12.2.5",
     "next-redux-wrapper": "^8.0.0",

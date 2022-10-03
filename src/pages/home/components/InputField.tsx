@@ -7,10 +7,11 @@ import { setIsCategoryVisible } from "../../../redux/features/dialog.reducer";
 import styles from "../HomePage.module.scss";
 import Recorder from "./Recorder";
 import CategoryAndReminderSection from "../../../../components/Common/CategoryAndReminderSection";
+import { AudioData } from "voice-recorder-react/lib";
 
 type Props = {
     onSave: (input: string) => any;
-    onVoiceRecord: () => any;
+    onVoiceRecord: (data: AudioData) => any;
 };
 
 function InputField(props: Props) {
