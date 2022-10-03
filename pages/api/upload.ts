@@ -36,19 +36,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
         var file = await srcToFile(formData.files.file.filepath);
 
         if (resp.url) {
-            const response = await fetch(resp.url, {
+            await fetch(resp.url, {
                 method: "PUT",
                 body: file,
             });
-            console.log(response);
+            res.status(200).send({});
         }
     } catch (error) {
-        console.log(error);
+        res.status(400).send({
+            status: "Bad Request",
+        });
     }
-
-    res.status(200).send({
-        status: "success",
-    });
 }
 
 //set bodyparser
