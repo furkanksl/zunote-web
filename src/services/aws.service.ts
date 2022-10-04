@@ -9,23 +9,28 @@ export default class AwsService {
         formData.append("fileName", fileName);
         formData.append("uuid", auth?.currentUser?.uid ?? "");
 
-        const response = await fetch("./api/upload", {
+        await fetch("./api/upload", {
             method: "POST",
             body: formData,
         });
-
-        console.log("RESPONSE");
-        let resp = response.status;
-        console.log(resp);
     }
 
     async getVoiceRecords() {
-        const response = await fetch("./api/get-voices", {
+        const response = await fetch("http://localhost:3000/api/get-voices", {
             method: "POST",
             body: JSON.stringify({ uuid: auth?.currentUser?.uid }),
         });
         let resp = await response.json();
 
         if (resp.voiceUrls) return resp.voiceUrls;
+    }
+
+    async deleteVoiceRecord(fileName: string) {
+        const response = await fetch("http://localhost:3000/api/delete-voice", {
+            method: "POST",
+            body: JSON.stringify({ uuid: auth?.currentUser?.uid, fileName: fileName }),
+        });
+        let resp = await response.json();
+        console.log(resp);
     }
 }
