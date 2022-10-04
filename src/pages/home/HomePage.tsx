@@ -15,10 +15,13 @@ import InputField from "./components/InputField";
 
 import styles from "./HomePage.module.scss";
 import AwsService from "../../services/aws.service";
+import FirebaseService from "../../services/firebase/firebase.service";
+import { auth } from "../../../firebase";
 
 function HomePage() {
     const dispatch = useDispatch();
     const awsService = new AwsService();
+    const firebaseService = new FirebaseService();
 
     const [savedVoiceNotes, setSavedVoiceNotes] = useState<TimedNote[]>([]);
     const [savedNotes, setSavedNotes] = useState<Note[]>([]);
@@ -29,7 +32,11 @@ function HomePage() {
     const selectedCategory = useSelector((state: StateModel) => state.category.selectedCategory);
     const reminderDate = useSelector((state: StateModel) => state.reminder.reminderDate);
 
-    function saveNote(inputValue: string) {
+    async function testSaveNote() {
+        await firebaseService.saveNote();
+    }
+
+    async function saveNote(inputValue: string) {
         if (inputValue === "") {
             toast.error("Please fill the text field before saving the note!");
             return;
@@ -59,11 +66,15 @@ function HomePage() {
             );
         } else {
             const newNote = new Note({
+                id: createdAt.toString(),
                 category: selectedCategory ?? "",
                 createdAt: createdAt,
                 noteText: inputValue,
                 reminder: reminderDate ?? 0,
+                isVoiceNote: false,
             });
+
+            await firebaseService.saveNote(newNote);
 
             setSavedNotes([...savedNotes, newNote]);
             setJustAddedNotes([...savedNotes, newNote].reverse());
@@ -80,12 +91,16 @@ function HomePage() {
         await awsService.upload(`${createdAt}`, "audio/mpeg", data.blob);
 
         const newVoiceNote: VoiceNote = new VoiceNote({
+            id: createdAt.toString(),
             category: selectedCategory ?? "",
             createdAt: createdAt,
             notes: savedVoiceNotes,
             reminder: reminderDate,
-            voiceUrl: "",
+            voiceUrl: `${auth.currentUser?.email}/${createdAt}`,
+            isVoiceNote: true,
         });
+
+        await firebaseService.saveNote(newVoiceNote);
 
         dispatch(addNewNote(newVoiceNote));
         setSavedVoiceNotes([]);
