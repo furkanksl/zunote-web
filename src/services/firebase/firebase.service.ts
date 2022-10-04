@@ -1,5 +1,5 @@
 import { createUserWithEmailAndPassword, sendEmailVerification, signInWithEmailAndPassword } from "firebase/auth";
-import { getDatabase, ref, DatabaseReference, push, set, get, child } from "firebase/database";
+import { getDatabase, ref, update, push, set, get, child } from "firebase/database";
 
 import { toast } from "react-toastify";
 import { auth } from "../../../firebase";
@@ -92,6 +92,19 @@ export default class FirebaseService {
         const notesRef = ref(getDatabase(), "notes/" + auth.currentUser?.uid + "/" + note?.createdAt);
         try {
             await set(notesRef, JSON.stringify(note));
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async updateNote(note?: VoiceNote | Note) {
+        const notesRef = ref(getDatabase());
+        try {
+            const updates: any = {};
+
+            updates["/notes/" + auth.currentUser?.uid + "/" + note?.createdAt] = JSON.stringify(note);
+
+            await update(notesRef, updates);
         } catch (error) {
             console.log(error);
         }

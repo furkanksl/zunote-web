@@ -9,10 +9,12 @@ import { unselectCategory } from "../../../redux/features/category.reducer";
 import { removeNoteWithIndex, setIsNoteEditing, setSelectedNote } from "../../../redux/features/note.reducer";
 import { unsetReminder } from "../../../redux/features/reminder.reducer";
 import { StateModel } from "../../../redux/store/store";
+import FirebaseService from "../../../services/firebase/firebase.service";
 
 import styles from "../NoteDetailPage.module.scss";
 
 function PlayerAndButtons() {
+    const firebaseService = new FirebaseService();
     const dispatch = useDispatch();
     const router = useRouter();
 
@@ -35,6 +37,7 @@ function PlayerAndButtons() {
         dispatch(setSelectedNote(selectedNote));
         dispatch(unselectCategory());
         dispatch(unsetReminder());
+        await firebaseService.updateNote(selectedNote);
         ///Upload to firebase
         await router.push("/notes");
     }
