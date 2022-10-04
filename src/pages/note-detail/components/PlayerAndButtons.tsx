@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import DeleteDialog from "../../../../components/Dialogs/Delete/DeleteDialog";
 import DeleteSvgComponent from "../../../../components/Svg/DeleteSvg";
+import LoadingSvgComponent from "../../../../components/Svg/LoadingSvg";
 import VoiceNote from "../../../models/VoiceNote.model";
 import { unselectCategory } from "../../../redux/features/category.reducer";
 import { removeNoteWithIndex, setIsNoteEditing, setSelectedNote } from "../../../redux/features/note.reducer";
@@ -14,11 +15,13 @@ import FirebaseService from "../../../services/firebase/firebase.service";
 import styles from "../NoteDetailPage.module.scss";
 
 function PlayerAndButtons() {
-    const firebaseService = new FirebaseService();
     const dispatch = useDispatch();
     const router = useRouter();
 
+    const firebaseService = new FirebaseService();
+
     const [isDeleteVisible, setIsDeleteVisible] = useState(false);
+    const [isDeleting, setIsDeleting] = useState(false);
 
     const isNoteEditing = useSelector((state: StateModel) => state.note.isNoteEditing);
     const selectedNote = useSelector((state: StateModel) => state.note.selectedNote);
@@ -50,13 +53,20 @@ function PlayerAndButtons() {
                     {isNoteEditing ? "SAVE" : "EDIT"}
                 </div>
                 <div className={styles.button} onClick={() => setIsDeleteVisible(true)}>
-                    <DeleteSvgComponent function={() => setIsDeleteVisible(true)} />
+                    {isDeleting ? (
+                        <LoadingSvgComponent />
+                    ) : (
+                        <DeleteSvgComponent function={() => setIsDeleteVisible(true)} />
+                    )}
                 </div>
             </div>
             {isDeleteVisible ? (
                 <DeleteDialog
                     onConfirm={async () => {
+                        setIsDeleting(true);
                         dispatch(removeNoteWithIndex());
+                        await firebaseService.deleteNote(selectedNote.createdAt);
+                        setIsDeleting(false);
                         await router.push("/notes");
                     }}
                     onCancel={() => {

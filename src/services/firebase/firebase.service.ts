@@ -1,5 +1,5 @@
 import { createUserWithEmailAndPassword, sendEmailVerification, signInWithEmailAndPassword } from "firebase/auth";
-import { getDatabase, ref, update, push, set, get, child } from "firebase/database";
+import { getDatabase, ref, update, push, set, get, child, remove } from "firebase/database";
 
 import { toast } from "react-toastify";
 import { auth } from "../../../firebase";
@@ -43,13 +43,7 @@ export default class FirebaseService {
             if (!auth.currentUser?.emailVerified) {
                 toast.info("Please verify your email to login!");
                 return false;
-            } else {
-                toast.success("Successfully logged in!");
-
-                if (response && response.user) {
-                    return await this.postUserToken(await response.user.getIdToken());
-                }
-            }
+            } else toast.success("Successfully logged in!");
 
             return true;
         } catch (error: any) {
@@ -61,21 +55,6 @@ export default class FirebaseService {
 
             return false;
         }
-    }
-
-    async postUserToken(token: any) {
-        var path = "/api/auth";
-        var url = "http:localhost:300" + path;
-        var data = { token: token };
-        // Default options are marked with *
-        const response = await fetch(url, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data), // body data type must match "Content-Type" header
-        });
-        return response.json(); // parses JSON response into native JavaScript objects
     }
 
     async logout() {
@@ -97,7 +76,7 @@ export default class FirebaseService {
         }
     }
 
-    async updateNote(note?: VoiceNote | Note) {
+    async updateNote(note: VoiceNote | Note) {
         const notesRef = ref(getDatabase());
         try {
             const updates: any = {};
@@ -105,6 +84,15 @@ export default class FirebaseService {
             updates["/notes/" + auth.currentUser?.uid + "/" + note?.createdAt] = JSON.stringify(note);
 
             await update(notesRef, updates);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async deleteNote(noteId: string) {
+        const notesRef = ref(getDatabase(), "notes/" + auth.currentUser?.uid + "/" + noteId);
+        try {
+            await remove(notesRef);
         } catch (error) {
             console.log(error);
         }
