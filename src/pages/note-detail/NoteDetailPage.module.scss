@@ -115,6 +115,18 @@
     w-full
     gap-y-6;
 
+    audio {
+        background-color: $gray-color !important;
+        height: 46px !important;
+
+        @include shadowed-box();
+        @include rounded();
+
+        @apply w-full;
+    }
+    audio::-webkit-media-controls-panel {
+        background-color: $gray-color;
+    }
     .buttons {
         @apply flex
         flex-row
