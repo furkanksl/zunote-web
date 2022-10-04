@@ -1,7 +1,10 @@
 import { createUserWithEmailAndPassword, sendEmailVerification, signInWithEmailAndPassword } from "firebase/auth";
+import { getDatabase, ref, DatabaseReference, push, set, get, child } from "firebase/database";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 import { auth } from "../../../firebase";
+import Note from "../../models/Note.model";
+import VoiceNote from "../../models/VoiceNote.model";
 
 export default class FirebaseService {
     router = useRouter();
@@ -64,5 +67,47 @@ export default class FirebaseService {
         } catch (error) {
             toast.error("Something went wrong");
         }
+    }
+
+    async saveNote(note?: VoiceNote | Note) {
+        const notesRef = ref(getDatabase(), "notes/" + auth.currentUser?.uid + "/" + note?.createdAt);
+        try {
+            await set(notesRef, JSON.stringify(note));
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async getAllNotes() {
+        const notesRef = ref(getDatabase());
+
+        const notes: any[] = [];
+        try {
+            const snapshot = await get(child(notesRef, "notes/" + auth.currentUser?.uid));
+            if (snapshot.exists()) {
+                let key: string;
+                let value: any;
+
+                for ([key, value] of Object.entries(snapshot.val())) {
+                    // console.log(`${key}: ${value}`);
+                    try {
+                        let noteObject = JSON.parse(value);
+                        let isVoiceNote = noteObject.isVoiceNote;
+
+                        if (isVoiceNote) {
+                            const newVoiceNote = new VoiceNote(undefined, noteObject);
+                            notes.push(newVoiceNote);
+                        } else {
+                            const newNote = new Note(undefined, noteObject);
+                            notes.push(newNote);
+                        }
+                    } catch (error) {}
+                }
+            } else {
+                console.log("No data available");
+            }
+        } catch (error) {}
+
+        return notes;
     }
 }
