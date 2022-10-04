@@ -22,11 +22,10 @@ export default class AwsService {
     async getVoiceRecords() {
         const response = await fetch("./api/get-voices", {
             method: "POST",
-            body: JSON.stringify({ uuid: auth?.currentUser?.uid ?? "" }),
+            body: JSON.stringify({ uuid: auth?.currentUser?.uid }),
         });
+        let resp = await response.json();
 
-        console.log("RESPONSE");
-        let resp = response.status;
-        console.log(resp);
+        if (resp.voiceUrls) return resp.voiceUrls;
     }
 }
