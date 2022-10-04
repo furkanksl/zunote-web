@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import DeleteDialog from "../../../../components/Dialogs/Delete/DeleteDialog";
 import MiniPlaySvgComponent from "../../../../components/Svg/MiniPlaySvg";
@@ -22,12 +22,25 @@ function VoiceNoteCard(props: Props) {
 
     const [isPlaying, setIsPlaying] = useState(false);
     const [isDeleteVisible, setIsDeleteVisible] = useState(false);
+    const audioRef = useRef<any>();
 
     const utilityService = new UtilityService();
 
     const deleteItem = () => {
         dispatch(setSelectedNoteIndex(props.index));
         setIsDeleteVisible(true);
+    };
+
+    const togglePlayer = () => {
+        if (audioRef.current?.paused) {
+            audioRef.current?.play();
+
+            setIsPlaying(true);
+        } else {
+            audioRef.current?.pause();
+
+            setIsPlaying(false);
+        }
     };
 
     return (
@@ -45,14 +58,14 @@ function VoiceNoteCard(props: Props) {
                 {isPlaying ? (
                     <MiniPauseSvgComponent
                         function={(event: any) => {
-                            setIsPlaying(false);
+                            togglePlayer();
                             event.stopPropagation();
                         }}
                     />
                 ) : (
                     <MiniPlaySvgComponent
                         function={(event: any) => {
-                            setIsPlaying(true);
+                            togglePlayer();
                             event.stopPropagation();
                         }}
                     />
@@ -67,6 +80,7 @@ function VoiceNoteCard(props: Props) {
                     onCancel={() => setIsDeleteVisible(false)}
                 />
             ) : null}
+            <audio ref={audioRef} src={props.voiceUrl} hidden playsInline />
         </div>
     );
 }
