@@ -1,8 +1,7 @@
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import AudioPlayer from "react-h5-audio-player";
 import DeleteDialog from "../../../../components/Dialogs/Delete/DeleteDialog";
 import DeleteSvgComponent from "../../../../components/Svg/DeleteSvg";
 import VoiceNote from "../../../models/VoiceNote.model";
@@ -26,9 +25,7 @@ function PlayerAndButtons() {
 
     const isVoiceNote = selectedNote instanceof VoiceNote;
 
-    function onEdit() {
-        dispatch(setIsNoteEditing(true));
-    }
+    const onEdit = () => dispatch(setIsNoteEditing(true));
 
     async function onSave() {
         dispatch(setIsNoteEditing(false));
@@ -44,9 +41,7 @@ function PlayerAndButtons() {
 
     return (
         <div className={styles["player-and-buttons-section"]}>
-            {isVoiceNote ? (
-                <AudioPlayer className={styles["audio-player"]} volume={0.5} src={""} customAdditionalControls={[]} />
-            ) : null}
+            {isVoiceNote ? <audio controls src={selectedNote.voiceUrl} preload="auto" /> : null}
             <div className={styles.buttons}>
                 <div className={styles.button} onClick={async () => (isNoteEditing ? onSave() : onEdit())}>
                     {isNoteEditing ? "SAVE" : "EDIT"}
