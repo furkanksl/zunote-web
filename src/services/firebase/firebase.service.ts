@@ -68,6 +68,8 @@ export default class FirebaseService {
     }
 
     async saveNote(note?: VoiceNote | Note) {
+        if (note instanceof VoiceNote) note.voiceUrl = `${auth.currentUser?.email}/${note.createdAt}`;
+
         const notesRef = ref(getDatabase(), "notes/" + auth.currentUser?.uid + "/" + note?.createdAt);
         try {
             await set(notesRef, JSON.stringify(note));
