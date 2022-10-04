@@ -10,6 +10,7 @@ import { unselectCategory } from "../../../redux/features/category.reducer";
 import { removeNoteWithIndex, setIsNoteEditing, setSelectedNote } from "../../../redux/features/note.reducer";
 import { unsetReminder } from "../../../redux/features/reminder.reducer";
 import { StateModel } from "../../../redux/store/store";
+import AwsService from "../../../services/aws.service";
 import FirebaseService from "../../../services/firebase/firebase.service";
 
 import styles from "../NoteDetailPage.module.scss";
@@ -19,6 +20,7 @@ function PlayerAndButtons() {
     const router = useRouter();
 
     const firebaseService = new FirebaseService();
+    const awsService = new AwsService();
 
     const [isDeleteVisible, setIsDeleteVisible] = useState(false);
     const [isDeleting, setIsDeleting] = useState(false);
@@ -65,7 +67,10 @@ function PlayerAndButtons() {
                     onConfirm={async () => {
                         setIsDeleting(true);
                         dispatch(removeNoteWithIndex());
-                        await firebaseService.deleteNote(selectedNote.createdAt);
+                        await firebaseService.deleteNote(`${selectedNote.createdAt}`);
+                        if (selectedNote.isVoiceNote) {
+                            await awsService.deleteVoiceRecord(`${selectedNote.createdAt}`);
+                        }
                         setIsDeleting(false);
                         await router.push("/notes");
                     }}

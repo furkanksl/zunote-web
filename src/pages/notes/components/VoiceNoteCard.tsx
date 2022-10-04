@@ -5,6 +5,7 @@ import MiniPlaySvgComponent from "../../../../components/Svg/MiniPlaySvg";
 import MiniPauseSvgComponent from "../../../../components/Svg/MiniResumeSvg";
 import RemoveSvgComponent from "../../../../components/Svg/RemoveSvg";
 import { removeNoteWithIndex, setSelectedNoteIndex } from "../../../redux/features/note.reducer";
+import AwsService from "../../../services/aws.service";
 import FirebaseService from "../../../services/firebase/firebase.service";
 import UtilityService from "../../../services/utility.service";
 
@@ -22,6 +23,7 @@ function VoiceNoteCard(props: Props) {
     const dispatch = useDispatch();
 
     const firebaseService = new FirebaseService();
+    const awsService = new AwsService();
 
     const [isPlaying, setIsPlaying] = useState(false);
     const [isDeleteVisible, setIsDeleteVisible] = useState(false);
@@ -81,6 +83,7 @@ function VoiceNoteCard(props: Props) {
                         dispatch(removeNoteWithIndex());
 
                         await firebaseService.deleteNote(`${props.createdAt}`);
+                        await awsService.deleteVoiceRecord(`${props.createdAt}`);
                     }}
                     onCancel={() => setIsDeleteVisible(false)}
                 />

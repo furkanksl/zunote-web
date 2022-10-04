@@ -32,10 +32,6 @@ function HomePage() {
     const selectedCategory = useSelector((state: StateModel) => state.category.selectedCategory);
     const reminderDate = useSelector((state: StateModel) => state.reminder.reminderDate);
 
-    async function testSaveNote() {
-        await firebaseService.saveNote();
-    }
-
     async function saveNote(inputValue: string) {
         if (inputValue === "") {
             toast.error("Please fill the text field before saving the note!");
@@ -96,11 +92,13 @@ function HomePage() {
             createdAt: createdAt,
             notes: savedVoiceNotes,
             reminder: reminderDate,
-            voiceUrl: `${auth.currentUser?.email}/${createdAt}`,
+            voiceUrl: data.url,
             isVoiceNote: true,
         });
 
         await firebaseService.saveNote(newVoiceNote);
+
+        newVoiceNote.voiceUrl = data.url;
 
         dispatch(addNewNote(newVoiceNote));
         setSavedVoiceNotes([]);
