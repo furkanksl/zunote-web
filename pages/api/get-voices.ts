@@ -4,7 +4,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 export default async function handler(req: NextApiRequest, res: NextApiResponse<any>) {
     const GET_ALL_API_URL: string = process.env.API_GET_ALL_URL!;
 
-    if (req.body["uuid"])
+    if (JSON.parse(req.body).uuid)
         try {
             const signedUrlResponse = await fetch(GET_ALL_API_URL, {
                 method: "POST",
@@ -12,13 +12,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    uuid: req.body["uuid"],
+                    uuid: JSON.parse(req.body).uuid,
                 }),
                 cache: "default",
             });
 
             const resp = await signedUrlResponse.json();
-            const voiceUrls = await getVoiceRecordUrlsByName(resp.files, req.body["uuid"]);
+            const voiceUrls = await getVoiceRecordUrlsByName(resp.files, JSON.parse(req.body).uuid);
 
             res.status(200).send({
                 status: resp.status,
@@ -29,10 +29,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
                 status: "Conflict!",
             });
         }
-    else
+    else {
         res.status(400).send({
             status: "Bad Request!",
         });
+    }
 }
 
 async function getVoiceRecordUrlsByName(fileNames: any[], uuid: string): Promise<string[]> {
@@ -62,3 +63,10 @@ async function getVoiceRecordUrlsByName(fileNames: any[], uuid: string): Promise
 
     return voiceUrls;
 }
+
+//set bodyparser
+export const config = {
+    api: {
+        bodyParser: true,
+    },
+};
