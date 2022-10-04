@@ -1,14 +1,12 @@
 import { createUserWithEmailAndPassword, sendEmailVerification, signInWithEmailAndPassword } from "firebase/auth";
 import { getDatabase, ref, DatabaseReference, push, set, get, child } from "firebase/database";
-import { useRouter } from "next/router";
+
 import { toast } from "react-toastify";
 import { auth } from "../../../firebase";
 import Note from "../../models/Note.model";
 import VoiceNote from "../../models/VoiceNote.model";
 
 export default class FirebaseService {
-    router = useRouter();
-
     async signup(email: string, password: string): Promise<boolean> {
         try {
             await createUserWithEmailAndPassword(auth, email, password);
@@ -45,7 +43,13 @@ export default class FirebaseService {
             if (!auth.currentUser?.emailVerified) {
                 toast.info("Please verify your email to login!");
                 return false;
-            } else toast.success("Successfully logged in!");
+            } else {
+                toast.success("Successfully logged in!");
+
+                if (response && response.user) {
+                    return await this.postUserToken(await response.user.getIdToken());
+                }
+            }
 
             return true;
         } catch (error: any) {
@@ -57,6 +61,21 @@ export default class FirebaseService {
 
             return false;
         }
+    }
+
+    async postUserToken(token: any) {
+        var path = "/api/auth";
+        var url = "http:localhost:300" + path;
+        var data = { token: token };
+        // Default options are marked with *
+        const response = await fetch(url, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data), // body data type must match "Content-Type" header
+        });
+        return response.json(); // parses JSON response into native JavaScript objects
     }
 
     async logout() {
@@ -79,9 +98,10 @@ export default class FirebaseService {
     }
 
     async getAllNotes() {
+        const notes: any[] = [];
+
         const notesRef = ref(getDatabase());
 
-        const notes: any[] = [];
         try {
             const snapshot = await get(child(notesRef, "notes/" + auth.currentUser?.uid));
             if (snapshot.exists()) {
