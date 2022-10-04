@@ -1,9 +1,11 @@
 interface IVoiceNote {
+    id: string;
     createdAt: number;
     notes: TimedNote[];
     reminder: number;
     category: string;
     voiceUrl: string;
+    isVoiceNote: boolean;
 }
 
 interface ITimedNote {
@@ -25,17 +27,27 @@ export class TimedNote implements ITimedNote {
 }
 
 export default class VoiceNote implements IVoiceNote {
+    id: string = "";
     createdAt: number = 0;
     notes: TimedNote[] = [];
     reminder: number = 0;
     category: string = "";
     voiceUrl: string = "";
+    isVoiceNote = true;
 
-    constructor(note: IVoiceNote) {
-        this.createdAt = note.createdAt;
-        this.notes = note.notes;
-        this.reminder = note.reminder;
-        this.category = note.category;
-        this.voiceUrl = note.voiceUrl;
+    constructor(note?: IVoiceNote, json?: any) {
+        if (note !== undefined) {
+            this.id = note.id;
+            this.createdAt = note.createdAt;
+            this.notes = note.notes;
+            this.reminder = note.reminder;
+            this.category = note.category;
+            this.voiceUrl = note.voiceUrl;
+            this.isVoiceNote = note.isVoiceNote;
+        }
+
+        if (json !== undefined) {
+            Object.assign(this, json);
+        }
     }
 }
