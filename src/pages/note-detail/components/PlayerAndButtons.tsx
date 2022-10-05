@@ -43,7 +43,6 @@ function PlayerAndButtons() {
         dispatch(unselectCategory());
         dispatch(unsetReminder());
         await firebaseService.updateNote(selectedNote);
-        ///Upload to firebase
         await router.push("/notes");
     }
 
