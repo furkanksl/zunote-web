@@ -88,7 +88,7 @@ function VoiceNoteCard(props: Props) {
                     onCancel={() => setIsDeleteVisible(false)}
                 />
             ) : null}
-            <audio ref={audioRef} src={props.voiceUrl} hidden playsInline />
+            <audio ref={audioRef} src={props.voiceUrl} hidden />
         </div>
     );
 }
