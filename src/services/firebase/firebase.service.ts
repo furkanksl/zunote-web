@@ -112,7 +112,6 @@ export default class FirebaseService {
                 let value: any;
 
                 for ([key, value] of Object.entries(snapshot.val())) {
-                    // console.log(`${key}: ${value}`);
                     try {
                         let noteObject = JSON.parse(value);
                         let isVoiceNote = noteObject.isVoiceNote;
@@ -124,12 +123,16 @@ export default class FirebaseService {
                             const newNote = new Note(undefined, noteObject);
                             notes.push(newNote);
                         }
-                    } catch (error) {}
+                    } catch (error) {
+                        console.log(error);
+                    }
                 }
             } else {
                 console.log("No data available");
             }
-        } catch (error) {}
+        } catch (error) {
+            console.log(error);
+        }
 
         return notes;
     }
