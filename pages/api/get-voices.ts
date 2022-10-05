@@ -4,7 +4,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 export default async function handler(req: NextApiRequest, res: NextApiResponse<any>) {
     const GET_ALL_API_URL: string = process.env.API_GET_ALL_URL!;
 
-    if (JSON.parse(req.body).uuid)
+    if (parseBody(req, "uuid"))
         try {
             const signedUrlResponse = await fetch(GET_ALL_API_URL, {
                 method: "POST",
@@ -12,13 +12,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    uuid: JSON.parse(req.body).uuid,
+                    uuid: parseBody(req, "uuid"),
                 }),
                 cache: "default",
             });
 
             const resp = await signedUrlResponse.json();
-            const voiceUrls = await getVoiceRecordUrlsByName(resp.files, JSON.parse(req.body).uuid);
+            const voiceUrls = await getVoiceRecordUrlsByName(resp.files, parseBody(req, "uuid"));
 
             res.status(200).send({
                 status: resp.status,
@@ -33,6 +33,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
         res.status(400).send({
             status: "Bad Request!",
         });
+    }
+}
+
+function parseBody(req: any, key: string) {
+    try {
+        return process.env.NODE_ENV === "production" ? req.body[key] : JSON.parse(req.body)[key];
+    } catch (error) {
+        console.log(error);
     }
 }
 
