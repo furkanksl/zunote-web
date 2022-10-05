@@ -1,4 +1,6 @@
 import moment from "moment";
+import Note from "../models/Note.model";
+import VoiceNote from "../models/VoiceNote.model";
 
 export default class UtilityService {
     formatRecorderTime(value: number): string {
@@ -22,5 +24,20 @@ export default class UtilityService {
             const shortenedEmail = email.slice(0, 5) + "..." + mailPart[1];
             return shortenedEmail;
         }
+    }
+
+    appendVoiceUrlsToVoiceNotes(notes: any[], voiceUrls: { url: string; fileName: string }[]): any[] {
+        if (notes && voiceUrls)
+            notes.forEach((note: VoiceNote | Note) => {
+                if (note instanceof VoiceNote) {
+                    voiceUrls.map((element) => {
+                        if (note.voiceUrl === element.fileName) {
+                            note.voiceUrl = element.url;
+                        }
+                    });
+                }
+            });
+
+        return notes;
     }
 }

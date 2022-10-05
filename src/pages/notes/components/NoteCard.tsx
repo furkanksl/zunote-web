@@ -7,6 +7,7 @@ import RemoveSvgComponent from "../../../../components/Svg/RemoveSvg";
 import UtilityService from "../../../services/utility.service";
 
 import styles from "../NotesPage.module.scss";
+import FirebaseService from "../../../services/firebase/firebase.service";
 
 type Props = {
     noteText: string;
@@ -17,6 +18,8 @@ type Props = {
 
 function NoteCard(props: Props) {
     const dispatch = useDispatch();
+
+    const firebaseService = new FirebaseService();
 
     const [isDeleteVisible, setIsDeleteVisible] = useState(false);
 
@@ -40,8 +43,9 @@ function NoteCard(props: Props) {
 
             {isDeleteVisible ? (
                 <DeleteDialog
-                    onConfirm={() => {
+                    onConfirm={async () => {
                         dispatch(removeNoteWithIndex());
+                        await firebaseService.deleteNote(`${props.createdAt}`);
                     }}
                     onCancel={() => setIsDeleteVisible(false)}
                 />

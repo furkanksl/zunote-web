@@ -1,5 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+type ReminderState = {
+    value: boolean;
+    reminderDate: number;
+};
+
 export const reminderSlice = createSlice({
     name: "reminder",
     initialState: {
@@ -7,13 +12,13 @@ export const reminderSlice = createSlice({
         reminderDate: 0,
     },
     reducers: {
-        setReminderState: (state, action) => {
+        setReminderState: (state: ReminderState, action) => {
             state.value = action.payload;
         },
-        unsetReminder: (state) => {
+        unsetReminder: (state: ReminderState) => {
             state.reminderDate = 0;
         },
-        setReminder: (state, action) => {
+        setReminder: (state: ReminderState, action) => {
             state.reminderDate = action.payload;
         },
     },

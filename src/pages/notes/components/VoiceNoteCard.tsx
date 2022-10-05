@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import DeleteDialog from "../../../../components/Dialogs/Delete/DeleteDialog";
 import MiniPlaySvgComponent from "../../../../components/Svg/MiniPlaySvg";
 import MiniPauseSvgComponent from "../../../../components/Svg/MiniResumeSvg";
 import RemoveSvgComponent from "../../../../components/Svg/RemoveSvg";
 import { removeNoteWithIndex, setSelectedNoteIndex } from "../../../redux/features/note.reducer";
+import AwsService from "../../../services/aws.service";
+import FirebaseService from "../../../services/firebase/firebase.service";
 import UtilityService from "../../../services/utility.service";
 
 import styles from "../NotesPage.module.scss";
@@ -20,14 +22,30 @@ type Props = {
 function VoiceNoteCard(props: Props) {
     const dispatch = useDispatch();
 
+    const firebaseService = new FirebaseService();
+    const awsService = new AwsService();
+
     const [isPlaying, setIsPlaying] = useState(false);
     const [isDeleteVisible, setIsDeleteVisible] = useState(false);
+    const audioRef = useRef<any>();
 
     const utilityService = new UtilityService();
 
     const deleteItem = () => {
         dispatch(setSelectedNoteIndex(props.index));
         setIsDeleteVisible(true);
+    };
+
+    const togglePlayer = () => {
+        if (audioRef.current?.paused) {
+            audioRef.current?.play();
+
+            setIsPlaying(true);
+        } else {
+            audioRef.current?.pause();
+
+            setIsPlaying(false);
+        }
     };
 
     return (
@@ -45,14 +63,14 @@ function VoiceNoteCard(props: Props) {
                 {isPlaying ? (
                     <MiniPauseSvgComponent
                         function={(event: any) => {
-                            setIsPlaying(false);
+                            togglePlayer();
                             event.stopPropagation();
                         }}
                     />
                 ) : (
                     <MiniPlaySvgComponent
                         function={(event: any) => {
-                            setIsPlaying(true);
+                            togglePlayer();
                             event.stopPropagation();
                         }}
                     />
@@ -61,12 +79,16 @@ function VoiceNoteCard(props: Props) {
             </div>
             {isDeleteVisible ? (
                 <DeleteDialog
-                    onConfirm={() => {
+                    onConfirm={async () => {
                         dispatch(removeNoteWithIndex());
+
+                        await firebaseService.deleteNote(`${props.createdAt}`);
+                        await awsService.deleteVoiceRecord(`${props.createdAt}`);
                     }}
                     onCancel={() => setIsDeleteVisible(false)}
                 />
             ) : null}
+            <audio ref={audioRef} src={props.voiceUrl} hidden />
         </div>
     );
 }

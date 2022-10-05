@@ -1,4 +1,4 @@
-import { Moment } from "moment";
+import moment, { Moment } from "moment";
 import Datetime from "react-datetime";
 import { useDispatch, useSelector } from "react-redux";
 import { setReminder, setReminderState } from "../src/redux/features/reminder.reducer";
@@ -13,9 +13,7 @@ function DatetimePicker() {
         return current.toDate() >= date;
     }
 
-    function onChangeDatetime(val: any) {
-        dispatch(setReminder(val.utc()));
-    }
+    const onChangeDatetime = (val: any) => dispatch(setReminder(val.utc().valueOf()));
 
     return (
         <div className="datetime-picker-container">

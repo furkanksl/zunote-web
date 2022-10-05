@@ -11,6 +11,14 @@
     h-full;
 }
 
+.loading {
+    @apply flex
+    flex-col
+    justify-center
+    items-center
+    h-full;
+}
+
 .category-tab {
     background-color: $primary-btn-color;
 
