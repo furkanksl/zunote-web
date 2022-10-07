@@ -4,6 +4,7 @@ import { getDatabase, ref, update, push, set, get, child, remove } from "firebas
 import { toast } from "react-toastify";
 import { auth } from "../../../firebase";
 import Note from "../../models/Note.model";
+import UserData from "../../models/UserData.model";
 import VoiceNote from "../../models/VoiceNote.model";
 
 export default class FirebaseService {
@@ -13,6 +14,7 @@ export default class FirebaseService {
 
             if (auth.currentUser) {
                 sendEmailVerification(auth.currentUser);
+                this.saveUser(0, "Free");
 
                 toast.info("We sent a verification link to your mail.\nCheck you mailbox to verify your email!", {
                     icon: "📧",
@@ -78,6 +80,23 @@ export default class FirebaseService {
         }
     }
 
+    async saveUser(plan: number, planName: string) {
+        const userRef = ref(getDatabase(), "users/" + auth.currentUser?.uid);
+        try {
+            await set(
+                userRef,
+                JSON.stringify({
+                    email: auth.currentUser?.email,
+                    uuid: auth.currentUser?.uid,
+                    planId: plan,
+                    planName: planName,
+                })
+            );
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     async updateNote(note: VoiceNote | Note) {
         const notesRef = ref(getDatabase());
         try {
@@ -135,5 +154,24 @@ export default class FirebaseService {
         }
 
         return notes;
+    }
+
+    async getUserData() {
+        const userREf = ref(getDatabase());
+        let userData: UserData;
+
+        try {
+            const snapshot = await get(child(userREf, "users/" + auth.currentUser?.uid));
+            if (snapshot.exists()) {
+                let userDataObject = JSON.parse(snapshot.val());
+                userData = new UserData(undefined, userDataObject);
+            } else {
+                console.log("No data available");
+            }
+        } catch (error) {
+            console.log(error);
+        }
+
+        return userData!;
     }
 }

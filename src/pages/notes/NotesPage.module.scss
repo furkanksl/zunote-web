@@ -164,10 +164,15 @@
         items-end
         w-full;
 
+        .duration {
+            @apply mr-auto ml-1;
+        }
+
         svg {
             @apply ml-0
             cursor-pointer
             h-8
+            -mb-1
             w-8;
 
             &:hover {

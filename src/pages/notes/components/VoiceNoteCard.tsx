@@ -16,6 +16,7 @@ type Props = {
     createdAt: number;
     voiceUrl: string;
     index: number;
+    duration: string;
     onClick: (event: any) => any;
 };
 
@@ -75,6 +76,7 @@ function VoiceNoteCard(props: Props) {
                         }}
                     />
                 )}
+                <p className={styles.duration}>{props.duration}</p>
                 <p>{utilityService.timestampToString(props.createdAt)}</p>
             </div>
             {isDeleteVisible ? (

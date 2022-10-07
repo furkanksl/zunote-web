@@ -38,6 +38,7 @@ function NoteList() {
                     noteText={note.notes[0]?.noteText ?? ""}
                     createdAt={note.createdAt}
                     voiceUrl={note.voiceUrl}
+                    duration={note.duration}
                     onClick={(event: any) => selectNote(event, index)}
                 />
             ) : null
