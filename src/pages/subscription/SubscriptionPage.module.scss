@@ -13,6 +13,14 @@
     sm:pb-0;
 }
 
+.loading {
+    @apply flex
+    flex-col
+    justify-center
+    items-center
+    h-full;
+}
+
 .current-plan-card {
     background-color: $primary-btn-color;
 
