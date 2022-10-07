@@ -38,7 +38,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
 
 function parseBody(req: any, key: string) {
     try {
-        return process.env.NODE_ENV === "production" ? req.body[key] : JSON.parse(req.body)[key];
+        return JSON.parse(req.body)[key];
     } catch (error) {
         console.log(error);
     }
