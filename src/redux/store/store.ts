@@ -7,6 +7,7 @@ import reminderReducer from "../features/reminder.reducer";
 import recorderReducer from "../features/recorder.reducer";
 import dialogReducer from "../features/dialog.reducer";
 import authReducer from "../features/auth.reducer";
+import userReducer from "../features/user.reducer";
 
 export type StateModel = {
     reminder: any;
@@ -15,6 +16,7 @@ export type StateModel = {
     recorder: any;
     dialog: any;
     auth: any;
+    user: any;
 };
 
 const reducer: StateModel = {
@@ -24,6 +26,7 @@ const reducer: StateModel = {
     recorder: recorderReducer,
     dialog: dialogReducer,
     auth: authReducer,
+    user: userReducer,
 };
 
 const makeStore = () =>
