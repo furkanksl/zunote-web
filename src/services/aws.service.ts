@@ -1,5 +1,4 @@
 import { auth } from "../../firebase";
-import { BASE_API_URL } from "../config";
 
 export default class AwsService {
     async upload(fileName: string, fileType: string, file: Blob) {
@@ -10,7 +9,7 @@ export default class AwsService {
         formData.append("fileName", fileName);
         formData.append("uuid", auth?.currentUser?.uid ?? "");
 
-        let resp = await fetch(BASE_API_URL + "/upload-voice", {
+        let resp = await fetch(process.env.NEXT_PUBLIC_BASE_API_URL + "/upload-voice", {
             method: "POST",
             body: formData,
         });
@@ -20,7 +19,7 @@ export default class AwsService {
     }
 
     async getVoiceRecords() {
-        const response = await fetch(BASE_API_URL + "/get-voices", {
+        const response = await fetch(process.env.NEXT_PUBLIC_BASE_API_URL + "/get-voices", {
             method: "POST",
             body: JSON.stringify({ uuid: auth?.currentUser?.uid }),
         });
@@ -31,7 +30,7 @@ export default class AwsService {
     }
 
     async deleteVoiceRecord(fileName: string) {
-        const response = await fetch(BASE_API_URL + "/delete-voice", {
+        const response = await fetch(process.env.NEXT_PUBLIC_BASE_API_URL + "/delete-voice", {
             method: "POST",
             body: JSON.stringify({ uuid: auth?.currentUser?.uid, fileName: fileName }),
         });
