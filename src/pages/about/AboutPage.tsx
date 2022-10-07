@@ -5,19 +5,10 @@ function AboutPage() {
         <div className={styles["about-page-wrapper"]}>
             <p className={styles.title}>ABOUT</p>
             <p className={styles.desc}>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusantium iure itaque repudiandae dolorum
-                ipsum incidunt harum ea quasi blanditiis! Quo omnis atque possimus nesciunt, blanditiis cupiditate odio
-                beatae non aliquam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt quis explicabo
-                nemo inventore nostrum cum libero, repellendus harum esse rem reiciendis nihil id, tempora saepe ea
-                mollitia unde ipsa autem? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusantium iure
-                itaque repudiandae dolorum ipsum incidunt harum ea quasi blanditiis! Quo omnis atque possimus nesciunt,
-                blanditiis cupiditate odio beatae non aliquam. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Nesciunt quis explicabo nemo inventore nostrum cum libero, repellendus harum esse rem reiciendis nihil
-                id, tempora saepe ea mollitia unde ipsa autem? Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                Accusantium iure itaque repudiandae dolorum ipsum incidunt harum ea quasi blanditiis! Quo omnis atque
-                possimus nesciunt, blanditiis cupiditate odio beatae non aliquam. Lorem ipsum dolor sit amet consectetur
-                adipisicing elit. Nesciunt quis explicabo nemo inventore nostrum cum libero, repellendus harum esse rem
-                reiciendis nihil id, tempora saepe ea mollitia unde ipsa autem?
+                ZUNOTE is a basic productivity tool that you can take notes while voice recording. It will be a
+                multi-platform app soon. Desktop app will support Macos (arm/intel), Windows and Linux operating
+                systems. Mobile app will support both IOS and Android. Lastly, extension will be available on
+                Chrome/Firefox extension store.
             </p>
         </div>
     );
