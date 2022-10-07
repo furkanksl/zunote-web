@@ -3,15 +3,17 @@
 ZU-NOTE is a simple note-taking web app | Take a note while voice recording. After web, It will be developed for all platforms (Android, IOS, Linux, Windows, IpadOS and chrome extension).
 
 It will be fully open-source when project done.
-You can see current demo here: [zunote-io](https://zunote-io.web.app/)
+You can see it here: [zunote-io](https://zunote.io/)
 
 Tech Stack :
 
--   NextJs,
--   ReactJs,
--   (Tailwind + Scss),
--   Firebase,
--   AWS
+-   NextJs
+-   ReactJs
+-   (Tailwind + Scss)
+-   Firebase
+-   AWS-S3
+-   Docker
+-   GCP
 
 ## Getting Started
 
