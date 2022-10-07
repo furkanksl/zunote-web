@@ -29,7 +29,7 @@ function NotesPage() {
                 let notes = await firebaseService.getAllNotes();
                 const voiceNotesUrls = await awsService.getVoiceRecords();
                 notes = utilityService.appendVoiceUrlsToVoiceNotes(notes, voiceNotesUrls);
-                dispatch(setNotes(notes));
+                dispatch(setNotes(notes.reverse()));
                 setIsLoading(false);
             });
         }
