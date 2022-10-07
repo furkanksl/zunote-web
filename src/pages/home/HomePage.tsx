@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-import { addNewNote } from "../../redux/features/note.reducer";
+import { addNewNote, setNotes } from "../../redux/features/note.reducer";
 import { useDispatch, useSelector } from "react-redux";
 import { StateModel } from "../../redux/store/store";
 import { setReminder } from "../../redux/features/reminder.reducer";
@@ -17,11 +17,15 @@ import styles from "./HomePage.module.scss";
 import AwsService from "../../services/aws.service";
 import FirebaseService from "../../services/firebase/firebase.service";
 import { auth } from "../../../firebase";
+import { setUserData } from "../../redux/features/user.reducer";
+import UtilityService from "../../services/utility.service";
 
 function HomePage() {
     const dispatch = useDispatch();
+
     const awsService = new AwsService();
     const firebaseService = new FirebaseService();
+    const utilityService = new UtilityService();
 
     const [savedVoiceNotes, setSavedVoiceNotes] = useState<TimedNote[]>([]);
     const [savedNotes, setSavedNotes] = useState<Note[]>([]);
@@ -31,6 +35,16 @@ function HomePage() {
     const isVoiceNote = useSelector((state: StateModel) => state.recorder.isRecording);
     const selectedCategory = useSelector((state: StateModel) => state.category.selectedCategory);
     const reminderDate = useSelector((state: StateModel) => state.reminder.reminderDate);
+
+    useEffect(() => {
+        new Promise(async () => {
+            dispatch(setUserData(await firebaseService.getUserData()));
+            let notes = await firebaseService.getAllNotes();
+            const voiceNotesUrls = await awsService.getVoiceRecords();
+            notes = utilityService.appendVoiceUrlsToVoiceNotes(notes, voiceNotesUrls);
+            dispatch(setNotes(notes.reverse()));
+        });
+    }, []);
 
     async function saveNote(inputValue: string) {
         if (inputValue === "") {
@@ -84,7 +98,7 @@ function HomePage() {
     async function saveVoiceRecord(data: AudioData) {
         const createdAt = new Date().getTime();
 
-        await awsService.upload(`${createdAt}`, "audio/mpeg", data.blob);
+        awsService.upload(`${createdAt}`, "audio/mpeg", data.blob);
 
         const newVoiceNote: VoiceNote = new VoiceNote({
             id: createdAt.toString(),
@@ -94,12 +108,12 @@ function HomePage() {
             reminder: reminderDate,
             voiceUrl: data.url,
             isVoiceNote: true,
+            duration: voiceNoteLapTime,
         });
 
-        await firebaseService.saveNote(newVoiceNote);
+        firebaseService.saveNote(newVoiceNote);
 
         newVoiceNote.voiceUrl = data.url;
-
         dispatch(addNewNote(newVoiceNote));
         setSavedVoiceNotes([]);
         dispatch(setReminder(0));
