@@ -5,6 +5,7 @@ interface IVoiceNote {
     reminder: number;
     category: string;
     voiceUrl: string;
+    duration: string;
     isVoiceNote: boolean;
 }
 
@@ -34,6 +35,7 @@ export default class VoiceNote implements IVoiceNote {
     category: string = "";
     voiceUrl: string = "";
     isVoiceNote = true;
+    duration: string = "0";
 
     constructor(note?: IVoiceNote, json?: any) {
         if (note !== undefined) {
@@ -44,6 +46,7 @@ export default class VoiceNote implements IVoiceNote {
             this.category = note.category;
             this.voiceUrl = note.voiceUrl;
             this.isVoiceNote = note.isVoiceNote;
+            this.duration = note.duration;
         }
 
         if (json !== undefined) {
