@@ -44,14 +44,14 @@ export default class UtilityService {
 
     isIOS() {
         var ua = navigator.userAgent.toLowerCase();
+        // console.log(ua.indexOf("safari") != -1 ? ua.indexOf("chrome") == -1 : true);
 
         return (
             ["iPad Simulator", "iPhone Simulator", "iPod Simulator", "iPad", "iPhone", "iPod"].includes(
                 navigator.platform
             ) ||
-            // iPad on iOS 13 detection
             (navigator.userAgent.includes("Mac") && "ontouchend" in document) ||
-            ua.indexOf("safari") != -1
+            (ua.indexOf("safari") != -1 ? ua.indexOf("chrome") == -1 : true)
         );
     }
 }
