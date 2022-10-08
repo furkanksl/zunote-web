@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 import DeleteDialog from "../../../../components/Dialogs/Delete/DeleteDialog";
 import DeleteSvgComponent from "../../../../components/Svg/DeleteSvg";
@@ -12,6 +13,7 @@ import { unsetReminder } from "../../../redux/features/reminder.reducer";
 import { StateModel } from "../../../redux/store/store";
 import AwsService from "../../../services/aws.service";
 import FirebaseService from "../../../services/firebase/firebase.service";
+import UtilityService from "../../../services/utility.service";
 
 import styles from "../NoteDetailPage.module.scss";
 
@@ -21,6 +23,7 @@ function PlayerAndButtons() {
 
     const firebaseService = new FirebaseService();
     const awsService = new AwsService();
+    const utilityService = new UtilityService();
 
     const [isDeleteVisible, setIsDeleteVisible] = useState(false);
     const [isDeleting, setIsDeleting] = useState(false);
@@ -48,7 +51,19 @@ function PlayerAndButtons() {
 
     return (
         <div className={styles["player-and-buttons-section"]}>
-            {isVoiceNote ? <audio controls src={selectedNote.voiceUrl} preload="auto" /> : null}
+            {isVoiceNote ? (
+                <audio
+                    onError={() => {
+                        if (utilityService.isIOS() && selectedNote.voiceUrl.includes("blob")) {
+                            toast.info("Your browser does not support this operation. Please refresh the page!");
+                            return;
+                        }
+                    }}
+                    controls
+                    src={selectedNote.voiceUrl}
+                    preload="auto"
+                />
+            ) : null}
             <div className={styles.buttons}>
                 <div className={styles.button} onClick={async () => (isNoteEditing ? onSave() : onEdit())}>
                     {isNoteEditing ? "SAVE" : "EDIT"}
