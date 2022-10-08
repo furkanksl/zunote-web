@@ -1,4 +1,5 @@
 import moment from "moment";
+import { auth } from "../../firebase";
 import Note from "../models/Note.model";
 import VoiceNote from "../models/VoiceNote.model";
 
@@ -31,7 +32,7 @@ export default class UtilityService {
             notes.forEach((note: VoiceNote | Note) => {
                 if (note instanceof VoiceNote) {
                     voiceUrls.map((element) => {
-                        if (note.voiceUrl === element.fileName) {
+                        if (auth.currentUser?.email + "/" + `${note.createdAt}` === element.fileName) {
                             note.voiceUrl = element.url;
                         }
                     });
@@ -39,5 +40,18 @@ export default class UtilityService {
             });
 
         return notes;
+    }
+
+    isIOS() {
+        var ua = navigator.userAgent.toLowerCase();
+
+        return (
+            ["iPad Simulator", "iPhone Simulator", "iPod Simulator", "iPad", "iPhone", "iPod"].includes(
+                navigator.platform
+            ) ||
+            // iPad on iOS 13 detection
+            (navigator.userAgent.includes("Mac") && "ontouchend" in document) ||
+            ua.indexOf("safari") != -1
+        );
     }
 }
