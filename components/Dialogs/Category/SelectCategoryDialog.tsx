@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
     removeCategoryWithIndex,
@@ -7,14 +8,19 @@ import {
 } from "../../../src/redux/features/category.reducer";
 import { setIsAddCategoryVisible, setIsCategoryVisible } from "../../../src/redux/features/dialog.reducer";
 import { StateModel } from "../../../src/redux/store/store";
+import FirebaseService from "../../../src/services/firebase/firebase.service";
 import PlusSvgComponent from "../../Svg/PlusSvg";
 import RemoveSvgComponent from "../../Svg/RemoveSvg";
 import TitleBox from "../../TitleBox";
+import DeleteDialog from "../Delete/DeleteDialog";
 
 import styles from "./SelectCategoryDialog.module.scss";
 
 function SelectCategoryDialog() {
     const dispatch = useDispatch();
+    const [isDeleteVisible, setIsDeleteVisible] = useState(false);
+    const [idx, setIdx] = useState(0);
+    const firebaseService = new FirebaseService();
 
     const isCategoryVisible = useSelector((state: StateModel) => state.dialog.isCategoryVisible);
     const categories = useSelector((state: StateModel) => state.category.categories);
@@ -38,8 +44,9 @@ function SelectCategoryDialog() {
         closeDialog();
     }
 
-    function deleteCategory(index: number) {
+    async function deleteCategory(index: number) {
         dispatch(removeCategoryWithIndex(index));
+        await firebaseService.saveCategory(categories.filter((item: string) => item !== categories[index]));
     }
 
     return isCategoryVisible ? (
@@ -66,12 +73,29 @@ function SelectCategoryDialog() {
                         return (
                             <div key={index} className={styles["category-card"]} onClick={() => selectCategory(cat)}>
                                 <p className={styles["category-name"]}>{cat}</p>
-                                {isSorting ? null : <RemoveSvgComponent function={() => {}} />}
+                                {isSorting ? null : (
+                                    <RemoveSvgComponent
+                                        function={(event: any) => {
+                                            setIdx(index);
+                                            setIsDeleteVisible(true);
+                                            event.stopPropagation();
+                                        }}
+                                    />
+                                )}
                             </div>
                         );
                     })}
                 </div>
             </div>
+            {isDeleteVisible ? (
+                <DeleteDialog
+                    onConfirm={async () => {
+                        deleteCategory(idx);
+                        setIsDeleteVisible(false);
+                    }}
+                    onCancel={() => setIsDeleteVisible(false)}
+                />
+            ) : null}
         </>
     ) : (
         <></>

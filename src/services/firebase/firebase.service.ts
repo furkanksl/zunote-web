@@ -97,6 +97,20 @@ export default class FirebaseService {
         }
     }
 
+    async saveCategory(cats: string[]) {
+        const userRef = ref(getDatabase(), "categories/" + auth.currentUser?.uid);
+        try {
+            await set(
+                userRef,
+                JSON.stringify({
+                    categories: cats,
+                })
+            );
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     async updateNote(note: VoiceNote | Note) {
         const notesRef = ref(getDatabase());
         try {
@@ -173,5 +187,22 @@ export default class FirebaseService {
         }
 
         return userData!;
+    }
+
+    async getCategories() {
+        const catREf = ref(getDatabase());
+
+        try {
+            const snapshot = await get(child(catREf, "categories/" + auth.currentUser?.uid));
+            if (snapshot.exists()) {
+                let cats = JSON.parse(snapshot.val())?.categories ?? [];
+                return cats;
+            } else {
+                return [];
+            }
+        } catch (error) {
+            console.log(error);
+            return [];
+        }
     }
 }

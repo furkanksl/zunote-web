@@ -8,27 +8,7 @@ type CategoryState = {
     categories: string[];
 };
 
-//! this will be fetched from api
-let categories = [
-    "Cat1",
-    "Cat2",
-    "Cat3",
-    "Cat4",
-    "Cat5",
-    "Cat6",
-    "Cat3",
-    "Cat4",
-    "Cat5",
-    "Cat6",
-    "Cat3",
-    "Cat4",
-    "Cat5",
-    "Cat6",
-    "Cat3",
-    "Cat4",
-    "Cat5",
-    "Cat6",
-]; //! will be deleted
+let categories = ["Education", "Shopping", "Temp"];
 
 export const categorySlice = createSlice({
     name: "category",
@@ -41,6 +21,11 @@ export const categorySlice = createSlice({
     },
 
     reducers: {
+        setCategories: (state: CategoryState, action: any) => {
+            state.categories = action.payload;
+            state.categories = [...state.categories];
+        },
+
         unselectCategory: (state: CategoryState) => {
             state.selectedCategory = "";
         },
@@ -66,11 +51,13 @@ export const categorySlice = createSlice({
             }
 
             state.categories.splice(0, 0, action.payload);
+            state.categories = [...state.categories];
         },
 
         removeCategoryWithIndex: (state: CategoryState, action: any) => {
             const index: number = action.payload;
             state.categories.splice(index, 1);
+            state.categories = [...state.categories];
         },
     },
 });
@@ -82,6 +69,7 @@ export const {
     setIsSorting,
     addNewCategory,
     removeCategoryWithIndex,
+    setCategories,
 } = categorySlice.actions;
 
 export default categorySlice.reducer;
