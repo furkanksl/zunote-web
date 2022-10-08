@@ -100,19 +100,21 @@ function HomePage() {
 
         awsService.upload(`${createdAt}`, "audio/mpeg", data.blob);
 
-        const newVoiceNote: VoiceNote = new VoiceNote({
-            id: createdAt.toString(),
-            category: selectedCategory ?? "",
-            createdAt: createdAt,
-            notes: savedVoiceNotes,
-            reminder: reminderDate,
-            voiceUrl: data.url,
-            isVoiceNote: true,
-            duration: voiceNoteLapTime,
-        });
+        let newVoiceNote: VoiceNote = new VoiceNote(
+            {
+                id: createdAt.toString(),
+                category: selectedCategory ?? "",
+                createdAt: createdAt,
+                notes: savedVoiceNotes,
+                reminder: reminderDate,
+                voiceUrl: data.url,
+                isVoiceNote: true,
+                duration: voiceNoteLapTime,
+            },
+            undefined
+        );
 
         firebaseService.saveNote(newVoiceNote);
-
         newVoiceNote.voiceUrl = data.url;
         dispatch(addNewNote(newVoiceNote));
         setSavedVoiceNotes([]);

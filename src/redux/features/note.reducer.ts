@@ -185,6 +185,7 @@ export const noteSlice = createSlice({
 
         addNewNote: (state: NoteState, action: any) => {
             state.notes.splice(0, 0, action.payload);
+            state.notes = [...state.notes];
         },
 
         removeNoteWithIndex: (state: NoteState) => {
