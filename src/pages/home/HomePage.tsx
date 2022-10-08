@@ -4,7 +4,7 @@ import { addNewNote, setNotes } from "../../redux/features/note.reducer";
 import { useDispatch, useSelector } from "react-redux";
 import { StateModel } from "../../redux/store/store";
 import { setReminder } from "../../redux/features/reminder.reducer";
-import { setSelectedCategory } from "../../redux/features/category.reducer";
+import { setCategories, setSelectedCategory } from "../../redux/features/category.reducer";
 import VoiceNote, { TimedNote } from "../../models/VoiceNote.model";
 import { toast } from "react-toastify";
 import { AudioData } from "voice-recorder-react/lib";
@@ -43,6 +43,7 @@ function HomePage() {
             const voiceNotesUrls = await awsService.getVoiceRecords();
             notes = utilityService.appendVoiceUrlsToVoiceNotes(notes, voiceNotesUrls);
             dispatch(setNotes(notes.reverse()));
+            dispatch(setCategories(await firebaseService.getCategories()));
         });
     }, []);
 
