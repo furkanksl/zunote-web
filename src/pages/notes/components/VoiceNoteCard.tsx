@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 import DeleteDialog from "../../../../components/Dialogs/Delete/DeleteDialog";
 import MiniPlaySvgComponent from "../../../../components/Svg/MiniPlaySvg";
 import MiniPauseSvgComponent from "../../../../components/Svg/MiniResumeSvg";
@@ -38,6 +39,11 @@ function VoiceNoteCard(props: Props) {
     };
 
     const togglePlayer = () => {
+        if (utilityService.isIOS() && props.voiceUrl.includes("blob")) {
+            toast.info("Your browser does not support this operation. Please refresh the page!");
+            return;
+        }
+
         if (audioRef.current?.paused) {
             audioRef.current?.play();
 
@@ -90,7 +96,14 @@ function VoiceNoteCard(props: Props) {
                     onCancel={() => setIsDeleteVisible(false)}
                 />
             ) : null}
-            <audio ref={audioRef} src={props.voiceUrl} hidden />
+            <audio
+                onEnded={() => {
+                    setIsPlaying(false);
+                }}
+                ref={audioRef}
+                hidden
+                src={props.voiceUrl}
+            />
         </div>
     );
 }
