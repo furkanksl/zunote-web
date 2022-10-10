@@ -1,7 +1,6 @@
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-toastify";
 import { auth } from "../firebase";
 import { setUser } from "../src/redux/features/auth.reducer";
 import { StateModel } from "../src/redux/store/store";
