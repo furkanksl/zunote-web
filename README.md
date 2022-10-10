@@ -1,9 +1,8 @@
-## ABOUT (Under development!)
+## ABOUT
 
-ZU-NOTE is a simple note-taking web app | Take a note while voice recording. After web, It will be developed for all platforms (Android, IOS, Linux, Windows, IpadOS and chrome extension).
+ZU-NOTE is a simple note-taking web app | Take a note while voice recording. Set a reminder and get notification on you mobile app(soon). After web, It will be developed for all platforms (Android, IOS, Linux, Windows, IpadOS and [chrome extension](https://github.com/furkanksl/zunote-extension/releases/tag/0.1)).
 
-It will be fully open-source when project done.
-You can see it here: [zunote-io](https://zunote.io/)
+Website: [zunote-io](https://zunote.io/)
 
 Tech Stack :
 
