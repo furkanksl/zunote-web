@@ -4,6 +4,10 @@ import type { NextApiRequest, NextApiResponse } from "next";
 export default async function handler(req: NextApiRequest, res: NextApiResponse<any>) {
     const GET_ALL_API_URL: string = process.env.API_GET_ALL_URL!;
 
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+
     if (parseBody(req, "uuid"))
         try {
             const signedUrlResponse = await fetch(GET_ALL_API_URL, {
@@ -38,7 +42,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
 
 function parseBody(req: any, key: string) {
     try {
-        return JSON.parse(req.body)[key];
+        return req.body[key] ?? JSON.parse(req.body)[key];
     } catch (error) {
         console.log(error);
     }

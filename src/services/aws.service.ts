@@ -13,9 +13,6 @@ export default class AwsService {
             method: "POST",
             body: formData,
         });
-
-        // const reader = resp.body?.getReader();
-        // console.log(await reader?.read());
     }
 
     async getVoiceRecords() {
