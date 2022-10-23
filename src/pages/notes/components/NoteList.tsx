@@ -1,12 +1,12 @@
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
-import { setSelectedCategory } from "../../../redux/features/category.reducer";
-import { setSelectedNote, setSelectedNoteIndex } from "../../../redux/features/note.reducer";
-import { setReminder } from "../../../redux/features/reminder.reducer";
-import { StateModel } from "../../../redux/store/store";
+import { setSelectedCategory } from "redux/features/category.reducer";
+import { setSelectedNote, setSelectedNoteIndex } from "redux/features/note.reducer";
+import { setReminder } from "redux/features/reminder.reducer";
+import { StateModel } from "redux/store/store";
 
-import Note from "../../../models/Note.model";
-import VoiceNote from "../../../models/VoiceNote.model";
+import Note from "models/Note.model";
+import VoiceNote from "models/VoiceNote.model";
 import NoteCard from "./NoteCard";
 import VoiceNoteCard from "./VoiceNoteCard";
 

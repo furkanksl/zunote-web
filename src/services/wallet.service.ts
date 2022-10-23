@@ -1,8 +1,9 @@
 import { WindowRef } from "./window-ref.service";
 import { ethers } from "ethers";
-import WalletConnectProvider from "@walletconnect/web3-provider";
 import { toast } from "react-toastify";
 import { dev } from "../config";
+
+import WalletConnectProvider from "@walletconnect/web3-provider";
 import FirebaseService from "./firebase/firebase.service";
 
 const NETWORK = "binance";

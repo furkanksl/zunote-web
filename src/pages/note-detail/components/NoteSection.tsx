@@ -1,9 +1,10 @@
-import VoiceNote, { TimedNote } from "../../../models/VoiceNote.model";
+import { useSelector } from "react-redux";
+import { StateModel } from "redux/store/store";
+
+import VoiceNote, { TimedNote } from "models/VoiceNote.model";
 import NoteDetailCard from "./NoteDetailCard";
 
 import styles from "../NoteDetailPage.module.scss";
-import { useSelector } from "react-redux";
-import { StateModel } from "../../../redux/store/store";
 
 function NoteSection() {
     const selectedNote = useSelector((state: StateModel) => state.note.selectedNote);

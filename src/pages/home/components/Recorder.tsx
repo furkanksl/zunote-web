@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { setIsRecording, setLapTime } from "redux/features/recorder.reducer";
+import { StateModel } from "redux/store/store";
+
 import { toast } from "react-toastify";
 import { AudioData, useRecorder } from "voice-recorder-react";
 
-import MicSvgComponent from "../../../../components/Svg/MicSvg";
-import PauseSvgComponent from "../../../../components/Svg/PauseSvg";
-import PlaySvgComponent from "../../../../components/Svg/PlaySvg";
-import StopSvgComponent from "../../../../components/Svg/StopSvg";
-import UserData from "../../../models/UserData.model";
-import VoiceNote from "../../../models/VoiceNote.model";
-import { setIsRecording, setLapTime } from "../../../redux/features/recorder.reducer";
-import { StateModel } from "../../../redux/store/store";
-import UtilityService from "../../../services/utility.service";
+import MicSvgComponent from "components/Svg/MicSvg";
+import PauseSvgComponent from "components/Svg/PauseSvg";
+import PlaySvgComponent from "components/Svg/PlaySvg";
+import StopSvgComponent from "components/Svg/StopSvg";
+
+import UserData from "models/UserData.model";
+import VoiceNote from "models/VoiceNote.model";
+import UtilityService from "services/utility.service";
 
 type Props = {
     onRecord: (data: AudioData) => any;

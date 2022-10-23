@@ -1,14 +1,16 @@
 import { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
-import DeleteDialog from "../../../../components/Dialogs/Delete/DeleteDialog";
-import MiniPlaySvgComponent from "../../../../components/Svg/MiniPlaySvg";
-import MiniPauseSvgComponent from "../../../../components/Svg/MiniResumeSvg";
-import RemoveSvgComponent from "../../../../components/Svg/RemoveSvg";
-import { removeNoteWithIndex, setSelectedNoteIndex } from "../../../redux/features/note.reducer";
-import AwsService from "../../../services/aws.service";
-import FirebaseService from "../../../services/firebase/firebase.service";
-import UtilityService from "../../../services/utility.service";
+import { removeNoteWithIndex, setSelectedNoteIndex } from "redux/features/note.reducer";
+
+import DeleteDialog from "components/Dialogs/Delete/DeleteDialog";
+import MiniPlaySvgComponent from "components/Svg/MiniPlaySvg";
+import MiniPauseSvgComponent from "components/Svg/MiniResumeSvg";
+import RemoveSvgComponent from "components/Svg/RemoveSvg";
+
+import AwsService from "services/aws.service";
+import FirebaseService from "services/firebase/firebase.service";
+import UtilityService from "services/utility.service";
 
 import styles from "../NotesPage.module.scss";
 

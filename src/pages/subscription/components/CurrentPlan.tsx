@@ -1,5 +1,5 @@
-import PremiumPlanSvgComponent from "../../../../components/Svg/PremiumPlanSvg";
-import StandartPlanSvgComponent from "../../../../components/Svg/StandartPlanSvg";
+import PremiumPlanSvgComponent from "components/Svg/PremiumPlanSvg";
+import StandartPlanSvgComponent from "components/Svg/StandartPlanSvg";
 import { subscriptionPlans } from "../const/subscriptionPlans";
 
 import styles from "../SubscriptionPage.module.scss";

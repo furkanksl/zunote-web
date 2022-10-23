@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-
-import AddSvgCompoenent from "../../../../components/Svg/AddSvg";
-import { setIsCategoryVisible } from "../../../redux/features/dialog.reducer";
-
-import styles from "../HomePage.module.scss";
-import Recorder from "./Recorder";
-import CategoryAndReminderSection from "../../../../components/Common/CategoryAndReminderSection";
 import { AudioData } from "voice-recorder-react/lib";
+import { useDispatch } from "react-redux";
+import { setIsCategoryVisible } from "redux/features/dialog.reducer";
+
+import AddSvgCompoenent from "components/Svg/AddSvg";
+import CategoryAndReminderSection from "components/Common/CategoryAndReminderSection";
+
+import Recorder from "./Recorder";
+import styles from "../HomePage.module.scss";
 
 type Props = {
     onSave: (input: string) => any;

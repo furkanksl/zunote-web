@@ -1,19 +1,20 @@
 import { useRouter } from "next/router";
-import { useEffect, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
 import { toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
+import { StateModel } from "redux/store/store";
+import { unselectCategory } from "redux/features/category.reducer";
+import { removeNoteWithIndex, setIsNoteEditing, setSelectedNote } from "redux/features/note.reducer";
+import { unsetReminder } from "redux/features/reminder.reducer";
 
-import DeleteDialog from "../../../../components/Dialogs/Delete/DeleteDialog";
-import DeleteSvgComponent from "../../../../components/Svg/DeleteSvg";
-import LoadingSvgComponent from "../../../../components/Svg/LoadingSvg";
-import VoiceNote from "../../../models/VoiceNote.model";
-import { unselectCategory } from "../../../redux/features/category.reducer";
-import { removeNoteWithIndex, setIsNoteEditing, setSelectedNote } from "../../../redux/features/note.reducer";
-import { unsetReminder } from "../../../redux/features/reminder.reducer";
-import { StateModel } from "../../../redux/store/store";
-import AwsService from "../../../services/aws.service";
-import FirebaseService from "../../../services/firebase/firebase.service";
-import UtilityService from "../../../services/utility.service";
+import DeleteDialog from "components/Dialogs/Delete/DeleteDialog";
+import DeleteSvgComponent from "components/Svg/DeleteSvg";
+import LoadingSvgComponent from "components/Svg/LoadingSvg";
+
+import VoiceNote from "models/VoiceNote.model";
+import AwsService from "services/aws.service";
+import FirebaseService from "services/firebase/firebase.service";
+import UtilityService from "services/utility.service";
 
 import styles from "../NoteDetailPage.module.scss";
 

@@ -1,15 +1,16 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setIsNoteEditing, setSelectedNote } from "../../../redux/features/note.reducer";
-import { StateModel } from "../../../redux/store/store";
+import { setIsNoteEditing, setSelectedNote } from "redux/features/note.reducer";
+import { StateModel } from "redux/store/store";
 
-import VoiceNote from "../../../models/VoiceNote.model";
-import DeleteDialog from "../../../../components/Dialogs/Delete/DeleteDialog";
-import RemoveSvgComponent from "../../../../components/Svg/RemoveSvg";
-import UtilityService from "../../../services/utility.service";
+import DeleteDialog from "components/Dialogs/Delete/DeleteDialog";
+import RemoveSvgComponent from "components/Svg/RemoveSvg";
+
+import VoiceNote from "models/VoiceNote.model";
+import FirebaseService from "services/firebase/firebase.service";
+import UtilityService from "services/utility.service";
 
 import styles from "../NoteDetailPage.module.scss";
-import FirebaseService from "../../../services/firebase/firebase.service";
 
 type Props = {
     index: number;

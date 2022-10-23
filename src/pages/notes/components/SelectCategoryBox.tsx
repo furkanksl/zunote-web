@@ -1,8 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
-import CategoryBlackSvgComponent from "../../../../components/Svg/CategoryBlackSvg";
-import { setIsSorting } from "../../../redux/features/category.reducer";
-import { setIsCategoryVisible } from "../../../redux/features/dialog.reducer";
-import { StateModel } from "../../../redux/store/store";
+import { setIsSorting } from "redux/features/category.reducer";
+import { setIsCategoryVisible } from "redux/features/dialog.reducer";
+import { StateModel } from "redux/store/store";
+
+import CategoryBlackSvgComponent from "components/Svg/CategoryBlackSvg";
 
 import styles from "../NotesPage.module.scss";
 

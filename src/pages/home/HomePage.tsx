@@ -1,24 +1,25 @@
 import { useEffect, useState } from "react";
-
-import { addNewNote, setNotes } from "../../redux/features/note.reducer";
-import { useDispatch, useSelector } from "react-redux";
-import { StateModel } from "../../redux/store/store";
-import { setReminder } from "../../redux/features/reminder.reducer";
-import { setCategories, setSelectedCategory } from "../../redux/features/category.reducer";
-import VoiceNote, { TimedNote } from "../../models/VoiceNote.model";
 import { toast } from "react-toastify";
 import { AudioData } from "voice-recorder-react/lib";
+
+import { useDispatch, useSelector } from "react-redux";
+import { addNewNote, setNotes } from "redux/features/note.reducer";
+import { setUserData } from "redux/features/user.reducer";
+import { StateModel } from "redux/store/store";
+import { setReminder } from "redux/features/reminder.reducer";
+import { setCategories, setSelectedCategory } from "redux/features/category.reducer";
+
+import VoiceNote, { TimedNote } from "models/VoiceNote.model";
 
 import Note from "../../models/Note.model";
 import JustAdded from "./components/JustAdded";
 import InputField from "./components/InputField";
 
+import AwsService from "services/aws.service";
+import FirebaseService from "services/firebase/firebase.service";
+import UtilityService from "services/utility.service";
+
 import styles from "./HomePage.module.scss";
-import AwsService from "../../services/aws.service";
-import FirebaseService from "../../services/firebase/firebase.service";
-import { auth } from "../../../firebase";
-import { setUserData } from "../../redux/features/user.reducer";
-import UtilityService from "../../services/utility.service";
 
 function HomePage() {
     const dispatch = useDispatch();

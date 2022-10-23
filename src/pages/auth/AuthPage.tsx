@@ -2,14 +2,17 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
-import EmailSvgComponent from "../../../components/Svg/EmailSvg";
-import LoadingSvgComponent from "../../../components/Svg/LoadingSvg";
-import LogoSvgComponent from "../../../components/Svg/LogoSvg";
-import PasswordSvgComponent from "../../../components/Svg/PasswordSvg";
+import { setUser } from "redux/features/auth.reducer";
 import { auth } from "../../../firebase";
-import { setUser } from "../../redux/features/auth.reducer";
-import FirebaseService from "../../services/firebase/firebase.service";
-import UtilityService from "../../services/utility.service";
+
+import EmailSvgComponent from "components/Svg/EmailSvg";
+import LoadingSvgComponent from "components/Svg/LoadingSvg";
+import LogoSvgComponent from "components/Svg/LogoSvg";
+import PasswordSvgComponent from "components/Svg/PasswordSvg";
+
+import FirebaseService from "services/firebase/firebase.service";
+import UtilityService from "services/utility.service";
+
 import styles from "./AuthPage.module.scss";
 
 function AuthPage() {

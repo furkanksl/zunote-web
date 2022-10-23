@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
-import TextSvgComponent from "../../../../components/Svg/TextSvg";
-import VoiceSvgComponent from "../../../../components/Svg/VoiceSvg";
-import { setNotesTabIndex } from "../../../redux/features/note.reducer";
+import { setNotesTabIndex } from "redux/features/note.reducer";
+import { StateModel } from "redux/store/store";
 
-import { StateModel } from "../../../redux/store/store";
+import TextSvgComponent from "components/Svg/TextSvg";
+import VoiceSvgComponent from "components/Svg/VoiceSvg";
 
 import styles from "../NotesPage.module.scss";
 

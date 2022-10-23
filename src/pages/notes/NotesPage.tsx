@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import LoadingSvgComponent from "../../../components/Svg/LoadingSvg";
-import { setNotes } from "../../redux/features/note.reducer";
-import { StateModel } from "../../redux/store/store";
-import AwsService from "../../services/aws.service";
-import FirebaseService from "../../services/firebase/firebase.service";
-import UtilityService from "../../services/utility.service";
+import { setNotes } from "redux/features/note.reducer";
+import { StateModel } from "redux/store/store";
+
+import LoadingSvgComponent from "components/Svg/LoadingSvg";
 import CategoryTabs from "./components/CategoryTabs";
 import NoteList from "./components/NoteList";
 import SelectCategoryBox from "./components/SelectCategoryBox";
+
+import AwsService from "services/aws.service";
+import FirebaseService from "services/firebase/firebase.service";
+import UtilityService from "services/utility.service";
 
 import styles from "./NotesPage.module.scss";
 

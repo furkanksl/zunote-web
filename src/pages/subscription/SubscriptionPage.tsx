@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setUserData } from "../../redux/features/user.reducer";
-import { StateModel } from "../../redux/store/store";
+import { setUserData } from "redux/features/user.reducer";
+import { StateModel } from "redux/store/store";
 
-import LoadingSvgComponent from "../../../components/Svg/LoadingSvg";
+import LoadingSvgComponent from "components/Svg/LoadingSvg";
 import UserData from "../../models/UserData.model";
-import FirebaseService from "../../services/firebase/firebase.service";
+import FirebaseService from "services/firebase/firebase.service";
 import CurrentPlan from "./components/CurrentPlan";
 import Plans from "./components/Plans";
 import styles from "./SubscriptionPage.module.scss";

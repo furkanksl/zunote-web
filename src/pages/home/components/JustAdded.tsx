@@ -1,5 +1,5 @@
-import Note from "../../../models/Note.model";
-import { TimedNote } from "../../../models/VoiceNote.model";
+import Note from "models/Note.model";
+import { TimedNote } from "models/VoiceNote.model";
 
 import styles from "../HomePage.module.scss";
 

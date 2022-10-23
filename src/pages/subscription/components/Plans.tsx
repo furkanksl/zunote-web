@@ -1,11 +1,13 @@
 import { useState } from "react";
-import AppStoreSvgComponent from "../../../../components/Svg/AppStoreSvg";
-import LoadingSvgComponent from "../../../../components/Svg/LoadingSvg";
-import MetamaskSvgComponent from "../../../../components/Svg/MetamaskSvg";
-import PlayStoreSvgComponent from "../../../../components/Svg/PlayStoreSvg";
-import UpgradeSvgComponent from "../../../../components/Svg/UpgradeSvg";
-import { WalletService } from "../../../services/wallet.service";
+
+import AppStoreSvgComponent from "components/Svg/AppStoreSvg";
+import LoadingSvgComponent from "components/Svg/LoadingSvg";
+import MetamaskSvgComponent from "components/Svg/MetamaskSvg";
+import PlayStoreSvgComponent from "components/Svg/PlayStoreSvg";
+import UpgradeSvgComponent from "components/Svg/UpgradeSvg";
+
 import { subscriptionPlans } from "../const/subscriptionPlans";
+import { WalletService } from "services/wallet.service";
 
 import styles from "../SubscriptionPage.module.scss";
 
